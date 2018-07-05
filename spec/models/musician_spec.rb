@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Musician, :type => :model do
   let(:musician) {
     Musician.create(
@@ -5,7 +7,7 @@ RSpec.describe Musician, :type => :model do
       :email => "thegingertonicstudios@gmail.com",
       :provider => "visagetome",
       :uid => "123",
-      :image_url => "www.image.com/photo.png"
+      :image_url => "www.image.com/photo.png",
       :password => "password"
     )
   }
