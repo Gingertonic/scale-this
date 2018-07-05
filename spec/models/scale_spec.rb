@@ -30,8 +30,8 @@ RSpec.describe Scale, :type => :model do
     expect(scale.musicians.last).to eq(beti)
   end
 
-  it "can, given a starting midi value, create an array representing the scale starting on the given note, in midi values"
+  it "can, given a starting midi value, create an array representing the scale starting on the given note, in midi values" do
     root = 60
-    expect(scale.automagic(root)).to eq([60, 62, 64, 65, 67, 69, 71, 72])
+    expect(scale.scale_generator(root)).to eq([60, 62, 64, 65, 67, 69, 71, 72])
   end
 end
