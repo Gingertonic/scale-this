@@ -18,7 +18,7 @@ RSpec.describe Scale, :type => :model do
   it "has many practises" do
     musician = Musician.create(name: "Beth Schofield", password: "password")
     practise = Practise.create(musician_id: musician.id, scale_id: scale.id)
-    expect(scale.practise.first).to eq(practise)
+    expect(scale.practises.first).to eq(practise)
   end
 
   it "has many musicians through practises" do
@@ -26,8 +26,8 @@ RSpec.describe Scale, :type => :model do
     beti = Musician.create(name: "Beth Schofield", password: "password")
     scale.musicians << [aki, beti]
 
-    expect(scale.users.first).to eq(aki)
-    expect(scale.users.last).to eq(beti)
+    expect(scale.musicians.first).to eq(aki)
+    expect(scale.musicians.last).to eq(beti)
   end
 
 end
