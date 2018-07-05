@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Attraction, :type => :model do
+RSpec.describe Scale, :type => :model do
   let(:scale) {
     Scale.create(
       :name => "Major",
-      :type => "Standard",
+      :scale_type => "Standard",
       :origin => "Western",
       :pattern => "2212221",
       :melody_rules => "Notes can be played in any order"
     )
   }
 
-  it "is valid with a name, type, origin, pattern and melody_rules" do
+  it "is valid with a name, scale_type, origin, pattern and melody_rules" do
     expect(scale).to be_valid
   end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Attraction, :type => :model do
+RSpec.describe Note, :type => :model do
   let(:note) {
     Note.create(
       :name => "C",
@@ -9,7 +9,7 @@ RSpec.describe Attraction, :type => :model do
   }
 
   it "is valid with a name and midi_value" do
-    expect(scale).to be_valid
+    expect(note).to be_valid
   end
 
 
