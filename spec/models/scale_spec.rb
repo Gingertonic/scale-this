@@ -30,23 +30,23 @@ RSpec.describe Scale, :type => :model do
     expect(scale.musicians.last).to eq(beti)
   end
 
-  it "can, given a starting midi value, create an array representing 1 octave of the scale starting on the given note, in midi values" do
+  # it "can, given a starting midi value, create an array representing 1 octave of the scale starting on the given note, in midi values" do
+  #   root = 60
+  #   expect(scale.scale_generator(root, 1)).to eq([60, 62, 64, 65, 67, 69, 71, 72])
+  # end
+  #
+  # it "can, given a starting midi value, create an array representing 2 octaves of the scale starting on the given note, in midi values" do
+  #   root = 60
+  #   expect(scale.scale_generator(root, 2)).to eq([60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84])
+  # end
+
+  it "can, given a starting midi value, provide the frequencies for 1 octaves worth of the scale" do
     root = 60
-    expect(scale.scale_generator(root, 1)).to eq([60, 62, 64, 65, 67, 69, 71, 72])
+    expect.scale.scale_generator(root, 1).to eq([261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25])
   end
 
-  it "can, given a starting midi value, create an array representing 2 octaves of the scale starting on the given note, in midi values" do
+  it "can, given a starting midi value, provide the frequencies for 2 octaves worth of the scale" do
     root = 60
-    expect(scale.scale_generator(root, 2)).to eq([60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84])
-  end
-
-  it "can provide the frequencies for 1 octaves worth of a given scale" do
-    root = 60
-    expect.scale.scale_generator(root, 1).frequencies.to eq([261.63, 146.83, 164.81, 174.61, 196.00, 220.00, 246.94, 261.63])
-  end
-
-  it "can provide the frequencies for 2 octaves worth of a given scale" do
-    root = 60
-    expect.scale.scale_generator(root, 2).frequencies.to eq([261.63, 146.83, 164.81, 174.61, 196.00, 220.00, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25])
+    expect.scale.scale_generator(root, 2).to eq([261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50])
   end
 end
