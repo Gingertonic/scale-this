@@ -1,3 +1,8 @@
+Musician.destroy_all
+Practise.destroy_all
+Note.destroy_all
+Scale.destroy_all
+
 Note.create(name: "G3", midi_value: 55, frequency: 196.00)
 Note.create(name: "G#/Ab3", midi_value: 56, frequency: 207.65)
 Note.create(name: "A3", midi_value: 57, frequency: 220.00)
@@ -46,3 +51,8 @@ locrian = Scale.create(name: "locrian", pattern: "1221222")
 
 aki = Musician.create(name: "Al Gakovic", password: "password")
 beti = Musician.create(name: "Beth Schofield", password: "password")
+
+Practise.create(musician_id: 1, scale_id: 1)
+Practise.create(musician_id: 1, scale_id: 2)
+Practise.create(musician_id: 2, scale_id: 1)
+Practise.create(musician_id: 2, scale_id: 3)

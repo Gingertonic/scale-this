@@ -3,7 +3,8 @@ class Practise < ApplicationRecord
   belongs_to :scale
 
   def increase_experience
-    experience += 1
+    self.experience += 1
+    self.save
   end
 
   def status
