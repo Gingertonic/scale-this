@@ -5,4 +5,5 @@ class Note < ApplicationRecord
   validates :midi_value, uniqueness: true
   validates :frequency, presence: true
   validates :frequency, uniqueness: true
+
 end
