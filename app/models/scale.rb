@@ -45,4 +45,5 @@ class Scale < ApplicationRecord
     end
     midi_array
   end
+
 end

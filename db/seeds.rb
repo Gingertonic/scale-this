@@ -43,3 +43,6 @@ lydian = Scale.create(name: "lydian", pattern: "2221221")
 mixolydian = Scale.create(name: "mixolydian", pattern: "2212212")
 aeolian = Scale.create(name: "aeolian", pattern: "2122122")
 locrian = Scale.create(name: "locrian", pattern: "1221222")
+
+aki = Musician.create(name: "Al Gakovic", password: "password")
+beti = Musician.create(name: "Beth Schofield", password: "password")

@@ -4,7 +4,8 @@ RSpec.describe Note, :type => :model do
   let(:note) {
     Note.create(
       :name => "C",
-      :midi_value => 60
+      :midi_value => 60,
+      :frequency => 261.63
     )
   }
 
