@@ -32,6 +32,7 @@ RSpec.describe Scale, :type => :model do
   }
 
 
+
   it "is valid with a name, scale_type, origin, pattern and melody_rules" do
     expect(scale).to be_valid
   end
