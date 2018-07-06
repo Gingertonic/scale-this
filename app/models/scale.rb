@@ -11,6 +11,7 @@ class Scale < ApplicationRecord
     new_scale = Scale.new(name: params[:name], scale_type: params[:scale_type], origin: params[:origin], melody_rules: params[:melody_rules])
     new_scale.pattern = Scale.custom_pattern(params[:pattern])
     new_scale.save
+    new_scale
   end
 
   def scale_generator(root, octaves)

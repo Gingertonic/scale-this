@@ -31,6 +31,16 @@ RSpec.describe Scale, :type => :model do
     )
   }
 
+  let(:custom_scale) {
+    Scale.create_custom(
+        :name => "Sweet new scale",
+        :scale_type => "Amazing",
+        :origin => "My brain",
+        :pattern => [58, 59, 61, 62, 64, 65],
+        :melody_rules => "Notes can be played in any order"
+      )
+    }
+
 
 
   it "is valid with a name, scale_type, origin, pattern and melody_rules" do
@@ -68,5 +78,9 @@ RSpec.describe Scale, :type => :model do
 
   it "can, given a starting midi value, provide the frequencies for 2 octaves worth of the scale" do
     expect(scale.scale_generator(60, 2)).to eq([261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50])
+  end
+
+  it "can create a new scale based on a custom midi note pattern" do
+    expect(custom_scale.pattern).to eq("12121")
   end
 end
