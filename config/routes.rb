@@ -6,7 +6,7 @@ post '/scales/:scale_slug', to: 'scales#change_root'
 
 resources :users, only: [:new]
 
-get '/login', to: 'session#new'
+get '/login', to: 'session#new', as: 'login'
 
 
 
