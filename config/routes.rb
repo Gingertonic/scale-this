@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 resources :scales, only: [:index]
 get '/scales/:scale_slug/:root_note', to: 'scales#show'
 
-root 'scales#index'
+resources :users, only: [:new]
+
+get '/login', to: 'session#new'
+
+
+
+root 'welcome#welcome'
 
 end
