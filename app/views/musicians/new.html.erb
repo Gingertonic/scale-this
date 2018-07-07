@@ -1,0 +1,22 @@
+<h1>Register</h1>
+
+<%=link_to "Signup with Facebook", scales_path%>
+<%=link_to "Signup with Google", scales_path%>
+<%=link_to "Signup with Soundcloud", scales_path%>
+
+<p>Or to make an account especialy with us, signup right here!</p>
+<%=form_for(@user) do |f|%>
+  <%=f.label :name%>
+  <%=f.text_field :name%>
+
+  <%=f.label :email%>
+  <%=f.text_field :email%>
+
+  <%=f.label :password%>
+  <%=f.password_field :password%>
+
+  <%=f.label :password_confirmation%>
+  <%=f.password_field :password_confirmation%>
+
+  <%=submit_tag "Signup"%>
+<%end%>

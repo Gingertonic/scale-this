@@ -15,8 +15,8 @@ post '/login', to: 'sessions#create'
 get '/logout', to: 'sessions#destroy'
 
 # Users (musicians) routes
-resources :users, only: [:new]
-get '/:user_slug', to: 'users#show', as: 'practice_room'
+resources :musicians, only: [:new, :create]
+get '/:musician_slug', to: 'musicians#show', as: 'practice_room'
 
 root 'welcome#welcome'
 
