@@ -8,7 +8,13 @@
 
 <h3><input type="checkbox" class="checkbox"> Playback Scale</h3>
 
-<h2>Notes</h2>
+<!-- <h2>Notes</h2>
 <%@notes.each do |note|%>
 <%=note%>
-<%end%>
+<%end%> -->
+
+<div class="sequencer">
+  <%@midi_notes.each.with_index(1) do |value, i|%>
+    <div class="pitch" id="pitch_<%=i%>" style="background-color: #F<%=value*26%>0"><%=Note.find_by(midi_value: value).name.split("/").first%></div>
+  <%end%>
+</div>

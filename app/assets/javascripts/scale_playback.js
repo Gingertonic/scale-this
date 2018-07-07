@@ -4,8 +4,8 @@ $( function() {
   var context = new AudioContext();
   window.context = context;
 
-  // Use this array to store the values of all the sliders.
-  // var values = [69, 69, 69, 69, 69, 69, 69, 69];
+  // grab the sliders from the DOM and bind a `change` event.
+  var $pitches = $('.pitch');
 
   // the checkbox will control the start & stop of the sequencer.
   $('.checkbox').on('change', function(e) {
@@ -24,7 +24,7 @@ $( function() {
   // TIMING
   // ================================================================
 
-  var bpm          = 250;
+  var bpm          = 260;
   // an eighth note at the given bpm
   var noteLength   = bpm / 60 * (1/8);
   var attack       = 1/64;
@@ -74,14 +74,41 @@ $( function() {
     // at `time + noteLength`
     oscillator.start(time);
     oscillator.stop(time + noteLength);
+
+    // add the time and slider index to our animation queue so that
+    // we can highlight the correct slider when it's time.
+    animationQueue.push({ time: time, slider: current });
   }
 
+  // ================================================================
+  // VISUAL
+  // ================================================================
+
+  // The animation queue is an array with scheduled notes in it.
+  // Within `requestFrameAnimation` we will check the next `time` in
+  // the queue against `context.currentTime` to determine when we
+  // should highlight a pitch or not.
+
+  var animationQueue = [];
+
+  function highlightCurrentPitch() {
+    while(animationQueue.length && context.currentTime > animationQueue[0].time) {
+      // turn off all `highlight` classes
+      $pitches.toggleClass('highlight', false);
+      // highlight the current slider
+      $pitches.eq(animationQueue[0].slider).addClass('highlight');
+      // remove this item from the queue
+      animationQueue.splice(0, 1);
+    }
+    // request the next frame
+    requestAnimationFrame(highlightCurrentPitch);
+  }
+
+  highlightCurrentPitch();
 
 });
 
 // mtof = Midi note to Frequency
-// input: 0 - 127 (although you could go higher if you wanted)
-// output: frequency in Hz from ~8Hz to ~12543Hz
 function mtof(note) {
   return ( Math.pow(2, ( note-69 ) / 12) ) * 440.0;
 }

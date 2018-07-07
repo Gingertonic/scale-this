@@ -27,6 +27,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+#fun stuff (lets me use less css)
+gem 'therubyracer'
+gem 'less-rails'
+
 # Add OmniAuth and dotenv abilities
 gem 'omniauth'
 gem 'omniauth-facebook'
