@@ -1,1 +1,7 @@
 <h1><%=@user.name%>'s Practice Room</h1>
+
+
+<h3>Your scales</h3>
+<%@user.practises.each do |practise|%>
+  <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Practiced <%=practise.experience%> time(s)!</p>
+<%end%>
