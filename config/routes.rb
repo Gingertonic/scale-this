@@ -6,6 +6,7 @@ resources :scales, only: [:index]
 get '/scales/:scale_slug/:root_note', to: 'scales#show', as: 'scale'
 post '/scales/:scale_slug', to: 'scales#change_root'
 
+resources :practises, only: [:create]
 
 # Sessions routes
 get '/login', to: 'sessions#new', as: 'login'

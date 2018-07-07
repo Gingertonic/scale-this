@@ -10,6 +10,7 @@ class ScalesController < ApplicationController
     @midi_notes = @scale.midi_generator(params[:root_note].to_i, 1)
     @notes = @scale.see_notes(params[:root_note].to_i, 1)
     @roots = Note.all
+    @practise = Practise.new(scale: @scale)
   end
 
   def change_root

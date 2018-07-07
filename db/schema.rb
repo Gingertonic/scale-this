@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2018_07_06_000257) do
   create_table "practises", force: :cascade do |t|
     t.integer "musician_id"
     t.integer "scale_id"
-    t.integer "experience", default: 1
+    t.integer "experience", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
