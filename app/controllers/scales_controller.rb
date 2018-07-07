@@ -1,4 +1,6 @@
 class ScalesController < ApplicationController
+  before_action :logged_in?
+
   def index
     @scales = Scale.alphabetical
   end
