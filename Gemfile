@@ -34,9 +34,11 @@ gem 'less-rails'
 # Add OmniAuth and dotenv abilities
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-soundcloud'
+# gem 'omniauth-google-oauth2'
+# gem 'omniauth-soundcloud'
 gem 'dotenv-rails'
+
+gem 'thin'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
