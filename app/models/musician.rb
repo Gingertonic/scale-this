@@ -4,6 +4,7 @@ class Musician < ApplicationRecord
   has_many :scales, through: :practises
 
   def self.from_omniauth(auth)
+    # byebug
     user = Musician.find_by(uid: auth['uid'])
     if !user
       new_user = Musician.create(password: SecureRandom.hex)
@@ -11,8 +12,11 @@ class Musician < ApplicationRecord
       new_user.email = auth['info']['email']
       new_user.image_url = auth['info']['image']
       new_user.provider = auth['provider']
+      new_user.uid = auth['uid']
       new_user.save
       new_user
+    else
+      user
     end
   end
 
