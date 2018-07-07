@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if request.env
+    if request.env['omniauth.auth']
       user = Musician.from_omniauth(auth)
       session[:user_id] = user.id
     else
