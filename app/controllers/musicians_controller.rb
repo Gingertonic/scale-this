@@ -13,11 +13,6 @@ class MusiciansController < ApplicationController
   def show
     @user = Musician.find_by_slug(params[:musician_slug])
     @practise_log = @user.practise_log
-    # @today = @user.practised("today")
-    # @yesterday = @user.practised("yesterday")
-    # @this_week = @user.practised("this week")
-    # @this_month = @user.practised("this month")
-    # @ages_ago = @user.practised("ages ago")
   end
 
   private

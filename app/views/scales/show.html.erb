@@ -15,6 +15,10 @@
   <%end%>
 </div>
 
+<p>Melody Rules: <%=@scale.melody_rules%></p>
+<p>Origin: <%=@scale.origin%></p>
+<p>Scale Type: <%=@scale.scale_type%></p>
+
 
 <%=form_tag("/scales/#{@scale.name}") do%>
   <%=select_tag :root, options_from_collection_for_select(@roots, :midi_value, :name)%><br>

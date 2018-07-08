@@ -17,4 +17,17 @@ class ScalesController < ApplicationController
     redirect_to scale_path({scale_slug: params[:scale_slug], root_note: params[:root]})
   end
 
+  def new
+    @scale = Scale.new
+  end
+
+  def create
+    scale = Scale.create_custom(scale_params)
+    redirect_to scale_path({scale_slug: scale.name, root_note: 60})
+  end
+
+  private
+  def scale_params
+    params.require(:scale).permit(:name, :scale_type, :origin, :melody_rules, :pattern[])
+  end
 end

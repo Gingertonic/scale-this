@@ -1,16 +1,18 @@
 module UsersHelper
+  def last_practised(period)
+    content_tag(:h3, "Last practised #{period}")
+  end
 
-    def last_practised(period)
-      content_tag(:h3, "Last practised #{period}")
-    end
+  def period_class(period)
+    period.gsub(" ","_").gsub('!','')
+  end
 
-    def period_class(period)
-      period.gsub(" ","_").gsub('!','')
-    end
+  def p_for_scale(practise)
+    content_tag(:p, link_to(practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})))
+  end
+end
 
-    def p_for_scale(practise)
-      content_tag(:p, link_to(practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})))
-    end
+# EXPERIMENTS!
 
 #   def print_practise_log(period, scales)
 #     content_tag :div, class: ["practised", "#{period}"] do
@@ -48,5 +50,3 @@ module UsersHelper
 # end
 
 # content_tag(:div, "Hello world!", class: ["strong", "highlight"])
-
-end

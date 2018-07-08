@@ -5,3 +5,5 @@
     <li><%=link_to scale.name, "/scales/#{scale.name}/60"%></li>
   <%end%>
 </ul>
+
+<%=content_tag(:p, link_to("Add a new scale!", new_scale_path))%>
