@@ -29,4 +29,17 @@ class Musician < ApplicationRecord
   def slugify
     self.name.split(" ").join("-").downcase
   end
+
+  def practised(period)
+    self.practises.select{|p| p.status == period}
+  end
+
+  def practise_log
+    periods = ["today", "yesterday", "this week", "this month", "ages ago!"]
+    practise_log = {}
+    periods.each do |period|
+      practise_log[period] = self.practised(period)
+    end
+    practise_log
+  end
 end

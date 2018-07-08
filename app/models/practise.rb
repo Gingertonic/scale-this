@@ -17,7 +17,7 @@ class Practise < ApplicationRecord
     elsif last_practised.to_i >= last_month
       'this month'
     elsif last_practised.to_i < last_month
-      'ages ago'
+      'ages ago!'
     end
   end
 

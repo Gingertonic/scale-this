@@ -12,11 +12,12 @@ class MusiciansController < ApplicationController
 
   def show
     @user = Musician.find_by_slug(params[:musician_slug])
-    @today = @user.practises.select{|p| p.status == "today"}
-    @yesterday = @user.practises.select{|p| p.status == "yesterday"}
-    @this_week = @user.practises.select{|p| p.status == "this week"}
-    @this_month = @user.practises.select{|p| p.status == "this month"}
-    @ages_ago = @user.practises.select{|p| p.status == "ages ago"}
+    @practise_log = @user.practise_log
+    # @today = @user.practised("today")
+    # @yesterday = @user.practised("yesterday")
+    # @this_week = @user.practised("this week")
+    # @this_month = @user.practised("this month")
+    # @ages_ago = @user.practised("ages ago")
   end
 
   private

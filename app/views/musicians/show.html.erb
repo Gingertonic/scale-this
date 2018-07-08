@@ -1,39 +1,12 @@
 <h1><%=@user.name%>'s Practice Room</h1>
 
-
-<div id="practise_log">
-  <div class="practised today">
-    <h3>Last practised today</h3>
-    <%@today.each do |practise|%>
-      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
-    <%end%>
-  </div>
-
-  <div class="practised yesterday">
-    <h3>Last practised yesterday</h3>
-    <%@yesterday.each do |practise|%>
-      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
-    <%end%>
-  </div>
-
-  <div class="practised this_week">
-    <h3>Last practised this week</h3>
-    <%@this_week.each do |practise|%>
-      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
-    <%end%>
-  </div>
-
-  <div class="practised this_month">
-    <h3>Last practised this month</h3>
-    <%@this_month.each do |practise|%>
-      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
-    <%end%>
-  </div>
-
-  <div class="practised ages_ago">
-    <h3>Last practised ages ago</h3>
-    <%@ages_ago.each do |practise|%>
-      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
-    <%end%>
-  </div>
-</div> <!--practise log-->
+<%=content_tag :div, id: ["practise_log"] do%>
+  <%@practise_log.each do |period, scales| %>
+    <%=content_tag :div, class: ["practised #{period_class(period)}"] do%>
+      <%=last_practised(period)%>
+      <%scales.each do |scale|%>
+        <%=p_for_scale(scale)%>
+      <%end%>  <!-- scales.each -->
+    <%end%>  <!-- practised period_class -->
+  <%end%> <!-- practise_log.each -->
+<%end%> <!-- practise_log -->
