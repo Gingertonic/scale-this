@@ -2,7 +2,8 @@
 
 <ul class="menu">
   <%@scales.each do |scale|%>
-    <li><%=link_to scale.name, "/scales/#{scale.name}/60"%></li>
+    <!-- <li><%=link_to scale.name, "/scales/#{scale.name}/60"%></li> -->
+    <li><%=link_to scale.name, show_scale_path({scale_slug: scale.name, root_note: 60})%></li>
   <%end%>
 </ul>
 

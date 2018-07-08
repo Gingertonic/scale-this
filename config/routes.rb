@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 # Scales routes
-resources :scales, only: [:index, :new, :create]
-get '/scales/:scale_slug/:root_note', to: 'scales#show', as: 'scale'
-post '/scales/:scale_slug', to: 'scales#change_root'
+resources :scales, only: [:index, :new, :create, :update]
+get '/scales/:scale_slug/edit', to: 'scales#edit', as: 'edit_scale'
+get '/scales/:scale_slug/:root_note', to: 'scales#show', as: 'show_scale'
+post '/scales/:scale_slug/change_root', to: 'scales#change_root'
+
 
 resources :practises, only: [:create]
 

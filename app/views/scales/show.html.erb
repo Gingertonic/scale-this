@@ -20,7 +20,7 @@
 <p>Scale Type: <%=@scale.scale_type%></p>
 
 
-<%=form_tag("/scales/#{@scale.name}") do%>
+<%=form_tag("/scales/#{@scale.name}/change_root") do%>
   <%=select_tag :root, options_from_collection_for_select(@roots, :midi_value, :name)%><br>
 
   <%=submit_tag "Change root"%>

@@ -14,18 +14,29 @@ class ScalesController < ApplicationController
   end
 
   def change_root
-    redirect_to scale_path({scale_slug: params[:scale_slug], root_note: params[:root]})
+    redirect_to show_scale_path({scale_slug: params[:scale_slug], root_note: params[:root]})
   end
 
   def new
     @scale = Scale.new
     @note_selection = Note.limit(12)
+    @pattern = []
   end
 
   def create
     # raise params.inspect
     scale = Scale.create_custom(scale_params)
-    redirect_to scale_path({scale_slug: scale.name, root_note: 60})
+    redirect_to show_scale_path({scale_slug: scale.name, root_note: 60})
+  end
+
+  def edit
+    @scale = Scale.find_by(name: params[:scale_slug])
+    @note_selection = Note.limit(12)
+    @pattern = @scale.midi_generator(55, 1)
+  end
+
+  def update
+    Scale.find_by(name: params[:scale_slug]).update(scale_params)
   end
 
   private
