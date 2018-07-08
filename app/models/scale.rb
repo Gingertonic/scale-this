@@ -8,6 +8,7 @@ class Scale < ApplicationRecord
   has_many :musicians, through: :practises
 
   def self.create_custom(params)
+    # byebug
     new_scale = Scale.new(name: params[:name], scale_type: params[:scale_type], origin: params[:origin], melody_rules: params[:melody_rules])
     new_scale.pattern = Scale.custom_pattern(params[:pattern])
     new_scale.save
@@ -54,9 +55,11 @@ class Scale < ApplicationRecord
   end
 
   def self.custom_pattern(midi_array)
+    # byebug
     pattern = []
+    midi_array.shift if midi_array[0] == ""
     midi_array.each_with_index do |note, i|
-      (pattern << (midi_array[i+1] - midi_array[i])) unless i == midi_array.size - 1
+      (pattern << (midi_array[i+1].to_i - midi_array[i].to_i)) unless i == midi_array.size - 1
     end
     pattern.join
   end

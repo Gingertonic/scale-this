@@ -19,15 +19,17 @@ class ScalesController < ApplicationController
 
   def new
     @scale = Scale.new
+    @note_selection = Note.limit(12)
   end
 
   def create
+    # raise params.inspect
     scale = Scale.create_custom(scale_params)
     redirect_to scale_path({scale_slug: scale.name, root_note: 60})
   end
 
   private
   def scale_params
-    params.require(:scale).permit(:name, :scale_type, :origin, :melody_rules, :pattern[])
+    params.require(:scale).permit(:name, :scale_type, :origin, :melody_rules, :pattern => [])
   end
 end
