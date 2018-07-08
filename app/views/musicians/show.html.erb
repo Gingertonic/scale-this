@@ -2,6 +2,40 @@
 
 
 <h3>Your scales</h3>
-<%@user.practises.each do |practise|%>
-  <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Practiced <%=practise.experience%> time(s)!</p>
-<%end%>
+
+<div class="practise_log">
+  <div class="practised_today">
+    <h3>Practised today</h3>
+    <%@today.each do |practise|%>
+      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
+    <%end%>
+  </div>
+
+  <div class="practised_yesterday">
+    <h3>Practised yesterday</h3>
+    <%@yesterday.each do |practise|%>
+      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
+    <%end%>
+  </div>
+
+  <div class="practised_this_week">
+    <h3>Practised this week</h3>
+    <%@this_week.each do |practise|%>
+      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
+    <%end%>
+  </div>
+
+  <div class="practised_this_month">
+    <h3>Practised this month</h3>
+    <%@this_month.each do |practise|%>
+      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
+    <%end%>
+  </div>
+
+  <div class="practised_ages_ago">
+    <h3>Practised ages ago</h3>
+    <%@ages_ago.each do |practise|%>
+      <p><%=link_to practise.scale.name, scale_path({scale_slug: practise.scale.name, root_note: 60})%> - Experience: <%=practise.experience%></p>
+    <%end%>
+  </div>
+</div> <!--practise log-->

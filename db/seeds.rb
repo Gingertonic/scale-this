@@ -52,7 +52,38 @@ locrian = Scale.create(name: "locrian", pattern: "1221222")
 aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password")
 beti = Musician.create(name: "Beth Schofield", email: "gingertonic@test.com", password: "password")
 
-Practise.create(musician_id: 1, scale_id: 1, experience: 4)
-Practise.create(musician_id: 1, scale_id: 2, experience: 10)
+Practise.create(musician_id: 1, scale_id: 1, experience: 3)
+Practise.create(musician_id: 1, scale_id: 2, experience: 4)
+Practise.create(musician_id: 1, scale_id: 3, experience: 30)
+Practise.create(musician_id: 1, scale_id: 4, experience: 4)
+Practise.create(musician_id: 1, scale_id: 5, experience: 4)
+Practise.create(musician_id: 1, scale_id: 6, experience: 10)
 Practise.create(musician_id: 2, scale_id: 1, experience: 1)
+Practise.create(musician_id: 2, scale_id: 3, experience: 4)
+Practise.create(musician_id: 2, scale_id: 3, experience: 10)
 Practise.create(musician_id: 2, scale_id: 3, experience: 3)
+
+p2 = Practise.find(2)
+p2.updated_at = Time.now - 2.weeks
+p2.save
+p3 = Practise.find(3)
+p3.updated_at = Time.now - 7.weeks
+p3.save
+p4 = Practise.find(4)
+p4.updated_at = Time.now - 1.day
+p4.save
+p5 = Practise.find(5)
+p5.updated_at = Time.now - 2.months
+p5.save
+p6 = Practise.find(6)
+p6.updated_at = Time.now - 2.weeks
+p6.save
+p7 = Practise.find(7)
+p7.updated_at = Time.now - 3.days
+p7.save
+p8 = Practise.find(8)
+p8.updated_at = Time.now - 3.days
+p8.save
+p9 = Practise.find(9)
+p9.updated_at = Time.now - 3.days
+p9.save
