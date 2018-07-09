@@ -36,7 +36,15 @@ class ScalesController < ApplicationController
   end
 
   def update
-    Scale.find_by(name: params[:scale_slug]).update(scale_params)
+    # byebug
+    scale = Scale.find_by(params[:id])
+    scale.custom_update(scale, scale_params)
+    redirect_to show_scale_path({scale_slug: scale.name, root_note: 60})
+  end
+
+  def destroy
+    Scale.find(params[:id]).destroy
+    redirect_to scales_path
   end
 
   private

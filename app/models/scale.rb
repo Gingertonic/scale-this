@@ -15,6 +15,12 @@ class Scale < ApplicationRecord
     new_scale
   end
 
+  def custom_update(scale, params)
+    scale.update(params)
+    scale.pattern = Scale.custom_pattern(params[:pattern])
+    scale.save
+  end
+
   def scale_generator(root, octaves)
     self.frequencies(root, octaves)
   end

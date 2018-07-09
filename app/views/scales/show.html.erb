@@ -30,3 +30,8 @@
   <%=f.hidden_field :scale_id%>
   <%=f.submit "Practised!"%>
 <%end%>
+
+<%=content_tag(:p, link_to("Edit this scale", edit_scale_path(@scale)))%>
+<%=form_for(@scale, :html => {:method => :delete}) do |f|%>
+  <%=f.submit "Delete this scale"%>
+<%end%>
