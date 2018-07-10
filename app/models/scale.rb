@@ -19,7 +19,7 @@ class Scale < ApplicationRecord
   def custom_update(scale, params)
     scale.update(params)
     scale.pattern = Scale.custom_pattern(params[:pattern])
-    scale..private = false if params[:private] == "1"
+    scale.private = false if params[:private] == "1"
     scale.save
   end
 
