@@ -11,6 +11,7 @@ class Scale < ApplicationRecord
     # byebug
     new_scale = Scale.new(name: params[:name], scale_type: params[:scale_type], origin: params[:origin], melody_rules: params[:melody_rules])
     new_scale.pattern = Scale.custom_pattern(params[:pattern])
+    new_scale.private = false if params[:private] == "1"
     new_scale.save
     new_scale
   end
@@ -18,6 +19,7 @@ class Scale < ApplicationRecord
   def custom_update(scale, params)
     scale.update(params)
     scale.pattern = Scale.custom_pattern(params[:pattern])
+    scale..private = false if params[:private] == "1"
     scale.save
   end
 

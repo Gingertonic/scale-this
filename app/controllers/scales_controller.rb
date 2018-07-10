@@ -12,7 +12,7 @@ class ScalesController < ApplicationController
       root_note = 60
     end
     @scale = Scale.find_by(name: params[:scale_slug])
-    redirect_to scales_path, alert: "Private!" if @scale.private
+    redirect_to scales_path, alert: "Hey, that's private!" if @scale.private && @scale.created_by != current_user.id
     @midi_notes = @scale.midi_generator(root_note, 1)
     @notes = @scale.see_notes(root_note, 1)
     @roots = Note.select{|n| n.reference}
@@ -26,13 +26,16 @@ class ScalesController < ApplicationController
 
   def new
     @scale = Scale.new
+    # byebug
     @note_selection = Note.select{|n| n.reference}
     @pattern = []
   end
 
   def create
-    # raise params.inspect
     scale = Scale.create_custom(scale_params)
+    scale.created_by = current_user.id
+    scale.save
+    # byebug
     redirect_to show_scale_path({scale_slug: scale.name, root_note: "do"})
   end
 
@@ -58,6 +61,6 @@ class ScalesController < ApplicationController
 
   private
   def scale_params
-    params.require(:scale).permit(:name, :scale_type, :origin, :melody_rules, :pattern => [])
+    params.require(:scale).permit(:name, :scale_type, :origin, :melody_rules, :created_by, :private, :pattern => [])
   end
 end

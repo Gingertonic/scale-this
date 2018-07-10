@@ -14,3 +14,9 @@
  *= require_self
 
  */
+
+
+.flash-error {
+  border: 2px solid red;
+  height: 100px;
+}

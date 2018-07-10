@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2018_07_10_014325) do
     t.string "melody_rules", default: "No special rules"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "created_by"
+    t.integer "created_by"
     t.boolean "private", default: true
   end
 

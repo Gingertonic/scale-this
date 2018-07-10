@@ -14,6 +14,9 @@
 
     <%=f.collection_check_boxes(:pattern, @note_selection, :midi_value, :solfege, { checked: @pattern.map })%><br>
 
+    <%= f.label "Would you like to share this scale with other users?" %> <br />
+    <%= f.check_box :private %> <br />
+
     <%=f.submit%>
   <%end%>
 <%end%>
