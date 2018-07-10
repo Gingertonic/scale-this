@@ -7,14 +7,14 @@ class ScalesController < ApplicationController
 
   def show
     if params[:root_note]
-      root_note = params[:root_note].to_i
+      root_note = Note.find_by(solfege: params[:root_note]).midi_value
     else
       root_note = 60
     end
     @scale = Scale.find_by(name: params[:scale_slug])
     @midi_notes = @scale.midi_generator(root_note, 1)
     @notes = @scale.see_notes(root_note, 1)
-    @roots = Note.all
+    @roots = Note.select{|n| n.reference}
     @practise = Practise.new(scale: @scale)
   end
 
@@ -47,7 +47,7 @@ class ScalesController < ApplicationController
     # byebug
     scale = Scale.find(params[:id])
     scale.custom_update(scale, scale_params)
-    redirect_to show_scale_path({scale_slug: scale.name, root_note: 60})
+    redirect_to show_scale_path({scale_slug: scale.name, root_note: "do"})
   end
 
   def destroy

@@ -11,7 +11,9 @@
 
 <div class="sequencer">
   <%@midi_notes.each.with_index(1) do |value, i|%>
-    <div class="pitch" id="pitch_<%=i%>" style="background-color: #F<%=value*26%>0"><%=Note.find_by(midi_value: value).name.split("/").first%></div>
+    <div class="pitch" id="pitch_<%=i%>" style="background-color: #F<%=value*26%>0"><%=Note.find_by(midi_value: value).solfege.split("-").first%>
+      <div class="alt-pitch" id="alt-pitch_<%=i%>"><%=Note.find_by(midi_value: value).solfege.split("-").second%></div>
+    </div>
   <%end%>
 </div>
 
@@ -21,7 +23,7 @@
 
 
 <%=form_tag("/scales/#{@scale.name}/change_root") do%>
-  <%=select_tag :root, options_from_collection_for_select(@roots, :midi_value, :name)%><br>
+  <%=select_tag :root, options_from_collection_for_select(@roots, :solfege, :name, selected: "do")%><br>
 
   <%=submit_tag "Change root"%>
 <%end%>

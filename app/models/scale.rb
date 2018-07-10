@@ -42,6 +42,7 @@ class Scale < ApplicationRecord
   end
 
   def midi_generator(root, octaves)
+
     degrees = []
     pattern.split("").each do |st_count|
       degrees << st_count.to_i

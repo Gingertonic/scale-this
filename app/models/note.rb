@@ -6,4 +6,5 @@ class Note < ApplicationRecord
   validates :frequency, presence: true
   validates :frequency, uniqueness: true
 
+  
 end
