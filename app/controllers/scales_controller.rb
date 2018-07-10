@@ -6,15 +6,21 @@ class ScalesController < ApplicationController
   end
 
   def show
+    if params[:root_note]
+      root_note = params[:root_note].to_i
+    else
+      root_note = 60
+    end
     @scale = Scale.find_by(name: params[:scale_slug])
-    @midi_notes = @scale.midi_generator(params[:root_note].to_i, 1)
-    @notes = @scale.see_notes(params[:root_note].to_i, 1)
+    @midi_notes = @scale.midi_generator(root_note, 1)
+    @notes = @scale.see_notes(root_note, 1)
     @roots = Note.all
     @practise = Practise.new(scale: @scale)
   end
 
   def change_root
-    redirect_to show_scale_path({scale_slug: params[:scale_slug], root_note: params[:root]})
+    scale = Scale.find_by(name: params[:scale_slug])
+    redirect_to show_scale_path({scale_slug: scale.name, root_note: params[:root]})
   end
 
   def new
@@ -30,7 +36,9 @@ class ScalesController < ApplicationController
   end
 
   def edit
+    # byebug
     @scale = Scale.find_by(name: params[:scale_slug])
+    # @scale = Scale.find(params[:id])
     @note_selection = Note.limit(12)
     @pattern = @scale.midi_generator(55, 1)
   end

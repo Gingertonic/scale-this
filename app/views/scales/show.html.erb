@@ -31,7 +31,8 @@
   <%=f.submit "Practised!"%>
 <%end%>
 
-<%=content_tag(:p, link_to("Edit this scale", edit_scale_path(@scale)))%>
+<%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.name}/edit"))%>
+
 <%=form_for(@scale, :html => {:method => :delete}) do |f|%>
   <%=f.submit "Delete this scale"%>
 <%end%>
