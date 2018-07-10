@@ -25,7 +25,7 @@ class ScalesController < ApplicationController
 
   def new
     @scale = Scale.new
-    @note_selection = Note.limit(12)
+    @note_selection = Note.select{|n| n.reference}
     @pattern = []
   end
 
@@ -39,7 +39,7 @@ class ScalesController < ApplicationController
     # byebug
     @scale = Scale.find_by(name: params[:scale_slug])
     # @scale = Scale.find(params[:id])
-    @note_selection = Note.limit(12)
+    @note_selection = Note.select{|n| n.reference}
     @pattern = @scale.midi_generator(55, 1)
   end
 

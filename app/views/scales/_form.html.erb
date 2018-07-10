@@ -12,7 +12,7 @@
     <%=f.label :melody_rules%>
     <%=f.text_area :melody_rules%><br>
 
-    <%=f.collection_check_boxes(:pattern, @note_selection, :midi_value, :name, { checked: @pattern.map })%><br>
+    <%=f.collection_check_boxes(:pattern, @note_selection, :midi_value, :solfege, { checked: @pattern.map })%><br>
 
     <%=f.submit%>
   <%end%>
