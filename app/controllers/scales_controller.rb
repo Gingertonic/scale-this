@@ -12,6 +12,7 @@ class ScalesController < ApplicationController
       root_note = 60
     end
     @scale = Scale.find_by(name: params[:scale_slug])
+    redirect_to scales_path, alert: "Private!" if @scale.private
     @midi_notes = @scale.midi_generator(root_note, 1)
     @notes = @scale.see_notes(root_note, 1)
     @roots = Note.select{|n| n.reference}
@@ -32,7 +33,7 @@ class ScalesController < ApplicationController
   def create
     # raise params.inspect
     scale = Scale.create_custom(scale_params)
-    redirect_to show_scale_path({scale_slug: scale.name, root_note: 60})
+    redirect_to show_scale_path({scale_slug: scale.name, root_note: "do"})
   end
 
   def edit
