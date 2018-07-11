@@ -21,6 +21,7 @@ class Practise < ApplicationRecord
     end
   end
 
+  private
   def last_practised
     updated_at.to_i
   end

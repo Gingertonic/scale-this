@@ -41,27 +41,30 @@ Note.create(name: "F6", midi_value: 89, frequency: 1396.91, solfege: "fa")
 Note.create(name: "G#/Ab6", midi_value: 90, frequency: 1479.98, solfege: "se-fi")
 Note.create(name: "G6", midi_value: 91, frequency: 1567.98, solfege: "so")
 
-major = Scale.create(name: "ionian", pattern: "2212221", private: false)
-dorian = Scale.create(name: "dorian", pattern: "2122212", private: false)
-phrygian = Scale.create(name: "phrygian", pattern: "1222122", private: false)
-lydian = Scale.create(name: "lydian", pattern: "2221221", private: false)
-mixolydian = Scale.create(name: "mixolydian", pattern: "2212212", private: false)
-aeolian = Scale.create(name: "aeolian", pattern: "2122122", private: false)
-locrian = Scale.create(name: "locrian", pattern: "1221222", private: false)
 
-aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password")
-beti = Musician.create(name: "Beth Schofield", email: "gingertonic@test.com", password: "password")
+admin = Musician.create(name: "Admin", email: "thegingertonicstudios@gmail.com", password: "admin", admin: true) #user 1
+aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password") #user 2
+beti = Musician.create(name: "Beth Schofield", email: "gingertonic@test.com", password: "password") #user 3
 
-Practise.create(musician_id: 1, scale_id: 1, experience: 3)
-Practise.create(musician_id: 1, scale_id: 2, experience: 4)
-Practise.create(musician_id: 1, scale_id: 3, experience: 30)
-Practise.create(musician_id: 1, scale_id: 4, experience: 4)
-Practise.create(musician_id: 1, scale_id: 5, experience: 4)
-Practise.create(musician_id: 1, scale_id: 6, experience: 10)
-Practise.create(musician_id: 2, scale_id: 1, experience: 1)
-Practise.create(musician_id: 2, scale_id: 3, experience: 4)
-Practise.create(musician_id: 2, scale_id: 3, experience: 10)
-Practise.create(musician_id: 2, scale_id: 3, experience: 3)
+
+major = Scale.create(name: "ionian", pattern: "2212221", private: false, created_by: 1)
+dorian = Scale.create(name: "dorian", pattern: "2122212", private: false, created_by: 1)
+phrygian = Scale.create(name: "phrygian", pattern: "1222122", private: false, created_by: 1)
+lydian = Scale.create(name: "lydian", pattern: "2221221", private: false, created_by: 1)
+mixolydian = Scale.create(name: "mixolydian", pattern: "2212212", private: false, created_by: 1)
+aeolian = Scale.create(name: "aeolian", pattern: "2122122", private: false, created_by: 1)
+locrian = Scale.create(name: "locrian", pattern: "1221222", private: false, created_by: 1)
+
+Practise.create(musician_id: 2, scale_id: 1, experience: 3)
+Practise.create(musician_id: 2, scale_id: 2, experience: 4)
+Practise.create(musician_id: 2, scale_id: 3, experience: 30)
+Practise.create(musician_id: 2, scale_id: 4, experience: 4)
+Practise.create(musician_id: 2, scale_id: 5, experience: 4)
+Practise.create(musician_id: 2, scale_id: 6, experience: 10)
+Practise.create(musician_id: 3, scale_id: 1, experience: 1)
+Practise.create(musician_id: 3, scale_id: 3, experience: 4)
+Practise.create(musician_id: 3, scale_id: 3, experience: 10)
+Practise.create(musician_id: 3, scale_id: 3, experience: 3)
 
 p2 = Practise.find(2)
 p2.updated_at = Time.now - 2.weeks

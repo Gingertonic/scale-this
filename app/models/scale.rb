@@ -77,10 +77,6 @@ class Scale < ApplicationRecord
     pattern.join
   end
 
-  def self.alphabetical
-    all.sort_by{|s| s.name}
-  end
-
   def self.find_by_slug(slug)
     self.find_by(name: slug)
   end
