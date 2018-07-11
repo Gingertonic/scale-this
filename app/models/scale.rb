@@ -89,4 +89,7 @@ class Scale < ApplicationRecord
     self.private && self.created_by != current_user.id
   end
 
+  def self.types
+    all.map{|s|s.scale_type}.uniq
+  end
 end

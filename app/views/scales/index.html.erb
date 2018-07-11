@@ -2,15 +2,15 @@
 
 
 
-<%types = @scales.map{|s|s.scale_type}.uniq%>
-<%types.each do |type|%>
-  <div class="scale_type <%=type%>">
-    <h2><%=type%></h2>
-    <%of_type = @scales.select{|s|s.scale_type == type}%>
-    <%of_type.each do |s|%>
-      <li><%=link_to s.name, show_scale_path({scale_slug: s.slugify, root_note: "do"})%></li>
-    <%end%>
-  </div>
-<%end%>
+<%=content_tag :div, class: ["scales_menu"] do%>
+  <%@types.each do |type|%>
+    <%=content_tag :div, class: ["scale_type"], id: ["#{type}"] do%>
+      <h2><%=type%></h2>
+      <%of_type(@scales, type).each do |s|%>
+        <li><%=li_for_scale(s)%></li>
+      <%end%> <!-- of_type.each -->
+    <%end%> <!-- scale_type -->
+  <%end%> <!-- types.each -->
+<%end%> <!-- scales_menu -->
 
 <%=content_tag(:p, link_to("Add a new scale!", new_scale_path))%>

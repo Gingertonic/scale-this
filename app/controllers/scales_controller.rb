@@ -3,6 +3,7 @@ class ScalesController < ApplicationController
 
   def index
     @scales = Scale.custom_index(current_user)
+    @types = Scale.types
   end
 
   def show
