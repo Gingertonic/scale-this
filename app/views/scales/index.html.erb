@@ -1,10 +1,16 @@
 <h1>SCALE LIBRARY</h1>
 
-<ul class="menu">
-  <%@scales.each do |scale|%>
-    <!-- <li><%=link_to scale.name, "/scales/#{scale.name}/60"%></li> -->
-    <li><%=link_to scale.name, show_scale_path({scale_slug: scale.slugify, root_note: "do"})%></li>
-  <%end%>
-</ul>
+
+
+<%types = @scales.map{|s|s.scale_type}.uniq%>
+<%types.each do |type|%>
+  <div class="scale_type <%=type%>">
+    <h2><%=type%></h2>
+    <%of_type = @scales.select{|s|s.scale_type == type}%>
+    <%of_type.each do |s|%>
+      <li><%=link_to s.name, show_scale_path({scale_slug: s.slugify, root_note: "do"})%></li>
+    <%end%>
+  </div>
+<%end%>
 
 <%=content_tag(:p, link_to("Add a new scale!", new_scale_path))%>
