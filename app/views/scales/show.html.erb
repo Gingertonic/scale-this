@@ -1,7 +1,9 @@
 <h1><%=@scale.name.titleize%></h1>
 
-<%if current_user.id != @scale.created_by && @scale.created_by != nil%>
-  <h2>Created by someone else</h2>
+<%if current_user.id == @scale.created_by%>
+  <h2>Thanks for contributing this scale!</h2>
+<%elsif current_user.id != @scale.created_by && @scale.created_by != 1%>
+  <h2>Contributed by <%=Musician.find(@scale.created_by).name%></h2>
 <%end%>
 
 <script>
