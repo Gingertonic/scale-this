@@ -4,7 +4,6 @@ class Musician < ApplicationRecord
   has_many :scales, through: :practises
 
   def self.from_omniauth(auth)
-    # byebug
     user = Musician.find_by(uid: auth['uid'])
     if !user
       new_user = Musician.create(password: SecureRandom.hex)
@@ -42,4 +41,11 @@ class Musician < ApplicationRecord
     end
     practise_log
   end
+
+  def i_just_practised(params)
+    new_practise = self.practises.find_or_create_by(params)
+    new_practise.increase_experience
+    new_practise.save
+  end
+  
 end

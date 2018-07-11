@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-
+  protect_from_forgery with: :exception
+  
   private
   def logged_in?
     redirect_to root_path if !session[:user_id]

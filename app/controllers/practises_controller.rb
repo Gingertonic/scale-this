@@ -1,8 +1,6 @@
 class PractisesController < ApplicationController
   def create
-    practise = current_user.practises.find_or_create_by(practise_params)
-    practise.experience += 1
-    practise.save
+    current_user.i_just_practised(practise_params)
     redirect_to practice_room_path(current_user.slugify)
   end
 

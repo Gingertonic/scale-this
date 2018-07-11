@@ -31,3 +31,6 @@
 
 # Ignore personal notes
 notes.md
+
+#Ignore .env
+.env
