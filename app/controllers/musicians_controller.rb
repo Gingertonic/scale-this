@@ -4,7 +4,6 @@ class MusiciansController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     user = Musician.create(musician_params)
     session[:user_id] = user.id
     redirect_to scales_path
@@ -14,6 +13,7 @@ class MusiciansController < ApplicationController
     @user = Musician.find_by_slug(params[:musician_slug])
     @practise_log = @user.practise_log
   end
+
 
   private
   def musician_params

@@ -6,11 +6,10 @@ class SessionsController < ApplicationController
     if request.env['omniauth.auth']
       user = Musician.from_omniauth(auth)
       session[:user_id] = user.id
+      redirect_to practice_room_path(user.slugify)
     else
-      user = Musician.find_by(email: params[:email])
-      (session[:user_id] = user.id) if (user && user.authenticate(params[:password]))
+      authenticate_local_login(params)
     end
-    redirect_to practice_room_path(current_user.slugify)
   end
 
   def destroy
@@ -22,5 +21,19 @@ class SessionsController < ApplicationController
   def auth
     request.env['omniauth.auth']
   end
+
+  def authenticate_local_login(params)
+    user = Musician.find_by_email(params[:email])
+    if !user
+      redirect_to new_musician_path, alert: "We can't find an account with this email!"
+    elsif !user.authenticate(params[:password])
+      redirect_to login_path, alert: "Oops, wrong password!"
+    elsif user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to practice_room_path(current_user.slugify)
+    end
+  end
+
+
 
 end
