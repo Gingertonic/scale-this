@@ -7,11 +7,16 @@ class Scale < ApplicationRecord
   has_many :practises
   has_many :musicians, through: :practises
 
-  def self.create_custom(params)
+  def self.custom_index(user)
+    Scale.all.select{|s| s.private == false || s.created_by == user.id}.sort_by{|s| s.name}
+  end
+
+  def self.create_custom(user, params)
     # byebug
     new_scale = Scale.new(name: params[:name], scale_type: params[:scale_type], origin: params[:origin], melody_rules: params[:melody_rules])
     new_scale.pattern = Scale.custom_pattern(params[:pattern])
-    new_scale.private = false if params[:private] == "1"
+    new_scale.private = false if params[:private] == "0"
+    new_scale.created_by = user.id
     new_scale.save
     new_scale
   end
@@ -44,7 +49,6 @@ class Scale < ApplicationRecord
   end
 
   def midi_generator(root, octaves)
-
     degrees = []
     pattern.split("").each do |st_count|
       degrees << st_count.to_i
@@ -75,6 +79,14 @@ class Scale < ApplicationRecord
 
   def self.alphabetical
     all.sort_by{|s| s.name}
+  end
+
+  def self.find_by_slug(slug)
+    self.find_by(name: slug)
+  end
+
+  def not_your_scale(current_user)
+    self.private && self.created_by != current_user.id
   end
 
 end
