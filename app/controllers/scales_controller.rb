@@ -2,7 +2,7 @@ class ScalesController < ApplicationController
   before_action :logged_in?
 
   def index
-    @scales = Scale.alphabetical
+    @scales = Scale.all.select{|s| s.private == false || s.created_by == current_user.id}
   end
 
   def show
