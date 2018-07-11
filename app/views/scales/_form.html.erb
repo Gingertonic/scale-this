@@ -12,6 +12,9 @@
     <%=f.label :melody_rules%>
     <%=f.text_area :melody_rules%><br>
 
+    <%=f.label :aka "Also known as:"%>
+    <%=f.text_area :aka%><br>
+
     <%=f.collection_check_boxes(:pattern, @note_selection, :midi_value, :solfege, { checked: @pattern.map })%><br>
 
     <%= f.label "Would you like to keep this scale private?" %> <br />

@@ -46,14 +46,39 @@ admin = Musician.create(name: "Admin", email: "thegingertonicstudios@gmail.com",
 aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password") #user 2
 beti = Musician.create(name: "Beth Schofield", email: "gingertonic@test.com", password: "password") #user 3
 
+Scale.create(name: "ionian", aka: "major", scale_type: "mode (major scale)", pattern: "2212221", private: false, created_by: 1)
+Scale.create(name: "dorian", scale_type: "mode (major scale)", pattern: "2122212", private: false, created_by: 1)
+Scale.create(name: "phrygian", scale_type: "mode (major scale)", pattern: "1222122", private: false, created_by: 1)
+Scale.create(name: "lydian", scale_type: "mode (major scale)", pattern: "2221221", private: false, created_by: 1)
+Scale.create(name: "mixolydian", scale_type: "mode (major scale)", pattern: "2212212", private: false, created_by: 1)
+Scale.create(name: "aeolian", aka: "natural minor", scale_type: "mode (major scale)", pattern: "2122122", private: false, created_by: 1)
+Scale.create(name: "locrian", scale_type: "mode (major scale)", pattern: "1221222", private: false, created_by: 1)
 
-major = Scale.create(name: "ionian", pattern: "2212221", private: false, created_by: 1)
-dorian = Scale.create(name: "dorian", pattern: "2122212", private: false, created_by: 1)
-phrygian = Scale.create(name: "phrygian", pattern: "1222122", private: false, created_by: 1)
-lydian = Scale.create(name: "lydian", pattern: "2221221", private: false, created_by: 1)
-mixolydian = Scale.create(name: "mixolydian", pattern: "2212212", private: false, created_by: 1)
-aeolian = Scale.create(name: "aeolian", pattern: "2122122", private: false, created_by: 1)
-locrian = Scale.create(name: "locrian", pattern: "1221222", private: false, created_by: 1)
+# Scale.create(name: "jazz minor", scale_type: "mode (jazz minor scale)", pattern: "2122221", private: false, created_by: 1)
+Scale.create(name: "phrygian #6", scale_type: "mode (jazz minor scale)", pattern: "1222212", private: false, created_by: 1)
+Scale.create(name: "lydian augmented", scale_type: "mode (jazz minor scale)", pattern: "2222121", private: false, created_by: 1)
+Scale.create(name: "overtone", scale_type: "mode (jazz minor scale)", pattern: "2221212", private: false, created_by: 1)
+Scale.create(name: "mixolydian b6", scale_type: "mode (jazz minor scale)", pattern: "2212122", private: false, created_by: 1)
+Scale.create(name: "locrian #2", scale_type: "mode (jazz minor scale)", pattern: "2121222", private: false, created_by: 1)
+Scale.create(name: "altered", scale_type: "mode (jazz minor scale)", pattern: "1212222", private: false, created_by: 1)
+
+Scale.create(name: "major pentatonic", scale_type: "pentatonic", pattern: "2232", private: false, created_by: 1)
+Scale.create(name: "minor pentatonic", scale_type: "pentatonic", pattern: "3223", private: false, created_by: 1)
+
+Scale.create(name: "chromatic", scale_type: "essentials", pattern: "11111111111", private: false, created_by: 1)
+Scale.create(name: "whole-tone", scale_type: "essentials", pattern: "22222", private: false, created_by: 1)
+
+Scale.create(name: "dominant diminished", scale_type: "octatonic", pattern: "1212121", private: false, created_by: 1)
+Scale.create(name: "diminished", scale_type: "octatonic", pattern: "2121212", private: false, created_by: 1)
+
+Scale.create(name: "augmented", scale_type: "essentials", pattern: "13131", private: false, created_by: 1)
+
+Scale.create(name: "harmonic minor", scale_type: "essentials", pattern: "212213", private: false, created_by: 1)
+Scale.create(name: "melodic minor asc", aka: "jazz minor", scale_type: "essentials", pattern: "212222", melody_rules: "When descending, use natural minor", private: false, created_by: 1)
+
+Scale.create(name: "oriental minor", aka: "Hungarian minor, Hungarian gypsy scale, Arabic minor", scale_type: "other", pattern: "213113", private: false, created_by: 1)
+
+
 
 Practise.create(musician_id: 2, scale_id: 1, experience: 3)
 Practise.create(musician_id: 2, scale_id: 2, experience: 4)

@@ -25,9 +25,12 @@
 <p>Melody Rules: <%=@scale.melody_rules%></p>
 <p>Origin: <%=@scale.origin%></p>
 <p>Scale Type: <%=@scale.scale_type%></p>
+<%if @scale.aka%>
+  <p>Also known as: <%=@scale.aka%></p>
+<%end%>
 
 
-<%=form_tag("/scales/#{@scale.name}/change_root") do%>
+<%=form_tag("/scales/#{@scale.slugify}/change_root") do%>
   <%=select_tag :root, options_from_collection_for_select(@roots, :solfege, :name, selected: "do")%><br>
 
   <%=submit_tag "Change root"%>
@@ -38,7 +41,7 @@
   <%=f.submit "Practised!"%>
 <%end%>
 
-<%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.name}/edit"))%>
+<%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.slugify}/edit"))%>
 
 <%=form_for(@scale, :html => {:method => :delete}) do |f|%>
   <%=f.submit "Delete this scale"%>

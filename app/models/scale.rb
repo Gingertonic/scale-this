@@ -77,8 +77,12 @@ class Scale < ApplicationRecord
     pattern.join
   end
 
+  def slugify
+    name.gsub(" ", "-").gsub("#","sharp")
+  end
+
   def self.find_by_slug(slug)
-    self.find_by(name: slug)
+    self.find{|s| s.slugify == slug}
   end
 
   def not_your_scale(current_user)

@@ -8,7 +8,7 @@ module UsersHelper
   end
 
   def p_for_scale(practise)
-    content_tag(:p, link_to(practise.scale.name, show_scale_path({scale_slug: practise.scale.name, root_note: "do"})))
+    content_tag(:p, link_to(practise.scale.name, show_scale_path({scale_slug: practise.scale.slugify, root_note: "do"})))
   end
 end
 

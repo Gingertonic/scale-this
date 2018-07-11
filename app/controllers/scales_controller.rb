@@ -17,7 +17,7 @@ class ScalesController < ApplicationController
 
   def change_root
     scale = Scale.find_by_slug(params[:scale_slug])
-    redirect_to show_scale_path({scale_slug: scale.name, root_note: params[:root]})
+    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: params[:root]})
   end
 
   def new
@@ -28,7 +28,7 @@ class ScalesController < ApplicationController
 
   def create
     scale = Scale.create_custom(current_user, scale_params)
-    redirect_to show_scale_path({scale_slug: scale.name, root_note: "do"})
+    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: "do"})
   end
 
   def edit
@@ -40,7 +40,7 @@ class ScalesController < ApplicationController
   def update
     scale = Scale.find(params[:id])
     scale.custom_update(scale, scale_params)
-    redirect_to show_scale_path({scale_slug: scale.name, root_note: "do"})
+    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: "do"})
   end
 
   def destroy
