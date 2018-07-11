@@ -23,4 +23,8 @@ class Note < ApplicationRecord
     self.select{|n| n.reference}
   end
 
+  def self.midi_to_solfege(value)
+    Note.find_by(midi_value: value).solfege.split("-")
+  end
+
 end

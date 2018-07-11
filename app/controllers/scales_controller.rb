@@ -14,6 +14,7 @@ class ScalesController < ApplicationController
     @notes = @scale.see_notes(root_note, 1)
     @roots = Note.references
     @practise = Practise.new(scale: @scale)
+    @owner = Musician.find(@scale.created_by)
   end
 
   def change_root

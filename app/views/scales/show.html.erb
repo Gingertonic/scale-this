@@ -1,48 +1,36 @@
-<h1><%=@scale.name.titleize%></h1>
+<script> var values = <%=@midi_notes%> </script>
 
-<%if current_user.id == @scale.created_by%>
-  <h2>Thanks for contributing this scale!</h2>
-<%elsif current_user.id != @scale.created_by && @scale.created_by != 1%>
-  <h2>Contributed by <%=Musician.find(@scale.created_by).name%></h2>
-<%end%>
+<%=scale_title(@scale)%>
 
-<script>
-  var values = <%=@midi_notes%>;
-</script>
+<%=ownership(@owner)%>
 
 
 <h3><input type="checkbox" class="checkbox"> Playback Scale</h3>
 
 
-<div class="sequencer">
+<%=content_tag :div, nil, class: ["sequencer"] do%>
   <%@midi_notes.each.with_index(1) do |value, i|%>
-    <div class="pitch" id="pitch_<%=i%>" style="background-color: #F<%=value*26%>0"><%=Note.find_by(midi_value: value).solfege.split("-").first%>
-      <div class="alt-pitch" id="alt-pitch_<%=i%>"><%=Note.find_by(midi_value: value).solfege.split("-").second%></div>
-    </div>
-  <%end%>
-</div>
+    <%=div_for_sequencer(value, i)%>
+    <%=div_for_alt_pitch(value, i)%>
+  <%end%> <!-- midi_notes.each -->
+<%end%> <!-- sequencer -->
 
-<p>Melody Rules: <%=@scale.melody_rules%></p>
-<p>Origin: <%=@scale.origin%></p>
-<p>Scale Type: <%=@scale.scale_type%></p>
-<%if @scale.aka%>
-  <p>Also known as: <%=@scale.aka%></p>
-<%end%>
-
+<%=content_tag :div, scale_info(@scale), id: ["scale_info"]%>
 
 <%=form_tag("/scales/#{@scale.slugify}/change_root") do%>
   <%=select_tag :root, options_from_collection_for_select(@roots, :solfege, :name, selected: "do")%><br>
-
   <%=submit_tag "Change root"%>
 <%end%>
 
-<%=form_for(@practise) do |f|%>
-  <%=f.hidden_field :scale_id%>
-  <%=f.submit "Practised!"%>
+<!-- New practice -->
+<%=content_tag :div, nil, class: ["form new_practise_form"] do %>
+  <%=form_for(@practise) do |f|%>
+    <%=f.hidden_field :scale_id%>
+    <%=f.submit "Practised!"%>
+  <%end%>
 <%end%>
 
 <%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.slugify}/edit"))%>
 
-<%=form_for(@scale, :html => {:method => :delete}) do |f|%>
-  <%=f.submit "Delete this scale"%>
-<%end%>
+<!-- Delete scale -->
+<%=content_tag :div, delete_scale_form(@scale, @owner), class: ["form delete_scale_form"]%>
