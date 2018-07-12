@@ -19,6 +19,31 @@ module ScalesHelper
     end
   end
 
+  def easy_read(practise)
+    if practise
+      content_tag(:p, "You last practised this scale on #{practise.updated_at.strftime("%A %B %e %Y")}")
+    else
+      content_tag(:p, "You've not logged any practise of this scale!")
+    end
+  end
+
+  def your_experience(practise)
+    if practise
+      content_tag(:p, "You've practised this scale #{times(practise.experience)}")
+    end
+  end
+
+  def times(exp)
+    case exp
+    when 1
+      "once"
+    when 2
+      "twice"
+    else
+      "#{exp} times"
+    end
+  end
+
   def div_for_sequencer(value, i)
     content_tag(:div, "#{Note.midi_to_solfege(value).first}", class: ["pitch"], id: ["pitch_#{i}"], style: "background-color: #F#{value*26}0")
   end

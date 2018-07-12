@@ -22,6 +22,10 @@
   <%=submit_tag "Change root"%>
 <%end%>
 
+<!-- User experience with scale -->
+<%=easy_read(@your_practise)%>
+<%=your_experience(@your_practise)%>
+
 <!-- New practice -->
 <%=content_tag :div, nil, class: ["form new_practise_form"] do %>
   <%=form_for(@practise) do |f|%>

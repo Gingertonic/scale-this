@@ -1,5 +1,4 @@
 class ScalesController < ApplicationController
-  before_action :logged_in?
 
   def index
     @scales = Scale.custom_index(current_user)
@@ -15,6 +14,7 @@ class ScalesController < ApplicationController
     @roots = Note.references
     @practise = Practise.new(scale: @scale)
     @owner = Musician.find(@scale.created_by)
+    @your_practise = current_user.practises.find_by(scale: @scale)
   end
 
   def change_root
