@@ -12,11 +12,15 @@ module ScalesHelper
   end
 
   def ownership(owner)
-    if current_user.id == owner.id
+    if your_scale(owner)
       content_tag(:h2, "Thanks for contributing this scale!")
     elsif owner.admin == false
       content_tag(:h2, "Contributed by #{owner.name}")
     end
+  end
+
+  def your_scale(owner)
+    owner.id == current_user.id
   end
 
   def easy_read(practise)

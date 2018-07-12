@@ -34,7 +34,7 @@
   <%end%>
 <%end%>
 
-<%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.slugify}/edit"))%>
+<%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.slugify}/edit")) if your_scale(@owner)%>
 
 <!-- Delete scale -->
 <%=content_tag :div, delete_scale_form(@scale, @owner), class: ["form delete_scale_form"]%>

@@ -15,6 +15,7 @@ class MusiciansController < ApplicationController
 
   def show
     @user = Musician.find_by_slug(params[:musician_slug])
+    redirect_to login_path, alert: "That's not your practise room!" if not_your_room(@user)
     @practise_log = @user.practise_log
   end
 
@@ -22,5 +23,9 @@ class MusiciansController < ApplicationController
   private
   def musician_params
     params.require(:musician).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def not_your_room(user)
+    current_user != user
   end
 end
