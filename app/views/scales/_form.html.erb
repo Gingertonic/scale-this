@@ -1,3 +1,17 @@
+<% if @scale.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      Oops, there's <%= pluralize(@scale.errors.count, "error") %>!
+    </h2>
+
+    <ul>
+    <% @scale.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%=content_tag :div, class: ["form"] do%>
   <%=form_for @scale do |f|%>
     <%=f.label :name%>

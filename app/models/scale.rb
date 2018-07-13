@@ -17,7 +17,6 @@ class Scale < ApplicationRecord
     new_scale.pattern = Scale.custom_pattern(params[:pattern])
     new_scale.private = false if params[:private] == "0"
     new_scale.created_by = user.id
-    new_scale.save
     new_scale
   end
 

@@ -29,8 +29,14 @@ class ScalesController < ApplicationController
   end
 
   def create
-    scale = Scale.create_custom(current_user, scale_params)
-    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: "do"})
+    @scale = Scale.create_custom(current_user, scale_params)
+    if @scale.save
+      redirect_to show_scale_path({scale_slug: @scale.slugify, root_note: "do"})
+    else
+      @note_selection = Note.references
+      @pattern = @scale.midi_generator(55, 1)
+      render :new
+    end
   end
 
   def edit
