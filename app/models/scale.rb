@@ -24,7 +24,7 @@ class Scale < ApplicationRecord
     scale.update(params)
     scale.pattern = Scale.custom_pattern(params[:pattern])
     scale.private = false if params[:private] == "1"
-    scale.save
+    scale
   end
 
   def scale_generator(root, octaves)

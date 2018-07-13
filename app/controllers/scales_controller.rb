@@ -47,10 +47,16 @@ class ScalesController < ApplicationController
   end
 
   def update
-    scale = Scale.find(params[:id])
-    editable_scale?(scale)
-    scale.custom_update(scale, scale_params)
-    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: "do"})
+    @scale = Scale.find(params[:id])
+    editable_scale?(@scale)
+    @scale.custom_update(@scale, scale_params)
+    if @scale.save
+      redirect_to show_scale_path({scale_slug: @scale.slugify, root_note: "do"})
+    else
+      @note_selection = Note.select{|n| n.reference}
+      @pattern = @scale.midi_generator(55, 1)
+      render :edit
+    end
   end
 
   def destroy
