@@ -34,7 +34,7 @@ class ScalesController < ApplicationController
       redirect_to show_scale_path({scale_slug: @scale.slugify, root_note: "do"})
     else
       @note_selection = Note.references
-      @pattern = @scale.midi_generator(55, 1)
+      @pattern = @scale.midi_generator(60, 1)
       render :new
     end
   end
@@ -43,7 +43,7 @@ class ScalesController < ApplicationController
     @scale = Scale.find_by_slug(params[:scale_slug])
     editable_scale?(@scale)
     @note_selection = Note.select{|n| n.reference}
-    @pattern = @scale.midi_generator(55, 1)
+    @pattern = @scale.midi_generator(60, 1)
   end
 
   def update
@@ -54,7 +54,7 @@ class ScalesController < ApplicationController
       redirect_to show_scale_path({scale_slug: @scale.slugify, root_note: "do"})
     else
       @note_selection = Note.select{|n| n.reference}
-      @pattern = @scale.midi_generator(55, 1)
+      @pattern = @scale.midi_generator(60, 1)
       render :edit
     end
   end
