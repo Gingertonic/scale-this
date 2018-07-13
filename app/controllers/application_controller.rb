@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   before_action :require_login
 
   private
+
+  def login(user)
+    session[:user_id] = user.id
+  end
+
   def logged_in?
     !!session[:user_id]
   end

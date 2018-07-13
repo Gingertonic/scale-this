@@ -8,9 +8,8 @@ class MusiciansController < ApplicationController
 
   def create
     redirect_to root_path if logged_in?
-    user = Musician.create(musician_params)
-    session[:user_id] = user.id
-    redirect_to scales_path
+    @user = Musician.new(musician_params)
+    validate(@user)
   end
 
   def show
@@ -27,5 +26,14 @@ class MusiciansController < ApplicationController
 
   def not_your_room(user)
     current_user != user
+  end
+
+  def validate(user)
+    if user.save
+      login(user)
+      redirect_to scales_path
+    else
+      render :new
+    end
   end
 end

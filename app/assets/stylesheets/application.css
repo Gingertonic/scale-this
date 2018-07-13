@@ -20,3 +20,7 @@
   border: 2px solid red;
   height: 100px;
 }
+
+.field_with_errors {
+  border: 2px dashed red;
+}
