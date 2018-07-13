@@ -1,0 +1,16 @@
+<h1>Who is most diligent with their practise?</h1>
+
+<table style="width:100%">
+  <tr>
+    <th><%=link_to "Name", musician_rankings_path({by: "name"})%></th>
+    <th><%=link_to "Total Practises", musician_rankings_path({by: "total-practises"})%></th>
+    <th><%=link_to "Last Practised", musician_rankings_path({by: "last-practised"})%></th>
+  </tr>
+<%@musicians.each do |m|%>
+  <tr>
+    <td><%=m.name%></td>
+    <td><%=total_practise(m)%></td>
+    <td><%=last_practice_time(m)%></td>
+  </tr>
+<%end%>
+</table>

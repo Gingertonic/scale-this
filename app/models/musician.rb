@@ -21,8 +21,8 @@ class Musician < ApplicationRecord
 
   def self.find_by_slug(slug)
     #find user with name "Al Gakovic" from 'al-gakovic'
-    name = slug.split("-").join(" ").titleize
-    Musician.find_by(name: name)
+    name = slug.split("-").join(" ")
+    Musician.where("lower(name) = ?", name.downcase).first
   end
 
   def slugify
@@ -47,5 +47,16 @@ class Musician < ApplicationRecord
     new_practise.increase_experience
     new_practise.save
   end
-  
+
+  def self.order_by(by)
+    case by
+    when "name"
+      order("LOWER(name)")
+    when "total-practises"
+      joins(:practises).group(:musician_id).order("sum(experience) desc")
+    when "last-practised"
+      joins(:practises).group(:musician_id).order("practises.updated_at desc")
+    end
+  end
+
 end

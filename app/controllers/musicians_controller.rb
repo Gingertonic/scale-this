@@ -18,6 +18,11 @@ class MusiciansController < ApplicationController
     @practise_log = @user.practise_log
   end
 
+  def rankings
+    params[:by]
+    @musicians = Musician.order_by(params[:by])
+  end
+
 
   private
   def musician_params
@@ -36,4 +41,5 @@ class MusiciansController < ApplicationController
       render :new
     end
   end
+
 end

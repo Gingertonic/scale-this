@@ -10,6 +10,23 @@ module UsersHelper
   def p_for_scale(practise)
     content_tag(:p, link_to(practise.scale.name, show_scale_path({scale_slug: practise.scale.slugify, root_note: "do"})))
   end
+
+  def total_practise(m)
+    total_exp = 0
+    m.practises.each do |p|
+      total_exp += p.experience
+    end
+    total_exp
+  end
+
+  def last_practice_time(m)
+    if total_practise(m) != 0
+      m.practises.last.updated_at.strftime("%D")
+    else
+      "Not once! Shocking!"
+    end
+  end
+
 end
 
 # EXPERIMENTS!
