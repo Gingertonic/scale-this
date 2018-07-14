@@ -2,7 +2,7 @@ class Scale < ApplicationRecord
   validates :pattern, presence: {:message => "needs at least two notes!"}
   validates :pattern, uniqueness: {:message => "already belongs to another scale!"}
   validates :name, presence: true
-  validates :name, uniqueness: {:message => "is already is use for another scale!"}
+  validates :name, uniqueness: {:case_sensitive => false, :message => "is already is use for another scale!"}
 
   has_many :practises
   has_many :musicians, through: :practises

@@ -1,4 +1,9 @@
 class Musician < ApplicationRecord
+  validates :name, uniqueness: {:case_sensitive => false, :message => "is already is use by another musician!"}
+  validates :name, :email, presence: {:message => "must be provided."}
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates :password, length: {minimum: 6}
+
   has_secure_password
   has_many :practises
   has_many :scales, through: :practises
@@ -51,7 +56,7 @@ class Musician < ApplicationRecord
   def self.order_by(by)
     case by
     when "name"
-      order("LOWER(name)")
+      where.not(name: 'Admin').order("LOWER(name)")
     when "total-practises"
       joins(:practises).group(:musician_id).order("sum(experience) desc")
     when "last-practised"
