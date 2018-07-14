@@ -5,10 +5,24 @@ class Musician < ApplicationRecord
   validates :password, length: {minimum: 6}
 
   has_secure_password
+
   has_many :practises
   has_many :scales, through: :practises
 
-  def self.from_omniauth(auth)
+
+  # Class methods
+  def self.order_by(by) # order for rankings page
+    case by
+    when "name"
+      where.not(name: 'Admin').order("LOWER(name)")
+    when "total-practises"
+      joins(:practises).group(:musician_id).order("sum(experience) desc")
+    when "last-practised"
+      joins(:practises).group(:musician_id).order("practises.updated_at desc")
+    end
+  end
+
+  def self.from_omniauth(auth) # create from omniauth request
     user = Musician.find_by(uid: auth['uid'])
     if !user
       new_user = Musician.create(password: SecureRandom.hex)
@@ -24,21 +38,22 @@ class Musician < ApplicationRecord
     end
   end
 
-  def self.find_by_slug(slug)
-    #find user with name "Al Gakovic" from 'al-gakovic'
+  def self.find_by_slug(slug) #find user with name "Al Gakovic" from 'al-gakovic'
     name = slug.split("-").join(" ")
     Musician.where("lower(name) = ?", name.downcase).first
   end
 
-  def slugify
+
+  # Instance methods
+  def slugify #make slug from name eg change "Al Gakovic" to "al-gakovic"
     self.name.split(" ").join("-").downcase
   end
 
-  def practised(period)
+  def practised(period) #find which scales user practised in x period
     self.practises.select{|p| p.status == period}
   end
 
-  def practise_log
+  def practise_log #returns object with k-v pairs of period: [scales]
     periods = ["today", "yesterday", "this week", "this month", "ages ago!"]
     practise_log = {}
     periods.each do |period|
@@ -47,25 +62,15 @@ class Musician < ApplicationRecord
     practise_log
   end
 
-  def i_just_practised(params)
+  def i_just_practised(params) # called when user practises a scale again, creates a new practise or increases experience of an existing practise.
     new_practise = self.practises.find_or_create_by(params)
     new_practise.increase_experience
     new_practise.save
   end
 
-  def find_scale(scale)
+  def find_scale(scale) #find a scale through a user's practises
     practises.find_by(scale: scale)
   end
 
-  def self.order_by(by)
-    case by
-    when "name"
-      where.not(name: 'Admin').order("LOWER(name)")
-    when "total-practises"
-      joins(:practises).group(:musician_id).order("sum(experience) desc")
-    when "last-practised"
-      joins(:practises).group(:musician_id).order("practises.updated_at desc")
-    end
-  end
 
 end

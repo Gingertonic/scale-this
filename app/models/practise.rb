@@ -2,12 +2,12 @@ class Practise < ApplicationRecord
   belongs_to :musician
   belongs_to :scale
 
-  def increase_experience
-    self.experience += 1
-    self.save
+  def increase_experience #increase the experience value by 1
+    experience += 1
+    save
   end
 
-  def status
+  def status #returns when the practise last happened
     if easy_read(updated_at) == today
       'today'
     elsif easy_read(updated_at) == yesterday
@@ -42,7 +42,7 @@ class Practise < ApplicationRecord
     (Time.now - 1.month).to_i
   end
 
-  def easy_read(datetime)
+  def easy_read(datetime) 
     datetime.strftime("%A %B%e %Y")
   end
 end
