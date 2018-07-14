@@ -29,6 +29,8 @@ class SessionsController < ApplicationController
     user = Musician.find_by_email(params[:email])
     if !user
       redirect_to new_musician_path, alert: "We can't find an account with this email!"
+    elsif !user.authenticate(params[:password]) && user.provider == 'facebook'
+      redirect_to login_path, alert: "It looks like you registered via Facebook, please click 'continue with Facebook' to login."
     elsif !user.authenticate(params[:password])
       redirect_to login_path, alert: "Oops, wrong password!"
     elsif user && user.authenticate(params[:password])

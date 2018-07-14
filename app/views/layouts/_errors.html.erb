@@ -1,10 +1,8 @@
 <% if obj.errors.any? %>
   <div id="error_explanation">
-    <h2>Oops, there's <%= pluralize(obj.errors.count, "error") %>!</h2>
-    <ul>
-      <% obj.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-    <% end %>
-    </ul>
+    Oops, there's <%= pluralize(obj.errors.count, "error") %>!
+    <p><% obj.errors.full_messages.each.with_index(1) do |msg, i| %>
+        <%= msg %><%="<br />".html_safe if i != obj.errors.count%>
+    <% end %></p>
   </div>
 <% end %>

@@ -16,11 +16,26 @@
  */
 
 
-.flash-error {
-  border: 2px solid red;
-  height: 100px;
+.flash-error, #error_explanation {
+  border: 2px dashed red;
+  height: auto;
+  width: 100%;
+  text-align: center;
+  padding-top: 1.5%;
+  padding-bottom: 1%;
+  font-size: 1em;
+  margin-bottom: 1%;
 }
 
-.field_with_errors {
-  border: 2px dashed red;
+#error_explanation p {
+  text-align: center;
+  font-size: 0.75em;
+}
+
+.field_with_errors label {
+  color: red;
+}
+
+.field_with_errors input {
+  background-color: #FFCCCC;
 }
