@@ -1,22 +1,9 @@
 <h1>Register</h1>
 
 <%=link_to "Signup with Facebook", '/auth/facebook'%>
-<!-- <%=link_to "Signup with Google", '/auth/google_oauth2'%> -->
-<!-- <%=link_to "Signup with Soundcloud", scales_path%> -->
 
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2>
-      Oops, there's <%= pluralize(@user.errors.count, "error") %>!
-    </h2>
+<%= render :partial => 'layouts/errors', locals: {obj: @user} %>
 
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
 
 <p>Or to make an account especially with us, signup right here!</p>
 <%=form_for(@user) do |f|%>
