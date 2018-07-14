@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     redirect_to root_path if logged_in?
     if request.env['omniauth.auth']
       user = Musician.from_omniauth(auth)
-      session[:user_id] = user.id
+      login(user)
       redirect_to practice_room_path(user.slugify)
     else
       authenticate_local_login(params)
@@ -32,11 +32,9 @@ class SessionsController < ApplicationController
     elsif !user.authenticate(params[:password])
       redirect_to login_path, alert: "Oops, wrong password!"
     elsif user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      login(user)
       redirect_to practice_room_path(current_user.slugify)
     end
   end
-
-
 
 end
