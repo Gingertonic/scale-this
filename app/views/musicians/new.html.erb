@@ -1,12 +1,9 @@
 <h1>Register</h1>
 
 
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
-
-
 <%= render :partial => 'layouts/errors', locals: {obj: @user} %>
 
-
+<%=link_to image_tag("oL5c2.png", class: ["fb_logo"]), '/auth/facebook', class: ["fb_button"]%>
 <p>Or to make an account especially with us, signup right here!</p>
 <%=form_for(@user) do |f|%>
   <%=f.label :name%>

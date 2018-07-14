@@ -1,7 +1,6 @@
 <h1>Login</h1>
 
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
-
+<%=link_to image_tag("oL5c2.png", class: ["fb_logo"]), '/auth/facebook', class: ["fb_button"]%>
 
 <p>Or if you made an account especially with us login right here!</p>
 <%=form_tag('/login') do%>
