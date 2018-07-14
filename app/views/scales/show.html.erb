@@ -25,7 +25,7 @@
     <p>Change root</p>
     <%=form_tag("/scales/#{@scale.slugify}/change_root") do%>
       <%=select_tag :root, options_from_collection_for_select(@roots, :solfege, :name, selected: @current_root)%><br>
-      <%=submit_tag "Change root"%>
+      <%=submit_tag "Change"%>
     <%end%>
   </div>
 

@@ -50,28 +50,36 @@
 
 
 /* Submit buttons */
-input[value="Change root"], input[value="Practised!"], input[value="Delete"] {
+// input[value="Change root"], input[value="Practised!"], input[value="Delete"]
+input[name="commit"] {
   border-radius: 50%;
   height: 80px;
   width: 80px;
   background-color: olivedrab;
   border: 1px dashed white;
   font-family: 'Special Elite', cursive;
+  font-size: 90%;
   color: white;
   margin-top: 3%;
 }
 
-input[value="Change root"]:hover, input[value="Practised!"]:hover, input[value="Delete"]:hover {
+input[name="commit"]:hover {
   border: 1px dashed grey;
 }
 
-input[value="Practised!"] {
+input[value="Practised!"], input[value="Update"] {
+  font-size: 70%;
+}
+
+input[value="Change"] {
   background-color: orange;
+  font-size: 90%;
 }
 
 input[value="Delete"] {
   background-color: red;
   margin-top: 0;
+  font-size: 60%;
 }
 
 .add_scale, .edit_scale {
