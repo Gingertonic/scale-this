@@ -1,8 +1,8 @@
 class Scale < ApplicationRecord
-  validates :pattern, presence: true
-  validates :pattern, uniqueness: true
+  validates :pattern, presence: {:message => "needs at least two notes!"}
+  validates :pattern, uniqueness: {:message => "already belongs to another scale!"}
   validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, uniqueness: {:message => "is already is use for another scale!"}
 
   has_many :practises
   has_many :musicians, through: :practises

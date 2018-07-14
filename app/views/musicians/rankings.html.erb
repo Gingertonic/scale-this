@@ -2,9 +2,9 @@
 
 <table style="width:100%">
   <tr>
-    <th><%=link_to "Name", musician_rankings_path({by: "name"})%></th>
-    <th><%=link_to "Total Practises", musician_rankings_path({by: "total-practises"})%></th>
-    <th><%=link_to "Last Practised", musician_rankings_path({by: "last-practised"})%></th>
+    <th><%=link_to "Name", musician_rankings_path("name")%></th>
+    <th><%=link_to "Total Practises", musician_rankings_path("total-practises")%></th>
+    <th><%=link_to "Last Practised", musician_rankings_path("last-practised")%></th>
   </tr>
 <%@musicians.each do |m|%>
   <tr>
