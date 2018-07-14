@@ -5,21 +5,22 @@
 At a minimum, users can:
   + Create an account, login and logout
   + See a list of scales
-  + Search the library for scales they are interested in
   + Mark scales that they are interested in learning
   + Mark scales they know
   + Add new scales (they can be public or private)
   + Edit scales they have made
+  + Hear audio versions of the scales
   + See a page for each public scale and any of their own private scales
   + See a personal scale library with all the scales they have marked as known, learning or to learn in the future
   + Delete scales from their own scale library
+  + See user rankings that can be ordered by name, total practises and last practise time
 
 Future functionality may include:
   + Follow other users and share new scales in private groups
+  + Search the library for scales they are interested in
   + See a tailored news feed of new scales made by users they have followed
   + Search for other users who are using the app
-  + Visualise the scales
-  + Hear audio versions of the scales
+  + Visualise the scales in new ways
   + Randomise the scale order to generate new melody snippets for practice ideas
   + Randomise the scale order in accordance to the ascending and descending rules where applicable
 
