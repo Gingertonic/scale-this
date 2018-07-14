@@ -2,26 +2,29 @@
 
 <%=content_tag :div, class: ["form"] do%>
   <%=form_for @scale do |f|%>
-    <%=f.label :name%>
+    <%=f.label :name%><br>
     <%=f.text_field :name%><br>
-
-    <%=f.label :scale_type%>
+    <br>
+    <%=f.label :scale_type%><br>
     <%=f.text_field :scale_type%><br>
-
-    <%=f.label :origin%>
+    <br>
+    <%=f.label :origin%><br>
     <%=f.text_field :origin%><br>
-
-    <%=f.label :melody_rules%>
+    <br>
+    <%=f.label :melody_rules%><br>
     <%=f.text_area :melody_rules%><br>
-
-    <%=f.label :aka, "Also known as"%>
+    <br>
+    <%=f.label :aka, "Also known as"%><br>
     <%=f.text_area :aka%><br>
-
-    <%=f.collection_check_boxes(:pattern, @note_selection, :midi_value, :solfege, { checked: @pattern.map })%><br>
-
+    <br>
+    <div class="pattern_checkboxes">
+      <%=f.label :pattern%><br>
+      <%=f.collection_check_boxes(:pattern, @note_selection, :midi_value, :solfege, { checked: @pattern.map })%><br>
+    </div>
+    <br>
     <%= f.label "Would you like to keep this scale private?" %> <br />
     <%= f.check_box :private %> <br />
-
+    <br>
     <%=f.submit%>
   <%end%>
 <%end%>
