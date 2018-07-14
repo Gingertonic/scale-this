@@ -17,18 +17,20 @@
   height: 80%;
   width: 20%;
   margin-top: 0.5%;
-  // padding: 5px 0;
-  // text-transform: uppercase;
   color: orange;
-  // text-align: center;
   text-decoration: none;
   font-size: 1.5em;
-  // background-color: olivedrab;
 }
 
 #navbar a:hover {
-  // background: url("../images/musical-note-2343556_1280.png");
-  background-size: contain;
+  background-image: image-url("musical-note-2343556_1280.png");
+  // background-image: image-url("Bass-Treble-Musical-Music-Clef-Silhouette-Note-3275055.png");
   background-color: olivedrab;
-  // background-repeat: no-repeat;
+}
+
+.home-link {
+  background-image: image-url("Bass-Treble-Musical-Music-Clef-Silhouette-Note-3275055.png");
+  // background-image: image-url("musical-note-2343556_1280.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }

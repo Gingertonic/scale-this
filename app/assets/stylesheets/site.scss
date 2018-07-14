@@ -1,19 +1,11 @@
-@import 'highlights.less';
-@import 'jquery-ui.min.less';
 @import url('https://fonts.googleapis.com/css?family=Linden+Hill|Mountains+of+Christmas');
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch|Megrim|Special+Elite');
-// font-family: 'Special Elite', cursive;
-// font-family: 'Megrim', cursive;
-
-@red: olivedrab;
 
 
 body, html
 {
   margin-top: 2em;
-  // height: 100%;
   width: 100%;
-
   font-family: 'Special Elite', cursive;
   font-size: 18px;
   text-align: center;
@@ -23,18 +15,7 @@ h1 {
   font-family: 'Megrim', cursive;
 }
 
-ul
-{
-  list-style-type: none;
-
-  text-align: left;
-
-  li
-  {
-    line-height: 1.5em;
-  }
-}
-
+/* General links */
 a:not(.nav-link) {
   text-decoration: none;
   color: olivedrab;
@@ -44,20 +25,21 @@ a:not(.nav-link):hover {
   text-shadow: 1px 2px orange;
 }
 
-
-.menu
-{
-  padding-top: 5%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.form {
-  align-self: center;
-  padding: 2%;
-}
-
+/* Outside logo */
 .logo {
   height: 200px;
   width: auto;
+  margin: 20px;
+}
+
+/* Website tagline */
+.description {
+  margin-top: 100px;
+  border: 1px dashed orange;
+  border-top-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  width: 30%;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }

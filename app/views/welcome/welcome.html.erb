@@ -3,4 +3,7 @@
 <%=image_tag("Bass-Treble-Musical-Music-Clef-Silhouette-Note-3275055.png", class: ["logo"])%>
 
 
-<%=link_to "See who's been practising!", musician_rankings_path("total-practises")%>
+<%=link_to "See who's been practising!", musician_rankings_path("total-practises"), class: ["to_rankings"]%>
+
+
+<%=content_tag(:h3, "Your personal practise room!", class: ["description"])%>

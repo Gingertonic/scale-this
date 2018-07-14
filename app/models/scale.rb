@@ -50,10 +50,10 @@ class Scale < ApplicationRecord
     frequencies(root, octaves)
   end
 
-  def see_notes(root, octaves) #returns the notes os a scale pattern calculated from the root note
+  def see_notes(root, octaves) #returns the notes as a scale pattern calculated from the root note
     notes = []
     midi_generator(root, octaves).each do |midi_value|
-      notes << Note.find_by(midi_value: midi_value).name[0...-1]
+      notes << Note.find_by(midi_value: midi_value).solfege[0...-1]
     end
     notes
   end

@@ -12,7 +12,7 @@
   <body>
 
     <div id="navbar">
-      <a class="nav-link" href="<%= root_url %>"/>Home</a>
+      <%=link_to "SCALE THIS", root_url, class: "nav-link home-link"%>
       <%if current_user%>
         <%=link_to "Your Practice Room", practice_room_path(current_user.slugify), class: "nav-link"%>
         <%=link_to "Scales Library", scales_path, class: "nav-link"%>

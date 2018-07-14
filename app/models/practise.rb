@@ -3,8 +3,8 @@ class Practise < ApplicationRecord
   belongs_to :scale
 
   def increase_experience #increase the experience value by 1
-    experience += 1
-    save
+    self.experience += 1
+    self.save
   end
 
   def status #returns when the practise last happened
@@ -42,7 +42,7 @@ class Practise < ApplicationRecord
     (Time.now - 1.month).to_i
   end
 
-  def easy_read(datetime) 
+  def easy_read(datetime)
     datetime.strftime("%A %B%e %Y")
   end
 end

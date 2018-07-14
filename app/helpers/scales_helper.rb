@@ -48,12 +48,12 @@ module ScalesHelper
     end
   end
 
-  def div_for_sequencer(value, i)
+  def div_for_pitch(value, i)
     content_tag(:div, "#{Note.midi_to_solfege(value).first}", class: ["pitch"], id: ["pitch_#{i}"], style: "background-color: #F#{value*26}0")
   end
 
   def div_for_alt_pitch(value, i)
-    content_tag(:div, "#{Note.midi_to_solfege(value).second}", class: ["alt-pitch"], id: ["alt-pitch_#{i}"])
+    content_tag(:div, "#{Note.midi_to_solfege(value).second}", class: ["alt_pitch"], id: ["alt-pitch_#{i}"], style: "background-color: #F#{value*26}0")
   end
 
   def scale_info(scale)
@@ -68,10 +68,9 @@ module ScalesHelper
   def delete_scale_form(scale, owner)
     if owner.id == current_user.id
       form_for(scale, :html => {:method => :delete}) do |f|
-        f.submit "Delete this scale"
+        f.submit "Delete"
       end
     end
   end
-
 
 end

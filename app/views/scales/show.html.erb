@@ -10,31 +10,43 @@
 
 <%=content_tag :div, nil, class: ["sequencer"] do%>
   <%@midi_notes.each.with_index(1) do |value, i|%>
-    <%=div_for_sequencer(value, i)%>
-    <%=div_for_alt_pitch(value, i)%>
+    <div class="div_for_sequencer">
+      <%=div_for_pitch(value, i)%>
+      <%=div_for_alt_pitch(value, i)%>
+    </div>
   <%end%> <!-- midi_notes.each -->
 <%end%> <!-- sequencer -->
 
-<%=content_tag :div, scale_info(@scale), id: ["scale_info"]%>
+<div class="scale_info">
+  <%=content_tag :div, scale_info(@scale), id: ["scale_info"]%>
 
-<%=form_tag("/scales/#{@scale.slugify}/change_root") do%>
-  <%=select_tag :root, options_from_collection_for_select(@roots, :solfege, :name, selected: "do")%><br>
-  <%=submit_tag "Change root"%>
-<%end%>
+  <div class="change_root">
+    <p>Change root</p>
+    <%=form_tag("/scales/#{@scale.slugify}/change_root") do%>
+      <%=select_tag :root, options_from_collection_for_select(@roots, :solfege, :name, selected: @current_root)%><br>
+      <%=submit_tag "Change root"%>
+    <%end%>
+  </div>
 
-<!-- User experience with scale -->
-<%=easy_read(@your_practise)%>
-<%=your_experience(@your_practise)%>
+  <!-- User experience with scale -->
+  <div class="experience">
+    <%=easy_read(@your_practise)%>
+    <%=your_experience(@your_practise)%>
 
-<!-- New practice -->
-<%=content_tag :div, nil, class: ["form new_practise_form"] do %>
-  <%=form_for(@practise) do |f|%>
-    <%=f.hidden_field :scale_id%>
-    <%=f.submit "Practised!"%>
-  <%end%>
-<%end%>
+    <!-- New practice -->
+    <%=content_tag :div, nil, class: ["form new_practise_form"] do %>
+      <%=form_for(@practise) do |f|%>
+        <%=f.hidden_field :scale_id%>
+        <%=f.submit "Practised!"%>
+      <%end%>
+    <%end%>
+  </div>
 
-<%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.slugify}/edit")) if your_scale(@owner)%>
+</div>
 
-<!-- Delete scale -->
-<%=content_tag :div, delete_scale_form(@scale, @owner), class: ["form delete_scale_form"]%>
+<div class="scale_options">
+  <!-- Edit scale -->
+  <%=content_tag(:p, link_to("Edit this scale", "/scales/#{@scale.slugify}/edit"), class: ["edit_scale"]) if your_scale(@owner)%>
+  <!-- Delete scale -->
+  <%=content_tag :div, delete_scale_form(@scale, @owner), class: ["form delete_scale_form"]%>
+</div>

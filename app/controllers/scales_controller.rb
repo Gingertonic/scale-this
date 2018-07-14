@@ -10,7 +10,7 @@ class ScalesController < ApplicationController
     @scale = Scale.find_by_slug(params[:scale_slug])
     valid_scale?(@scale)
     @midi_notes = @scale.midi_generator(root_note, 1)
-    @notes = @scale.see_notes(root_note, 1)
+    @current_root = params[:root_note]
     @roots = Note.references
     @practise = Practise.new(scale: @scale)
     @owner = Musician.find(@scale.created_by)

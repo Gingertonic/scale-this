@@ -1,0 +1,40 @@
+/* Inoro, root change and practised data */
+.scale_info {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2%;
+  margin-bottom: 3%;
+}
+
+.scale_info div:not(.form) {
+  border: 2px dashed grey;
+  padding: 1%;
+  border-top-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+/* Delete and edit */
+.scale_options div {
+  background-color: pink;
+}
+
+/* Scales index */
+.scales_menu
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.scale_type {
+  width: 20%;
+  border: 2px dashed grey;
+  padding: 1%;
+  margin: 0.5%;
+  border-top-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+.scale_type li {
+  list-style-type: none;
+}

@@ -5,7 +5,7 @@ $( function() {
   window.context = context;
 
   // grab the sliders from the DOM and bind a `change` event.
-  var $pitches = $('.pitch');
+  var $pitches = $('.div_for_sequencer');
 
   // the checkbox will control the start & stop of the sequencer.
   $('.checkbox').on('change', function(e) {
