@@ -42,7 +42,7 @@ Note.create(name: "G#/Ab6", midi_value: 90, frequency: 1479.98, solfege: "se-fi"
 Note.create(name: "G6", midi_value: 91, frequency: 1567.98, solfege: "so")
 
 
-admin = Musician.create(name: "Admin", email: "thegingertonicstudios@gmail.com", password: "admin", admin: true) #user 1
+admin = Musician.create(name: "Admin", email: "thegingertonicstudios@gmail.com", password: "administration", admin: true) #user 1
 aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password") #user 2
 beti = Musician.create(name: "Beth Schofield", email: "gingertonic@test.com", password: "password") #user 3
 

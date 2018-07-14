@@ -19,7 +19,7 @@ class ScalesController < ApplicationController
 
   def change_root
     scale = Scale.find_by_slug(params[:scale_slug])
-    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: params[:root]})
+    go_to(scale, params[:root])
   end
 
   def new
@@ -31,7 +31,7 @@ class ScalesController < ApplicationController
   def create
     @scale = Scale.create_custom(current_user, scale_params)
     if @scale.save
-      redirect_to show_scale_path({scale_slug: @scale.slugify, root_note: "do"})
+      go_to(@scale)
     else
       @note_selection = Note.references
       @pattern = @scale.midi_generator(60, 1)
@@ -51,7 +51,7 @@ class ScalesController < ApplicationController
     editable_scale?(@scale)
     @scale.custom_update(@scale, scale_params)
     if @scale.save
-      redirect_to show_scale_path({scale_slug: @scale.slugify, root_note: "do"})
+      go_to(@scale)
     else
       @note_selection = Note.select{|n| n.reference}
       @pattern = @scale.midi_generator(60, 1)
@@ -84,8 +84,12 @@ class ScalesController < ApplicationController
 
   def editable_scale?(scale)
     if valid_scale?(scale) && scale.created_by != current_user.id
-      redirect_to show_scale_path({scale_slug: scale.slugify, root_note: "do"}), alert: "You can't edit this scale, sorry!"
+      go_to(scale, root = "do", alert = "You can't edit this scale, sorry!")
     end
+  end
+
+  def go_to(scale, root = "do", alert = nil)
+    redirect_to show_scale_path({scale_slug: scale.slugify, root_note: root}), alert: alert
   end
 
 end
