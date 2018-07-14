@@ -53,6 +53,10 @@ class Musician < ApplicationRecord
     new_practise.save
   end
 
+  def find_scale(scale)
+    practises.find_by(scale: scale)
+  end
+
   def self.order_by(by)
     case by
     when "name"

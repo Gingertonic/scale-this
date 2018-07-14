@@ -14,7 +14,7 @@ class ScalesController < ApplicationController
     @roots = Note.references
     @practise = Practise.new(scale: @scale)
     @owner = Musician.find(@scale.created_by)
-    @your_practise = current_user.practises.find_by(scale: @scale)
+    @your_practise = current_user.find_scale(@scale)
   end
 
   def change_root
@@ -42,7 +42,7 @@ class ScalesController < ApplicationController
   def edit
     @scale = Scale.find_by_slug(params[:scale_slug])
     editable_scale?(@scale)
-    @note_selection = Note.select{|n| n.reference}
+    @note_selection = Note.references
     @pattern = @scale.midi_generator(60, 1)
   end
 
@@ -53,7 +53,7 @@ class ScalesController < ApplicationController
     if @scale.save
       go_to(@scale)
     else
-      @note_selection = Note.select{|n| n.reference}
+      @note_selection = Note.references
       @pattern = @scale.midi_generator(60, 1)
       render :edit
     end
