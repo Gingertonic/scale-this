@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Linden+Hill|Mountains+of+Christmas');
+@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch|Megrim|Special+Elite');
+
+
+body, html
+{
+  margin-top: 2em;
+  width: 100%;
+  font-family: 'Special Elite', cursive;
+  font-size: 18px;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Megrim', cursive;
+}
+
+/* General links */
+a:not(.nav-link) {
+  text-decoration: none;
+  color: olivedrab;
+}
+
+a:not(.nav-link):hover {
+  text-shadow: 1px 2px orange;
+}
+
+/* Outside logo */
+.logo {
+  height: 200px;
+  width: auto;
+  margin: 20px;
+}
+
+/* Website tagline */
+.description {
+  margin-top: 100px;
+  border: 1px dashed orange;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  width: 30%;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}

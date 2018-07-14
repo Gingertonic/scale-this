@@ -1,0 +1,14 @@
+<h1>SCALE LIBRARY</h1>
+
+<%=content_tag :div, class: ["scales_menu"] do%>
+  <%@types.each do |type|%>
+    <%=content_tag :div, class: ["scale_type"], id: ["#{type}"] do%>
+      <h2><%=type%></h2>
+      <%of_type(@scales, type).each do |s|%>
+        <p><%=li_for_scale(s)%></p>
+      <%end%> <!-- of_type.each -->
+    <%end%> <!-- scale_type -->
+  <%end%> <!-- types.each -->
+<%end%> <!-- scales_menu -->
+
+<%=content_tag(:p, link_to("Add a new scale!", new_scale_path), class: ["add_scale"])%>

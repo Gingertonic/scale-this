@@ -1,0 +1,22 @@
+<%= render :partial => 'layouts/errors', locals: {obj: @user} %>
+<h1>Register</h1>
+
+<%=image_tag("Bass-Treble-Musical-Music-Clef-Silhouette-Note-3275055.png", class: ["logo"])%>
+
+<%=link_to image_tag("oL5c2.png", class: ["fb_logo"]), '/auth/facebook', class: ["fb_button"]%>
+<h3>Or to make an account especially with us, signup right here!</h3>
+<%=form_for(@user) do |f|%>
+  <%=f.label :name%><br>
+  <%=f.text_field :name%><br>
+  <br>
+  <%=f.label :email%><br>
+  <%=f.text_field :email%><br>
+  <br>
+  <%=f.label :password%><br>
+  <%=f.password_field :password%><br>
+  <br>
+  <%=f.label :password_confirmation, "Retype password"%><br>
+  <%=f.password_field :password_confirmation%><br>
+  <br>
+  <%=submit_tag "Signup"%>
+<%end%>

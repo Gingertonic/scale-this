@@ -1,0 +1,35 @@
+/* Sequencer */
+.sequencer
+{
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-around;
+}
+
+.div_for_sequencer
+{
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-direction: column;
+  background-color: #e5be60;
+  // border: 2px solid grey;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.pitch, .alt_pitch {
+  border-top-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  padding: 2px;
+}
+
+.alt_pitch {
+  opacity: 0.8;
+}
+
+.highlight
+{
+  border: 2px dashed white;
+}

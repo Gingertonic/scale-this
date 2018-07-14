@@ -5,21 +5,22 @@
 At a minimum, users can:
   + Create an account, login and logout
   + See a list of scales
-  + Search the library for scales they are interested in
   + Mark scales that they are interested in learning
   + Mark scales they know
   + Add new scales (they can be public or private)
   + Edit scales they have made
+  + Hear audio versions of the scales
   + See a page for each public scale and any of their own private scales
   + See a personal scale library with all the scales they have marked as known, learning or to learn in the future
   + Delete scales from their own scale library
+  + See user rankings that can be ordered by name, total practises and last practise time
 
 Future functionality may include:
   + Follow other users and share new scales in private groups
+  + Search the library for scales they are interested in
   + See a tailored news feed of new scales made by users they have followed
   + Search for other users who are using the app
-  + Visualise the scales
-  + Hear audio versions of the scales
+  + Visualise the scales in new ways
   + Randomise the scale order to generate new melody snippets for practice ideas
   + Randomise the scale order in accordance to the ascending and descending rules where applicable
 
@@ -30,16 +31,15 @@ To run this app on a local server:
     + `git clone git@github.com:Gingertonic/scale-this.git` to use SSH or
     + `git clone https://github.com/Gingertonic/scale-this.git` to use HTTPS
   2. Run `cd scale-this`
-  3. Run `rails s` and navigate to the address provided (Usually `127.0.0.1:3000`)
-    + if a port number is given instead go to `http://localhost:<port>/` (Usually `http://localhost:3000`)
+  3. Run `thin start --ssl` and navigate to `https://localhost:3000`
   4. Play!
     + You can make you own account or you can use these credentials to log in as a pre-made user:
-      + username: `gingertonic` / password: `password`
+      + username: `gingertonic@test.com` / password: `password`
 
    - If you encounter any problems or cannot access the gingertonic test account, run these steps after step 2 above
     3. run `bundle install`
-    4. Run `rake db:seed`
-    5. Back to step 3 as above (run `rails s`)
+    4. Run `rake db:reset`
+    5. Back to step 3 as above (run `thin start --ssl`)
 
 
 ## This is created for a Flatiron School Portfolio Project

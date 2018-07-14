@@ -1,0 +1,12 @@
+<h1><%=@user.name%>'s Practice Room</h1>
+
+<%=content_tag :div, id: ["practise_log"] do%>
+  <%@practise_log.each do |period, scales| %>
+    <%=content_tag :div, class: ["practised #{period_class(period)}"] do%>
+      <%=last_practised(period)%>
+      <%scales.each do |scale|%>
+        <%=p_for_scale(scale)%>
+      <%end%>  <!-- scales.each -->
+    <%end%>  <!-- practised period_class -->
+  <%end%> <!-- practise_log.each -->
+<%end%> <!-- practise_log -->
