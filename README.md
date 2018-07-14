@@ -30,16 +30,15 @@ To run this app on a local server:
     + `git clone git@github.com:Gingertonic/scale-this.git` to use SSH or
     + `git clone https://github.com/Gingertonic/scale-this.git` to use HTTPS
   2. Run `cd scale-this`
-  3. Run `rails s` and navigate to the address provided (Usually `127.0.0.1:3000`)
-    + if a port number is given instead go to `http://localhost:<port>/` (Usually `http://localhost:3000`)
+  3. Run `thin start --ssl` and navigate to `https://localhost:3000`
   4. Play!
     + You can make you own account or you can use these credentials to log in as a pre-made user:
-      + username: `gingertonic` / password: `password`
+      + username: `gingertonic@test.com` / password: `password`
 
    - If you encounter any problems or cannot access the gingertonic test account, run these steps after step 2 above
     3. run `bundle install`
-    4. Run `rake db:seed`
-    5. Back to step 3 as above (run `rails s`)
+    4. Run `rake db:reset`
+    5. Back to step 3 as above (run `thin start --ssl`)
 
 
 ## This is created for a Flatiron School Portfolio Project
