@@ -26,6 +26,10 @@
   background-image: image-url("musical-note-2343556_1280.png");
   // background-image: image-url("Bass-Treble-Musical-Music-Clef-Silhouette-Note-3275055.png");
   background-color: olivedrab;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  padding: 2px;
+  border: 1px dashed #d8dbc2;
 }
 
 .home-link {
