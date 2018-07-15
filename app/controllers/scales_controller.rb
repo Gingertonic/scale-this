@@ -8,13 +8,14 @@ class ScalesController < ApplicationController
   def show
     root_note = Note.get_root(params)
     @scale = Scale.find_by_slug(params[:scale_slug])
-    valid_scale?(@scale)
-    @midi_notes = @scale.midi_generator(root_note, 1)
-    @current_root = params[:root_note]
-    @roots = Note.references
-    @practise = Practise.new(scale: @scale)
-    @owner = Musician.find(@scale.created_by)
-    @your_practise = current_user.find_scale(@scale)
+    if valid_scale?(@scale)
+      @midi_notes = @scale.midi_generator(root_note, 1)
+      @current_root = params[:root_note]
+      @roots = Note.references
+      @practise = Practise.new(scale: @scale)
+      @owner = Musician.find(@scale.created_by)
+      @your_practise = current_user.find_scale(@scale)
+    end
   end
 
   def change_root
