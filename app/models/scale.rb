@@ -42,8 +42,11 @@ class Scale < ApplicationRecord
   def custom_update(scale, params) #update a scale
     scale.update(params)
     scale.pattern = Scale.custom_pattern(params[:pattern])
-    scale.private = false if params[:private] == "1"
-    scale
+    if params[:private] == "1"
+      scale.private = true
+    elsif params[:private] == "0"
+      scale.private = false
+    end
   end
 
   def scale_generator(root, octaves) #returns the frequencies of a scale pattern calculated from the given root note
