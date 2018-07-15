@@ -42,9 +42,10 @@ class ScalesController < ApplicationController
 
   def edit
     @scale = Scale.find_by_slug(params[:scale_slug])
-    editable_scale?(@scale)
-    @note_selection = Note.references
-    @pattern = @scale.midi_generator(60, 1)
+    if editable_scale?(@scale)
+      @note_selection = Note.references
+      @pattern = @scale.midi_generator(60, 1)
+    end
   end
 
   def update
@@ -86,6 +87,8 @@ class ScalesController < ApplicationController
   def editable_scale?(scale)
     if valid_scale?(scale) && scale.created_by != current_user.id
       go_to(scale, root = "do", alert = "You can't edit this scale, sorry!")
+    else
+      true
     end
   end
 

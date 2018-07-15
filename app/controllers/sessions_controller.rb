@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if request.env['omniauth.auth']
       user = Musician.from_omniauth(auth)
       login(user)
-      redirect_to practice_room_path(user.slugify)
+      redirect_to scales_path
     else
       authenticate_local_login(params)
     end

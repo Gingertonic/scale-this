@@ -44,7 +44,7 @@ Note.create(name: "G6", midi_value: 91, frequency: 1567.98, solfege: "so")
 
 admin = Musician.create(name: "Admin", email: "thegingertonicstudios@gmail.com", password: "administration", admin: true) #user 1
 aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password") #user 2
-beti = Musician.create(name: "Beth Schofield", email: "gingertonic@test.com", password: "password") #user 3
+beti = Musician.create(name: "Gingertonic", email: "gingertonic@test.com", password: "password") #user 3
 
 Scale.create(name: "ionian", aka: "major", scale_type: "mode (major scale)", pattern: "221222", private: false, created_by: 1)
 Scale.create(name: "dorian", scale_type: "mode (major scale)", pattern: "212221", private: false, created_by: 1)
@@ -87,9 +87,14 @@ Practise.create(musician_id: 2, scale_id: 4, experience: 4)
 Practise.create(musician_id: 2, scale_id: 5, experience: 4)
 Practise.create(musician_id: 2, scale_id: 6, experience: 10)
 Practise.create(musician_id: 3, scale_id: 1, experience: 1)
-Practise.create(musician_id: 3, scale_id: 3, experience: 4)
+Practise.create(musician_id: 3, scale_id: 5, experience: 4)
 Practise.create(musician_id: 3, scale_id: 3, experience: 10)
-Practise.create(musician_id: 3, scale_id: 3, experience: 3)
+Practise.create(musician_id: 3, scale_id: 8, experience: 3)
+Practise.create(musician_id: 3, scale_id: 10, experience: 4)
+Practise.create(musician_id: 3, scale_id: 11, experience: 7)
+Practise.create(musician_id: 3, scale_id: 13, experience: 7)
+Practise.create(musician_id: 3, scale_id: 14, experience: 7)
+Practise.create(musician_id: 3, scale_id: 15, experience: 7)
 
 p2 = Practise.find(2)
 p2.updated_at = Time.now - 2.weeks
@@ -107,11 +112,26 @@ p6 = Practise.find(6)
 p6.updated_at = Time.now - 2.weeks
 p6.save
 p7 = Practise.find(7)
-p7.updated_at = Time.now - 3.days
+p7.updated_at = Time.now - 1.day
 p7.save
 p8 = Practise.find(8)
 p8.updated_at = Time.now - 3.days
 p8.save
 p9 = Practise.find(9)
-p9.updated_at = Time.now - 3.days
+p9.updated_at = Time.now - 2.months
 p9.save
+p10 = Practise.find(10)
+p10.updated_at = Time.now - 2.months
+p10.save
+p11 = Practise.find(11)
+p11.updated_at = Time.now - 2.months
+p11.save
+p12 = Practise.find(12)
+p12.updated_at = Time.now - 4.days
+p12.save
+p13 = Practise.find(13)
+p13.updated_at = Time.now - 4.days
+p13.save
+p14 = Practise.find(14)
+p14.updated_at = Time.now - 1.day
+p14.save
