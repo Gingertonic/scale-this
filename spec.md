@@ -16,7 +16,7 @@ Specs:
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
     Musician, Scale and Note have AR validations
     Practise has alternative validation
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
     Musician has self.order_by which, depending on argument, uses:
       where.not(name: 'Admin').order("LOWER(name)")
       joins(:practises).group(:musician_id).order("sum(experience) desc")
