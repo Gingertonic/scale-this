@@ -8,7 +8,11 @@ module UsersHelper
   end
 
   def p_for_scale(practise)
-    content_tag(:p, link_to(practise.scale.name, show_scale_path({scale_slug: practise.scale.slugify, root_note: "do"})))
+    if practise.scale
+      content_tag(:p, link_to(practise.scale.name, show_scale_path({scale_slug: practise.scale.slugify, root_note: "do"})))
+    else
+      content_tag(:p, link_to("A scale that was removed from the library!", scales_path))
+    end
   end
 
   def total_practise(m)
