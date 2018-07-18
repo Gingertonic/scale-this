@@ -19,7 +19,7 @@ class MusiciansController < ApplicationController
   end
 
   def rankings
-    params[:by]
+    redirect_to musician_rankings_path("name") unless valid_ranking?(params[:by])
     @musicians = Musician.order_by(params[:by])
   end
 
@@ -40,6 +40,10 @@ class MusiciansController < ApplicationController
     else
       render :new
     end
+  end
+
+  def valid_ranking?(param)
+    param == "name" || param == "total-practises" || param == "last-practised"
   end
 
 end
