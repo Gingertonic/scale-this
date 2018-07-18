@@ -13,7 +13,7 @@ resources :practises, only: [:create]
 
 # Sessions routes
 get '/login', to: 'sessions#new', as: 'login'
-get '/auth/:provider/callback', to: 'sessions#create'
+get '/auth/:provider/callback', to: 'sessions#create' # OAuth callback route
 post '/login', to: 'sessions#create'
 get '/logout', to: 'sessions#destroy'
 

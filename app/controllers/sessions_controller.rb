@@ -16,13 +16,17 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.clear
+    logout
     redirect_to root_path
   end
 
   private
   def auth
     request.env['omniauth.auth']
+  end
+
+  def logout
+    session.clear
   end
 
   def authenticate_local_login(params)

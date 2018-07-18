@@ -57,12 +57,12 @@ module ScalesHelper
   end
 
   def scale_info(scale)
-      content_tag(:p, "Melody Rules: #{@scale.melody_rules}") +
-      content_tag(:p, "Origin: #{@scale.origin}") +
-      content_tag(:p, "Type: #{@scale.scale_type}") +
-      if @scale.aka
-        content_tag(:p, "Also known as: #{@scale.aka}")
-      end
+    content_tag(:p, "Melody Rules: #{@scale.melody_rules}") +
+    content_tag(:p, "Origin: #{@scale.origin}") +
+    content_tag(:p, "Type: #{@scale.scale_type}") +
+    if @scale.aka
+      content_tag(:p, "Also known as: #{@scale.aka}")
+    end
   end
 
   def delete_scale_form(scale, owner)
