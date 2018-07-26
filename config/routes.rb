@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
 # Scales routes
 resources :scales, only: [:index, :new, :create, :update, :destroy]
+get '/scales/most_popular', to: 'scales#most_popular', as: 'most_popular_scale'
 get '/scales/:scale_slug', to: 'scales#show'
 get '/scales/:scale_slug/edit', to: 'scales#edit', as: 'edit_scale'
 post '/scales/:scale_slug/change_root', to: 'scales#change_root'
 get '/scales/:scale_slug/:root_note', to: 'scales#show', as: 'show_scale'
+
 
 
 resources :practises, only: [:create]

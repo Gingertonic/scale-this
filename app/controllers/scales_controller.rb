@@ -61,6 +61,10 @@ class ScalesController < ApplicationController
     end
   end
 
+  def most_popular
+    @most_popular_scale = "Ionian"
+  end
+
   def destroy
     scale = Scale.find(params[:id]).destroy
     editable_scale?(scale)
@@ -95,5 +99,6 @@ class ScalesController < ApplicationController
   def go_to(scale, root = "do", alert = nil)
     redirect_to show_scale_path({scale_slug: scale.slugify, root_note: root}), alert: alert
   end
+
 
 end
