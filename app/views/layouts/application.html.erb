@@ -8,7 +8,10 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= favicon_link_tag asset_path('Bass-Treble-Musical-Music-Clef-Silhouette-Note-3275055.png'), :rel => 'icon', :type =>  'image/png' %>
+    <%= favicon_link_tag asset_path('scalethistextgh.png'), :rel => 'icon', :type =>  'image/png' %>
+
+    <%= yield :og_header%>
+    <%= tag(:meta, property: "twitter:site", content: "@GingertonicSt")%>
   </head>
 
   <body>
