@@ -2,7 +2,12 @@ class ScalesController < ApplicationController
 
   def index
     @scales = Scale.custom_index(current_user)
-    @types = Scale.types
+    # @types = Scale.types
+    respond_to do |f|
+      f.html { render 'index' }
+      f.json { render json: @scales, each_serializer: SimpleScaleSerializer }
+          # f.json { render json: @scales }
+    end
   end
 
   def show
