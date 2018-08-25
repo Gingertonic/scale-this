@@ -21,13 +21,18 @@
 /* Scales index */
 .scales_menu
 {
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
+.scales_index_sidebar {
+  width: 38%;
+}
+
 .scale_type {
-  width: 20%;
+  width: 25%;
   border: 2px dashed grey;
   padding: 1%;
   margin: 0.5%;

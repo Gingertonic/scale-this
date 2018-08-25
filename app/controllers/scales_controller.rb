@@ -2,7 +2,7 @@ class ScalesController < ApplicationController
 
   def index
     @scales = Scale.custom_index(current_user)
-    # @types = Scale.types - MOVE TO JS CLASS OBJECT
+    @types = Scale.types #- MOVE TO JS CLASS OBJECT
     respond_to do |f|
       f.html { render 'index' }
       f.json { render json: @scales, each_serializer: SimpleScaleSerializer }

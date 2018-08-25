@@ -11,6 +11,10 @@ body, html
   text-align: center;
 }
 
+.container {
+  display: flex;
+}
+
 h1 {
   font-family: 'Megrim', cursive;
 }
