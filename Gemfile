@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 #user active_model_serializers for friendy json making
 gem 'active_model_serializers'
 
+#handlebars for templates
+gem 'handlebars_assets'
+
 #fun stuff (lets me use less css)
 gem 'therubyracer'
 gem 'less-rails'

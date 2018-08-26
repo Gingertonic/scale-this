@@ -13,6 +13,11 @@ function attachListeners(){
   })
 }
 
+function init() {
+  Handlebars.registerPartial('scaleFormPartial', $.('scale-form-template').innerHTML)
+}
+
+
 function loadRankings(){
   $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
   $('.sb_header').html('<h1>Current Rankings!</h1>');
@@ -91,4 +96,5 @@ function loadScales(){
 $( document ).ready(function() {
     console.log( "ready!" );
     attachListeners();
+    init();
   });

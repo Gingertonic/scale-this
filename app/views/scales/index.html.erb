@@ -26,3 +26,10 @@
     </div>
   </div>
 </div> <!-- container -->
+
+<script id="scale-form-template" type="text/x-handlebars-template">
+  <form onsubmit="updateRecipe()">
+    <%= render :partial => 'form', locals: {submit_text: "Create"} %>
+    <input type="submit">
+  </form>
+</script>
