@@ -63,11 +63,10 @@ function loadProgress(){
 }
 
 function loadPracticeDiary(practises){
-  $('.sb_nav').hide();
+  $('.sb_nav').html("");
   $('.sb_header').html('<h1>Practice Diary</h1>');
   $('.sb_content').text(practises);
 }
-
 
 function loadScalesLibrary(){
   $('.header').text("SCALES LIBRARY");
@@ -88,18 +87,21 @@ function loadPracticeRoom(){
 }
 
 function loadScales(){
+  $('.primary_content').html("")
   $.get('/scales.json', function(resp){
     resp["data"].forEach(function(scale){
-      console.log(scale.attributes)
+      new_scale = new Scale(scale.attributes)
+      console.log(new_scale)
+      if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
+        $('.primary_content').append(new_scale.renderScaleTypeBlock());
+      }
+      $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
     })
-    $('.primary_content').text(resp["data"])
   })
 }
 
 
 
 $( document ).ready(function() {
-    console.log( "ready!" );
     attachListeners();
-    init();
   });

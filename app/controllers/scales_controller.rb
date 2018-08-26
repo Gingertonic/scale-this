@@ -5,7 +5,7 @@ class ScalesController < ApplicationController
     @scale = Scale.new
     @note_selection = Note.references
     @pattern = []
-    @types = Scale.types #- MOVE TO JS CLASS OBJECT
+    @types = Scale.types
     respond_to do |f|
       f.html { render 'index' }
       f.json { render json: @scales, each_serializer: SimpleScaleSerializer }
