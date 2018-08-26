@@ -15,11 +15,11 @@ class MusiciansController < ApplicationController
   def show
     @user = Musician.find_by_slug(params[:musician_slug])
     redirect_to login_path, alert: "That's not your practise room!" if not_your_room(@user)
-    # respond_to do |f|
-    #   f.html { render 'show' }
-    #   f.json { render json: @user }
-    # end
-    @practise_log = @user.practise_log #- MOVE TO JS CLASS OBJECT
+    respond_to do |f|
+      f.html { render 'show' }
+      f.json { render json: @user, serializer: MusicianPracticeDataSerializer }
+    end
+    # @practise_log = @user.practise_log - MOVE TO JS CLASS OBJECT
   end
 
   def rankings
