@@ -23,21 +23,34 @@
   background-color: #FFCCCC;
 }
 
+.upper_form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.form_col_2 {
+  width: 50%;
+}
+
 /* Pattern checkbox form */
 .pattern_checkboxes {
   display: flex;
-  margin: 5px;
+  flex-direction: column-reverse;
+  // margin: 2%;
   justify-content: center;
  }
 .pattern_checkboxes input {
-  display: inline;
-  margin-left: 10px;
+  // display: inline;
+  // flex-direction: column-reverse;
+  // margin-left: 20%;
  }
 
 .pattern_checkboxes label {
   // background-color: pink;
   padding-right: 10px;
   border-right: 3px solid black;
+  // width: 20%;
 }
 
 .pattern_checkboxes label[for*='60'], label[for*='62'], label[for*='64'], label[for*='65'], label[for*='67'], label[for*='69'], label[for*='71'] {

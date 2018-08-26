@@ -19,8 +19,7 @@
 }
 
 /* Scales index */
-.scales_menu
-{
+.scales_menu {
   width: 60%;
   display: flex;
   flex-wrap: wrap;
@@ -28,7 +27,13 @@
 }
 
 .scales_index_sidebar {
-  width: 38%;
+  display: block;
+  width: 35%;
+  border: 2px dashed grey;
+  padding: 2%;
+  border-top-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  margin-left: 2%;
 }
 
 .scale_type {

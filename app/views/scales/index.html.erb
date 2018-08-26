@@ -13,7 +13,7 @@
   <%end%> <!-- scales_menu -->
 
   <div class="scales_index_sidebar">
-    Forms and rankings here!
-    <%=content_tag(:p, link_to("Add a new scale!", new_scale_path), class: ["add_scale"])%>
+    <%=content_tag(:button, link_to("Add a new scale!", new_scale_path), class: ["add_scale"])%>
+    <%= render :partial => 'form', locals: {submit_text: "Create"} %>
   </div>
 </div> <!-- container -->

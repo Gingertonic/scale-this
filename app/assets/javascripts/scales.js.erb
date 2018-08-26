@@ -1,0 +1,28 @@
+function attachListeners(){
+  $('.add_scale').on('click', function(e){
+    e.preventDefault();
+    // alert("you clicked add new scale!");
+    loadNewScaleForm();
+  })
+}
+
+function loadNewScaleForm(){
+  $('.scales_index_sidebar').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button> <h1>New Scale Form</h1>');
+  $('.see_rankings').on('click', function(e){
+    e.preventDefault();
+    loadRankings();
+  })
+}
+
+function loadRankings(){
+  $('.scales_index_sidebar').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button> <h1>Current Rankings!</h1>');
+  $('.add_scale').on('click', function(e){
+    e.preventDefault();
+    loadNewScaleForm();
+  })
+}
+
+$( document ).ready(function() {
+    console.log( "ready!" );
+    attachListeners();
+  });
