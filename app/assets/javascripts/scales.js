@@ -13,9 +13,6 @@ function attachListeners(){
   })
 }
 
-function init() {
-  Handlebars.registerPartial('scaleFormPartial', $.('scale-form-template').innerHTML)
-}
 
 
 function loadRankings(){
@@ -34,7 +31,8 @@ function loadRankings(){
 function loadNewScaleForm(){
   $('.sb_nav').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button>');
   $('.sb_header').html('<h1>New Scale</h1>');
-  $('.sb_content').html('<p>this will be the New Scale Form</p>');
+  scaleForm = HandlebarsTemplates['scale_form']
+  $('.sb_content').html(scaleForm);
   $('.see_rankings').on('click', function(e){
     e.preventDefault();
     loadRankings();
