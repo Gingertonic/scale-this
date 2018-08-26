@@ -2,9 +2,6 @@ class ScalesController < ApplicationController
 
   def index
     @scales = Scale.custom_index(current_user)
-    @scale = Scale.new
-    @note_selection = Note.references
-    @pattern = []
     @types = Scale.types
     respond_to do |f|
       f.html { render 'index' }

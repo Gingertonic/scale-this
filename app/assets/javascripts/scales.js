@@ -25,6 +25,8 @@ function loadRankings(){
   $.get('/musicians/rankings/name.json', function(resp){
     console.log(resp);
     $('.sb_content').text(resp["data"]);
+    let rankingsTable = HandlebarsTemplates['musician_rankings']({musicians: resp["data"]});
+    $('.sb_content').html(rankingsTable);
   })
 }
 
