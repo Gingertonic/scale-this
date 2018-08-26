@@ -54,11 +54,14 @@ function loadProgress(){
 }
 
 function loadPracticeDiary(){
+  $('.header').text("YOUR PRACTICE ROOM");
+  $('.sb_nav').hide();
   $('.sb_content').html('<h1>Practice Diary</h1>');
 }
 
 
 function loadScalesLibrary(){
+  $('.header').text("SCALES LIBRARY");
   loadScales();
   loadRankings();
 }
