@@ -14,15 +14,21 @@ function attachListeners(){
 }
 
 function loadRankings(){
-  $('.sidebar').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button> <h1>Current Rankings!</h1>');
+  $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
+  $('.sb_content').html('<h1>Current Rankings!</h1>');
   $('.add_scale').on('click', function(e){
     e.preventDefault();
     loadNewScaleForm();
   })
+  $.get('/musicians/rankings/name.json', function(resp){
+    console.log(resp);
+    $('.sb_content').text(resp["data"]);
+  })
 }
 
 function loadNewScaleForm(){
-  $('.sidebar').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button> <h1>New Scale Form</h1>');
+  $('.sb_nav').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button>');
+  $('.sb_content').html('<h1>New Scale Form</h1>');
   $('.see_rankings').on('click', function(e){
     e.preventDefault();
     loadRankings();
@@ -30,7 +36,8 @@ function loadNewScaleForm(){
 }
 
 function loadEditScaleForm(){
-  $('.sidebar').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button> <h1>Edit Scale Form</h1>');
+  $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
+  $('.sb_content').html('<h1>Edit Scale Form</h1>');
   $('.see_progress').on('click', function(e){
     e.preventDefault();
     loadProgress();
@@ -38,7 +45,8 @@ function loadEditScaleForm(){
 }
 
 function loadProgress(){
-  $('.sidebar').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button> <h1>Practice Diary</h1>');
+  $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
+  $('.sb_content').html('<h1>Practice Diary</h1>');
   $('.edit_scale').on('click', function(e){
     e.preventDefault();
     loadEditScaleForm();
@@ -46,18 +54,25 @@ function loadProgress(){
 }
 
 function loadPracticeDiary(){
-  $('.sidebar').html('<h1>Practice Diary</h1>');
+  $('.sb_content').html('<h1>Practice Diary</h1>');
 }
 
 
 function loadScalesLibrary(){
-  $('.primary_content').html('<h1>Scales Library</h1>')
+  loadScales();
   loadRankings();
 }
 
 function loadPracticeRoom(){
   $('.primary_content').html('<h1>Your Practice Room</h1>')
   loadPracticeDiary();
+}
+
+function loadScales(){
+  $.get('/scales.json', function(resp){
+    console.log(resp)
+    $('.primary_content').text(resp["data"])
+  })
 }
 
 $( document ).ready(function() {

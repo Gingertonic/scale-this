@@ -23,9 +23,10 @@ class MusiciansController < ApplicationController
   end
 
   def rankings
-    redirect_to musician_rankings_path("name") unless valid_ranking?(params[:by])
+    # redirect_to musician_rankings_path("name") unless valid_ranking?(params[:by])
     @musicians = Musician.order_by(params[:by])
-    render json: @musicians
+    # @musicians = Musician.all
+    render json: @musicians, each_serializer: MusicianRankSerializer
   end
 
 

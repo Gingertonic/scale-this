@@ -3,8 +3,8 @@ class ScalesController < ApplicationController
   def index
     @scales = Scale.custom_index(current_user)
     @scale = Scale.new
-      @note_selection = Note.references
-      @pattern = []
+    @note_selection = Note.references
+    @pattern = []
     @types = Scale.types #- MOVE TO JS CLASS OBJECT
     respond_to do |f|
       f.html { render 'index' }
