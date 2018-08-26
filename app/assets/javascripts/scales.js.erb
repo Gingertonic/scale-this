@@ -1,25 +1,63 @@
 function attachListeners(){
   $('.add_scale').on('click', function(e){
     e.preventDefault();
-    // alert("you clicked add new scale!");
+    loadNewScaleForm();
+  })
+  $('.to_library').on('click', function(e){
+    e.preventDefault();
+    loadScalesLibrary();
+  })
+  $('.to_practice_room').on('click', function(e){
+    e.preventDefault();
+    loadPracticeRoom();
+  })
+}
+
+function loadRankings(){
+  $('.sidebar').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button> <h1>Current Rankings!</h1>');
+  $('.add_scale').on('click', function(e){
+    e.preventDefault();
     loadNewScaleForm();
   })
 }
 
 function loadNewScaleForm(){
-  $('.scales_index_sidebar').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button> <h1>New Scale Form</h1>');
+  $('.sidebar').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button> <h1>New Scale Form</h1>');
   $('.see_rankings').on('click', function(e){
     e.preventDefault();
     loadRankings();
   })
 }
 
-function loadRankings(){
-  $('.scales_index_sidebar').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button> <h1>Current Rankings!</h1>');
-  $('.add_scale').on('click', function(e){
+function loadEditScaleForm(){
+  $('.sidebar').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button> <h1>Edit Scale Form</h1>');
+  $('.see_progress').on('click', function(e){
     e.preventDefault();
-    loadNewScaleForm();
+    loadProgress();
   })
+}
+
+function loadProgress(){
+  $('.sidebar').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button> <h1>Practice Diary</h1>');
+  $('.edit_scale').on('click', function(e){
+    e.preventDefault();
+    loadEditScaleForm();
+  })
+}
+
+function loadPracticeDiary(){
+  $('.sidebar').html('<h1>Practice Diary</h1>');
+}
+
+
+function loadScalesLibrary(){
+  $('.primary_content').html('<h1>Scales Library</h1>')
+  loadRankings();
+}
+
+function loadPracticeRoom(){
+  $('.primary_content').html('<h1>Your Practice Room</h1>')
+  loadPracticeDiary();
 }
 
 $( document ).ready(function() {

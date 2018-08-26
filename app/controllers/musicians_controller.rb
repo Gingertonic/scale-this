@@ -6,19 +6,20 @@ class MusiciansController < ApplicationController
     @user = Musician.new
   end
 
-  # def create
-  #   redirect_to root_path if logged_in?
-  #   @user = Musician.new(musician_params)
-  #   validate(@user)
-  # end
+  def create
+    redirect_to root_path if logged_in?
+    @user = Musician.new(musician_params)
+    validate(@user)
+  end
 
   def show
-    redirect_to login_path, alert: "That's not your practise room!" if not_your_room(@user)
     @user = Musician.find_by_slug(params[:musician_slug])
-    respond_to do |f|
-      f.json { render json: @user }
-    end
-    # @practise_log = @user.practise_log - MOVE TO JS CLASS OBJECT
+    redirect_to login_path, alert: "That's not your practise room!" if not_your_room(@user)
+    # respond_to do |f|
+    #   f.html { render 'show' }
+    #   f.json { render json: @user }
+    # end
+    @practise_log = @user.practise_log #- MOVE TO JS CLASS OBJECT
   end
 
   def rankings
