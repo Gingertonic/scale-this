@@ -22,10 +22,14 @@ function loadRankings(){
     e.preventDefault();
     loadNewScaleForm();
   })
-  $.get('/musicians/rankings/name.json', function(resp){
+  $.get('/musicians/rankings/total-practises', function(resp){
     console.log(resp);
     $('.sb_content').text(resp["data"]);
-    let rankingsTable = HandlebarsTemplates['musician_rankings']({musicians: resp["data"]});
+    var musicians = []
+    resp["data"].forEach(function(muso){
+      musicians.push(new Musician(muso))
+    })
+    let rankingsTable = HandlebarsTemplates['musician_rankings']({musicians: musicians});
     $('.sb_content').html(rankingsTable);
   })
 }
@@ -77,13 +81,13 @@ function loadScalesLibrary(){
 }
 
 function loadPracticeRoom(){
-  $('.header').text("YOUR PRACTICE ROOM");
   $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(resp){
       console.log(resp);
-      $('.primary_content').text(resp["data"]);
-      practises = resp["data"]["relationships"]["practises"]["data"]
-      loadPracticeDiary(practises);
+      musician = new Musician(resp["data"]);
+      $('.header').text(musician.name + "'s Practice Room");
+      $('.primary_content').text(musician);
+      loadPracticeDiary(musician.practises);
     })
   })
 }

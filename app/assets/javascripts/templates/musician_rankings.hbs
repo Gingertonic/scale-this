@@ -1,16 +1,15 @@
-<h1>Who is most diligent with their practise?</h1>
-<p>Click headers to re-order by name, total practises and when they last practised</p>
+<p>Who has practised the most!</p>
 <table>
   <tr>
     <th>Name</th>
     <th>Total Practises</th>
-    <th>Last Practised</th>
+    <!-- <th>Last Practised</th> -->
   </tr>
 <!-- <%@musicians.each do |m|%> -->
 {{#musicians}}
   <tr>
-    <td>{{attributes.name}}</td>
-    <!-- <td><%=total_practise(m)%></td> -->
+    <td>{{name}}</td>
+    <td>{{totalPractises}}</td>
     <!-- <td><%=last_practice_time(m)%></td> -->
   </tr>
 {{/musicians}}
