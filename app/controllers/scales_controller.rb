@@ -31,11 +31,12 @@ class ScalesController < ApplicationController
   #   go_to(scale, params[:root])
   # end
 
-  # def new
-  #   @scale = Scale.new
+  def new
+    @scale = Scale.new
   #   @note_selection = Note.references
   #   @pattern = []
-  # end
+    render json: @scale
+  end
 
   # def create
   #   @scale = Scale.create_custom(current_user, scale_params)

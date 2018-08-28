@@ -6,6 +6,7 @@ function Scale(attr){
   this.created_by = attr.created_by;
   this.private = attr.private;
   this.pattern = attr.pattern;
+  this.aka = attr.aka;
 }
 
 Scale.prototype.scaleTypeSlug = function(){

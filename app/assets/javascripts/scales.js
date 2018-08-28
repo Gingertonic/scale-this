@@ -35,11 +35,12 @@ function loadRankings(){
 }
 
 function loadNewScaleForm(){
+  $.get('/scales/new', function(resp){
+    scaleForm = HandlebarsTemplates['scale_form']({scale: resp})
+    $('.sb_content').html(scaleForm)
+  })
   $('.sb_nav').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button>');
   $('.sb_header').html('<h1>New Scale</h1>');
-  scaleForm = HandlebarsTemplates['scale_form']
-  $('.sb_content').html('<p>This will be the New Scale Form</p>');
-  $('.sb_content').append(scaleForm)
   $('.see_rankings').on('click', function(e){
     e.preventDefault();
     loadRankings();
