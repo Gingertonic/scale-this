@@ -1,32 +1,104 @@
-
-Hello?
 <div class="form">
 
     <div class="upper_form">
       <div class="pattern_checkboxes">
-        <!-- <%=f.label :pattern%><br> -->
-        checkboxes here
+        <input type="hidden" name="scale[pattern][]" value="">
+        <input type="checkbox" value="60" name="scale[pattern][]" id="scale_pattern_60">
+        <label for="scale_pattern_60">do</label>
+        <input type="checkbox" value="61" name="scale[pattern][]" id="scale_pattern_61">
+        <label for="scale_pattern_61">rah-di</label>
+        <input type="checkbox" value="62" name="scale[pattern][]" id="scale_pattern_62">
+        <label for="scale_pattern_62">re</label>
+        <input type="checkbox" value="63" name="scale[pattern][]" id="scale_pattern_63">
+        <label for="scale_pattern_63">me-ri</label>
+        <input type="checkbox" value="64" name="scale[pattern][]" id="scale_pattern_64">
+        <label for="scale_pattern_64">mi</label>
+        <input type="checkbox" value="65" name="scale[pattern][]" id="scale_pattern_65">
+        <label for="scale_pattern_65">fa</label>
+        <input type="checkbox" value="66" name="scale[pattern][]" id="scale_pattern_66">
+        <label for="scale_pattern_66">se-fi</label>
+        <input type="checkbox" value="67" name="scale[pattern][]" id="scale_pattern_67">
+        <label for="scale_pattern_67">so</label>
+        <input type="checkbox" value="68" name="scale[pattern][]" id="scale_pattern_68">
+        <label for="scale_pattern_68">le-si</label>
+        <input type="checkbox" value="69" name="scale[pattern][]" id="scale_pattern_69">
+        <label for="scale_pattern_69">la</label>
+        <input type="checkbox" value="70" name="scale[pattern][]" id="scale_pattern_70">
+        <label for="scale_pattern_70">te-li</label>
+        <input type="checkbox" value="71" name="scale[pattern][]" id="scale_pattern_71">
+        <label for="scale_pattern_71">ti</label>
       </div>
       <div class="form_col_2">
-        <input type="label" name="name">Name</input><br>
+        <label for="name">Name</label><br>
         <input type="text" name="name" value={{name}}>
-        <br>
-        <input type="label" name="name">Type</input><br>
-        <input type="text" name="name" value={{scaleType}}>
-        <br>
-        <input type="label" name="name">Origin</input><br>
-        <input type="text" name="name" value={{origin}}>
-        <br>
-        <input type="label" name="name">Melody Rules</input><br>
-        <input type="text" name="name" value={{melodyRules}}>
-        <br>
-        <input type="label" name="name">Also known as</input><br>
-        <input type="text" name="name" value={{aka}}>
-        <br>
-        private checkbox here
+        <br></br>
+        <label for="scaleType">Type</label><br>
+        <input type="text" name="scaleType" value={{scaleType}}>
+        <br></br>
+        <label for="origin">Origin</label><br>
+        <input type="text" name="origin" value={{origin}}>
+        <br></br>
+        <label for="melodyRules">Melody Rules</label><br>
+        <input type="text" name="melodyRules" value={{melodyRules}}>
+        <br></br>
+        <label for="aka">Also Known As</label><br>
+        <input type="text" name="aka" value={{aka}}>
+        <br></br>
+        <label for="scale_private">Would you like to keep this scale private?</label> <br>
+        <input name="scale[private]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="scale[private]" id="scale_private"> <br>
         <br>
       </div>
     </div> <!-- upper form -->
     <br>
     <input type="submit">
 </div>
+
+
+<!-- <div class="form">
+  <form class="new_scale" id="new_scale" action="/scales" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="/qC1T1AVFY6OyM7q7SiQY4yGaVhoHGniy4tZmSQrCxt5BtIEVCnPlc/KM26RNfydmbVXwf+jZWcEAQnZWhI+Fg==">
+    <label for="scale_name">Name</label><br>
+    <input type="text" name="scale[name]" id="scale_name"><br>
+    <br>
+    <label for="scale_scale_type">Scale type</label><br>
+    <input type="text" value="Unknown" name="scale[scale_type]" id="scale_scale_type"><br>
+    <br>
+    <label for="scale_origin">Origin</label><br>
+    <input type="text" value="Unknown" name="scale[origin]" id="scale_origin"><br>
+    <br>
+    <label for="scale_melody_rules">Melody rules</label><br>
+    <textarea name="scale[melody_rules]" id="scale_melody_rules">No special rules</textarea><br>
+    <br>
+    <label for="scale_aka">Also known as</label><br>
+    <textarea name="scale[aka]" id="scale_aka"></textarea><br>
+    <br>
+    <div class="pattern_checkboxes">
+      <label for="scale_pattern">Pattern</label><br>
+      <input type="hidden" name="scale[pattern][]" value="">
+      <input type="checkbox" value="60" name="scale[pattern][]" id="scale_pattern_60">
+      <label for="scale_pattern_60">do</label>
+      <input type="checkbox" value="61" name="scale[pattern][]" id="scale_pattern_61">
+      <label for="scale_pattern_61">rah-di</label><input type="checkbox" value="62" name="scale[pattern][]" id="scale_pattern_62">
+      <label for="scale_pattern_62">re</label><input type="checkbox" value="63" name="scale[pattern][]" id="scale_pattern_63"><label for="scale_pattern_63">me-ri</label>
+      <input type="checkbox" value="64" name="scale[pattern][]" id="scale_pattern_64">
+      <label for="scale_pattern_64">mi</label>
+      <input type="checkbox" value="65" name="scale[pattern][]" id="scale_pattern_65">
+      <label for="scale_pattern_65">fa</label>
+      <input type="checkbox" value="66" name="scale[pattern][]" id="scale_pattern_66">
+      <label for="scale_pattern_66">se-fi</label>
+      <input type="checkbox" value="67" name="scale[pattern][]" id="scale_pattern_67">
+      <label for="scale_pattern_67">so</label>
+      <input type="checkbox" value="68" name="scale[pattern][]" id="scale_pattern_68">
+      <label for="scale_pattern_68">le-si</label>
+      <input type="checkbox" value="69" name="scale[pattern][]" id="scale_pattern_69">
+      <label for="scale_pattern_69">la</label>
+      <input type="checkbox" value="70" name="scale[pattern][]" id="scale_pattern_70">
+      <label for="scale_pattern_70">te-li</label>
+      <input type="checkbox" value="71" name="scale[pattern][]" id="scale_pattern_71">
+      <label for="scale_pattern_71">ti</label><br>
+    </div>
+    <br>
+    <label for="scale_Would you like to keep this scale private">Would you like to keep this scale private?</label> <br>
+    <input name="scale[private]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="scale[private]" id="scale_private"> <br>
+    <br>
+    <input type="submit" name="commit" value="Create" data-disable-with="Create">
+</form></div> -->
