@@ -37,7 +37,8 @@ function loadScales(){
 }
 // ADD LINKS
 function addGoToScaleListener(link){
-  link.on('click', function(){
+  link.on('click', function(e){
+    e.preventDefault();
     loadScaleShow(link[0].id)
   })
 }
@@ -77,36 +78,42 @@ function loadNewScaleForm(){
 
 // SCALE SHOW VIEW
 // LOAD SCALE PAGE
-function loadScaleShow(scale){
-  loadScale(scale);
-  loadProgress(scale);
+function loadScaleShow(scaleName){
+  loadScale(scaleName);
 }
 // lOAD SCALE
-function loadScale(scale){
-  $.get('scales/' + scale, function(resp){
-    $('.primary_content').text(resp)
+function loadScale(scaleName){
+  debugger;
+  $.get('/scales/' + scaleName, function(resp){
+    debugger;
+    $('.header').text(resp.name);
+    $('.primary_content').text(resp);
+    var scale = new Scale(resp);
+    console.log(scale);
+    loadProgress(scale);
   })
 }
 // EDIT SCALE FORM
-function loadEditScaleForm(){
+function loadEditScaleForm(scale){
+  debugger;
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
-  scaleForm = HandlebarsTemplates['scale_form']
+  scaleForm = HandlebarsTemplates['scale_form']({scale: scale})
   $('.sb_content').html('<p>This will be the Edit Scale Form</p>');
   $('.sb_content').append(scaleForm)
   $('.see_progress').on('click', function(e){
     e.preventDefault();
-    loadProgress();
+    loadProgress(scale);
   })
 }
 // SHOW USER PROGRESS
-function loadProgress(){
+function loadProgress(scale){
   $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
   $('.sb_header').html('<h1>Practice Log</h1>');
   $('.sb_content').html('<p>This will state your progress</p>');
   $('.edit_scale').on('click', function(e){
     e.preventDefault();
-    loadEditScaleForm();
+    loadEditScaleForm(scale);
   })
 }
 
