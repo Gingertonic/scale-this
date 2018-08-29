@@ -3,10 +3,10 @@ function Scale(attr){
   this.scaleType = attr.scale_type;
   this.origin = attr.origin;
   this.melodyRules = attr.melody_rules;
-  this.created_by = attr.created_by;
   this.private = attr.private;
   this.pattern = attr.pattern;
   this.aka = attr.aka;
+  this.createdBy = attr.created_by;
 }
 
 Scale.prototype.scaleTypeSlug = function(){
