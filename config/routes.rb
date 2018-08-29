@@ -25,8 +25,8 @@ get '/logout', to: 'sessions#destroy'
 # Users (musicians) routes
 resources :musicians, only: [:new, :create]
 get '/musicians/rankings/:by', to: 'musicians#rankings', as: 'musician_rankings'
+get '/musicians/:id/practise_log', to: 'musicians#practise_log'
 get '/:musician_slug', to: 'musicians#show', as: 'practice_room'
-
 
 root 'welcome#welcome'
 

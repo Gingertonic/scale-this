@@ -19,7 +19,7 @@ class MusiciansController < ApplicationController
       f.html { render 'show' }
       f.json { render json: @user, serializer: MusicianPracticeDataSerializer }
     end
-    # @practise_log = @user.practise_log - MOVE TO JS CLASS OBJECT
+    # @practise_log = @user.practise_log
   end
 
   def rankings
@@ -27,6 +27,12 @@ class MusiciansController < ApplicationController
     @musicians = Musician.order_by(params[:by])
     # @musicians = Musician.all
     render json: @musicians, each_serializer: MusicianRankSerializer
+  end
+
+  def practise_log
+    musician = Musician.find(params[:id])
+    @practise_log = musician.practise_log
+    render json: @practise_log
   end
 
 

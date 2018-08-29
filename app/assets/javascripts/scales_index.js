@@ -75,6 +75,127 @@ function loadNewScaleForm(){
     loadRankings();
   })
 }
+// SHOW USER
+function loadPracticeRoom(){
+  $.get('/current_username', function(username){
+    $.get('/' + username + '.json', function(resp){
+      musician = new Musician(resp["data"]);
+      $('.header').text(musician.name + "'s Practice Room");
+      $.get('/musicians/' + musician.id + '/practise_log', function(resp){
+        practiseLog = HandlebarsTemplates['practise_log']({log: resp})
+        $('.primary_content').html(practiseLog);
+        for (const period in resp){
+          console.log(period.replace(" ","_").replace('!',''))
+          for (var i = 0; i < resp[period].length; i++){
+            console.log(resp[period][i]["id"])
+            $.get('/scales/' + resp[period][i]["id"], function(scale){
+              thisScale = new Scale(scale);
+              $('.' + period.replace(" ","_").replace('!','')).append(thisScale.renderLiLink());
+              addGoToScaleListener($('#' + thisScale.slugify()));
+            })
+          }
+        }
+      });
+      loadMusicianInfo(musician);
+    })
+  })
+}
+
+function loadMusicianInfo(musician){
+  $('.sb_nav').html("");
+  $('.sb_header').text("");
+  var musicianInfo = HandlebarsTemplates['musician_info']({musician: musician});
+  $('.sb_content').html(musicianInfo);
+}
+
+Handlebars.registerHelper("slugifyPeriod", function(period) {
+    return period.replace(" ","_").replace('!','');
+});
+
+Handlebars.registerHelper("consolelog", function(something) {
+  console.log(something);
+});
+
+// Handlebars.registerHelper("getScaleName", function(scaleObject) {
+//   result = $.get('/scales/' + scaleObject.id, function(thisScale){
+//   }).success(function(thisScale){
+//     return thisScale.name;
+//   });
+//   debugger
+// });
+
+Handlebars.registerHelper("debug", function(what) {
+  debugger;
+});
+
+/////////////////////////
+
+// SCALE SHOW VIEW
+// LOAD SCALE PAGE
+function loadScaleShow(scaleName){
+  loadScale(scaleName);
+}
+// lOAD SCALE
+function loadScale(scaleName){
+  $.get('/scales/' + scaleName, function(resp){
+    $('.header').text(resp.name);
+    var scale = new Scale(resp);
+    console.log(scale);
+    var playback = HandlebarsTemplates['scale_playback']({scale: scale, midi_notes: scale.patternInC()});
+    var values = scale.patternInC();
+    $('.primary_content').html(playback);
+    loadProgress(scale);
+  })
+}
+// EDIT SCALE FORM
+function loadEditScaleForm(scale){
+  $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
+  $('.sb_header').html('<h1>Edit Scale</h1>');
+  scaleForm = HandlebarsTemplates['scale_form']({scale: scale})
+  $('.sb_content').html(scaleForm)
+  $('.see_progress').on('click', function(e){
+    e.preventDefault();
+    loadProgress(scale);
+  })
+}
+// SHOW USER PROGRESS
+function loadProgress(scale){
+  console.log(scale)
+  $('.sb_header').html('<h1>Practice Log</h1>');
+  $.get('/current_username', function(username){
+    $.get('/' + username + '.json', function(user){
+      if (scale.createdBy === parseInt(user.data.id)){
+        $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
+        $('.edit_scale').on('click', function(e){
+          e.preventDefault();
+          loadEditScaleForm(scale);
+        })
+      } else { $('.sb_nav').html("") }
+      for (var i = 0; i < user.data.relationships.practises.data.length; i++){
+        debugger;
+        if (user.data.relationships.practises.data[i]["scale_id"] === scale.id){
+          $('.sb_content').text("Practised " + practised(user.data.relationships.practises.data[i]["scale_id"]));
+          return true;
+        } else {
+          $('.sb_content').text("Never practised!");
+        }
+      }
+    })
+  })
+}
+
+function practised(x){
+  if (x === 1){
+    return "just once..."
+  } else if (x === 2){
+    return "twice."
+  } else {
+    return `${x} times!`
+  }
+}
+
+///////////
+
 
 $( document ).ready(function() {
     attachListeners();
