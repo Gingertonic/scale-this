@@ -10,12 +10,12 @@ class ScalesController < ApplicationController
   end
 
   def show
-    root_note = Note.get_root(params)
+    # root_note = Note.get_root(params)
     @scale = Scale.find_by_slug(params[:scale_slug])
     if valid_scale?(@scale)
       respond_to do |f|
-        f.html { render 'index' }
         f.json { render json: @scale }
+        f.html { render 'index' }
       end
       # @midi_notes = @scale.midi_generator(root_note, 1) -  - MOVE TO JS CLASS OBJECT
       # @current_root = params[:root_note]

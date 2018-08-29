@@ -13,8 +13,36 @@ function attachListeners(){
   })
 }
 
+// SCALES INDEX VIEW
+//LOAD SCALES INDEX
+function loadScalesLibrary(){
+  $('.header').text("SCALES LIBRARY");
+  loadScales();
+  loadRankings();
+}
+// GET SCALES
+function loadScales(){
+  $('.primary_content').html("")
+  $.get('/scales.json', function(resp){
+    resp["data"].forEach(function(scale){
+      new_scale = new Scale(scale.attributes)
+      console.log(new_scale)
+      if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
+        $('.primary_content').append(new_scale.renderScaleTypeBlock());
+      }
+      $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
+      addGoToScaleListener($('#' + new_scale.slugify()));
+    })
+  })
+}
+// ADD LINKS
+function addGoToScaleListener(link){
+  link.on('click', function(){
+    loadScaleShow(link[0].id)
+  })
+}
 
-
+//  GET RANKINGS
 function loadRankings(){
   $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
   $('.sb_header').html('<h1>Current Rankings!</h1>');
@@ -33,7 +61,7 @@ function loadRankings(){
     $('.sb_content').html(rankingsTable);
   })
 }
-
+// NEW SCALE FORM
 function loadNewScaleForm(){
   $.get('/scales/new', function(resp){
     scaleForm = HandlebarsTemplates['scale_form']({scale: resp})
@@ -47,6 +75,19 @@ function loadNewScaleForm(){
   })
 }
 
+// SCALE SHOW VIEW
+// LOAD SCALE PAGE
+function loadScaleShow(scale){
+  loadScale(scale);
+  loadProgress(scale);
+}
+// lOAD SCALE
+function loadScale(scale){
+  $.get('scales/' + scale, function(resp){
+    $('.primary_content').text(resp)
+  })
+}
+// EDIT SCALE FORM
 function loadEditScaleForm(){
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
@@ -58,7 +99,7 @@ function loadEditScaleForm(){
     loadProgress();
   })
 }
-
+// SHOW USER PROGRESS
 function loadProgress(){
   $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
   $('.sb_header').html('<h1>Practice Log</h1>');
@@ -69,16 +110,12 @@ function loadProgress(){
   })
 }
 
+// USER SHOW VIEW
+// LOAD ALL PRACTISES
 function loadPracticeDiary(practises){
   $('.sb_nav').html("");
   $('.sb_header').html('<h1>Practice Diary</h1>');
   $('.sb_content').text(practises);
-}
-
-function loadScalesLibrary(){
-  $('.header').text("SCALES LIBRARY");
-  loadScales();
-  loadRankings();
 }
 
 function loadPracticeRoom(){
@@ -93,19 +130,6 @@ function loadPracticeRoom(){
   })
 }
 
-function loadScales(){
-  $('.primary_content').html("")
-  $.get('/scales.json', function(resp){
-    resp["data"].forEach(function(scale){
-      new_scale = new Scale(scale.attributes)
-      console.log(new_scale)
-      if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
-        $('.primary_content').append(new_scale.renderScaleTypeBlock());
-      }
-      $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
-    })
-  })
-}
 
 
 
