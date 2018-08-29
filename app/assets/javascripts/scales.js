@@ -83,19 +83,17 @@ function loadScaleShow(scaleName){
 }
 // lOAD SCALE
 function loadScale(scaleName){
-  debugger;
   $.get('/scales/' + scaleName, function(resp){
-    debugger;
     $('.header').text(resp.name);
-    $('.primary_content').text(resp);
     var scale = new Scale(resp);
     console.log(scale);
+    var playback = HandlebarsTemplates['scale_playback']({scale: scale, midi_notes: scale.patternInC()})
+    $('.primary_content').html(playback);
     loadProgress(scale);
   })
 }
 // EDIT SCALE FORM
 function loadEditScaleForm(scale){
-  debugger;
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
   scaleForm = HandlebarsTemplates['scale_form']({scale: scale})
@@ -142,4 +140,5 @@ function loadPracticeRoom(){
 
 $( document ).ready(function() {
     attachListeners();
+    loadScalesLibrary();
   });

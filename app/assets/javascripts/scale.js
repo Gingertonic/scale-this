@@ -28,10 +28,11 @@ Scale.prototype.renderScaleTypeBlock = function(){
   </div>`
 }
 
-// Scale.prototype.patternInC = function(){
-//   patternC = [60];
-//   this.pattern.forEach(function(diff){
-//     patternC.push(patternC[patternC.length - 1] + diff);
-//   })
-//   console.log(patternC);
-// }
+Scale.prototype.patternInC = function(){
+  patternC = [60];
+  for (var i=0; i < this.pattern.length; i++) {
+       diff = parseInt(this.pattern.charAt(i));
+       patternC.push(patternC[patternC.length - 1] + diff);
+     }
+  return patternC;
+}

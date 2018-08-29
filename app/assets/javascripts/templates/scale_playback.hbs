@@ -1,0 +1,23 @@
+<!-- <script> var values = {{midi_notes}} </script>
+
+<h3><input type="checkbox" class="checkbox"> Listen to Scale</h3>
+(if scale does not play, try refreshing the page!) -->
+
+<div class="sequencer">
+  <div class="div_for_sequencer">
+    {{#each midi_notes}}
+      <div class="pitch" id="pitch_{{@index}}", style="background-color: pink">
+        {{this}}
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+{{#with scale}}
+  <p>Melody Rules: {{melodyRules}}</p>
+  <p>Origin: {{origin}}</p>
+  <p>Type: {{scaleType}}</p>
+  {{#if aka}}
+    <p>Also known as: {{aka}}</p>
+  {{/if}}
+{{/with}}
