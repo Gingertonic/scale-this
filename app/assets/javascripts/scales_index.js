@@ -87,8 +87,8 @@ function loadPracticeRoom(){
         for (const period in resp){
           console.log(period.replace(" ","_").replace('!',''))
           for (var i = 0; i < resp[period].length; i++){
-            console.log(resp[period][i]["id"])
-            $.get('/scales/' + resp[period][i]["id"], function(scale){
+            console.log(resp[period][i]["scale_id"])
+            $.get('/scales/' + resp[period][i]["scale_id"], function(scale){
               thisScale = new Scale(scale);
               $('.' + period.replace(" ","_").replace('!','')).append(thisScale.renderLiLink());
               addGoToScaleListener($('#' + thisScale.slugify()));
