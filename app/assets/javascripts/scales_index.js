@@ -65,8 +65,31 @@ function loadRankings(){
 // NEW SCALE FORM
 function loadNewScaleForm(){
   $.get('/scales/new', function(resp){
-    scaleForm = HandlebarsTemplates['scale_form']({scale: resp})
-    $('.sb_content').html(scaleForm)
+    $.get('/current_username', function(username){
+      $.get('/' + username + '.json', function(user){
+        scaleForm = HandlebarsTemplates['scale_form']({scale: resp, action: "/scales", submitTag: "Add", musician_id: user.data.id})
+        $('.sb_content').html(scaleForm)
+        // debugger
+        $('form#scale').on('submit', function(e){
+          e.preventDefault();
+          console.log("stahhhp!")
+          $form = $(this)
+          console.log($form.serialize())
+          action = $form.attr("action")
+          params = ($form.serialize())
+          $.post(action, params).done(function(resp){
+            new_scale = new Scale(resp)
+            console.log(new_scale)
+            if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
+              $('.primary_content').append(new_scale.renderScaleTypeBlock());
+            }
+            $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
+            addGoToScaleListener($('#' + new_scale.slugify()));
+            loadNewScaleForm();
+          })
+        })
+      })
+    })
   })
   $('.sb_nav').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button>');
   $('.sb_header').html('<h1>New Scale</h1>');
@@ -75,6 +98,10 @@ function loadNewScaleForm(){
     loadRankings();
   })
 }
+
+// POST NEW SCALE FORM
+
+
 // SHOW USER
 function loadPracticeRoom(){
   $.get('/current_username', function(username){
@@ -143,13 +170,29 @@ function loadScale(scaleName){
 function loadEditScaleForm(scale){
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
-  scaleForm = HandlebarsTemplates['scale_form']({scale: scale})
+  scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, submitTag: "Update"})
   $('.sb_content').html(scaleForm)
   $('.see_progress').on('click', function(e){
     e.preventDefault();
     loadProgress(scale);
   })
+  $('form#scale').on('submit', function(e){
+    e.preventDefault();
+    $form = $(this);
+    action = $form.attr("action");
+    params = $form.serialize();
+    $.ajax({
+      url: action,
+      data: params,
+      method: "patch"
+    }).done(function(resp){
+      thisScale = new Scale(resp)
+      loadScaleShow(thisScale.slugify());
+    })
+  })
 }
+
+
 // SHOW USER PROGRESS
 function loadProgress(scale){
   console.log(scale)

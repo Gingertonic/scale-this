@@ -1,7 +1,9 @@
 class ScalesController < ApplicationController
+  # skip_before_action :check_session, only: [:index]
 
   def index
     @scales = Scale.custom_index(current_user)
+    # byebug
     @types = Scale.types
     respond_to do |f|
       f.html { render 'index' }
@@ -38,16 +40,19 @@ class ScalesController < ApplicationController
     render json: @scale
   end
 
-  # def create
-  #   @scale = Scale.create_custom(current_user, scale_params)
-  #   if @scale.save
-  #     go_to(@scale)
-  #   else
-  #     @note_selection = Note.references
-  #     @pattern = @scale.midi_generator(60, 1)
-  #     render :new
-  #   end
-  # end
+  def create
+    @musician = Musician.find(musician_params[:id])
+    @scale = Scale.create_custom(@musician, scale_params)
+    # byebug
+    if @scale.save
+      render json: @scale
+      # go_to(@scale)
+    # else
+    #   @note_selection = Note.references
+    #   @pattern = @scale.midi_generator(60, 1)
+    #   render :new
+    end
+  end
 
   # def edit
   #   @scale = Scale.find_by_slug(params[:scale_slug])
@@ -57,18 +62,19 @@ class ScalesController < ApplicationController
   #   end
   # end
 
-  # def update
-  #   @scale = Scale.find(params[:id])
-  #   editable_scale?(@scale)
-  #   @scale.custom_update(@scale, scale_params)
-  #   if @scale.save
-  #     go_to(@scale)
-  #   else
-  #     @note_selection = Note.references
-  #     @pattern = @scale.midi_generator(60, 1)
-  #     render :edit
-  #   end
-  # end
+  def update
+    @scale = Scale.find(params[:id])
+    # editable_scale?(@scale)
+    @scale.custom_update(@scale, scale_params)
+    if @scale.save
+      render json: @scale
+      # go_to(@scale)
+    # else
+      # @note_selection = Note.references
+      # @pattern = @scale.midi_generator(60, 1)
+      # render :edit
+    end
+  end
   #
   # def most_popular
   #   @most_popular_scale = "Ionian"
@@ -83,6 +89,10 @@ class ScalesController < ApplicationController
   private
   def scale_params
     params.require(:scale).permit(:name, :scale_type, :origin, :melody_rules, :created_by, :private, :pattern => [])
+  end
+
+  def musician_params
+    params.require(:musician).permit(:id)
   end
 
   def valid_scale?(scale)

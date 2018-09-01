@@ -1,11 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  # before_action :require_login
+  # before_action :check_session
 
   def current_username
     @slug = current_user.slugify
     render plain: @slug
   end
+
+  def current_user
+    (@current_user ||= Musician.find(session[:user_id])) if session[:user_id]
+  end
+
+  def check_session
+    render json: session[:user_id]
+  end
+
+  helper_method :current_user
 
   private
 
@@ -21,10 +31,6 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, alert: "Please login first!" unless logged_in?
   end
 
-  def current_user
-    (@current_user ||= Musician.find(session[:user_id])) if session[:user_id]
-  end
 
-  helper_method :current_user
 
 end

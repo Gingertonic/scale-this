@@ -2,10 +2,8 @@
   <form class="new_practise" id="new_practise" action="/practises">
     {{#with scale}}
       <input type="hidden" value="{{id}}" name="practise[scale_id]" id="practise_scale_id">
-      <h1>scale: {{id}}</h1>
     {{/with}}
     {{#with musician}}
-    <h1>muso: {{id}}</h1>
       <input type="hidden" value="{{id}}" name="practise[musician_id]" id="practise_musician_id">
     {{/with}}
 

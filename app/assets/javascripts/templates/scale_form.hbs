@@ -1,4 +1,4 @@
-<div class="form">
+  <form class="scale" id="scale" action="{{action}}">
   {{#with scale}}
     <div class="upper_form">
       <div class="pattern_checkboxes">
@@ -30,19 +30,19 @@
       </div>
       <div class="form_col_2">
         <label for="name">Name</label><br>
-        <input type="text" name="name" value={{name}}>
+        <input type="text" name="scale[name]" value={{name}}>
         <br></br>
         <label for="scaleType">Type</label><br>
-        <input type="text" name="scaleType" value={{scaleType}}>
+        <input type="text" name="scale[scale_type]" value={{scaleType}}>
         <br></br>
         <label for="origin">Origin</label><br>
-        <input type="text" name="origin" value={{origin}}>
+        <input type="text" name="scale[origin]" value={{origin}}>
         <br></br>
         <label for="melodyRules">Melody Rules</label><br>
-        <input type="text" name="melodyRules" value={{{melodyRules}}}>
+        <input type="text" name="scale[melody_rules]" value={{{melodyRules}}}>
         <br></br>
         <label for="aka">Also Known As</label><br>
-        <input type="text" name="aka" value={{aka}}>
+        <input type="text" name="scale[aka]" value={{aka}}>
         <br></br>
         <label for="scale_private">Would you like to keep this scale private?</label> <br>
         <input name="scale[private]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="scale[private]" id="scale_private"> <br>
@@ -50,6 +50,7 @@
       </div>
     </div> <!-- upper form -->
     <br>
-    <input type="submit">
   {{/with}}
+    <input type="hidden" value="{{musician_id}}" name="musician[id]" id="musician_id">
+    <input type="submit" id="submit_scale" value="Do it!">
 </div>
