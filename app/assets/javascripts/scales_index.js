@@ -116,14 +116,6 @@ Handlebars.registerHelper("consolelog", function(something) {
   console.log(something);
 });
 
-// Handlebars.registerHelper("getScaleName", function(scaleObject) {
-//   result = $.get('/scales/' + scaleObject.id, function(thisScale){
-//   }).success(function(thisScale){
-//     return thisScale.name;
-//   });
-//   debugger
-// });
-
 Handlebars.registerHelper("debug", function(what) {
   debugger;
 });
@@ -172,16 +164,35 @@ function loadProgress(scale){
         })
       } else { $('.sb_nav').html("") }
       for (var i = 0; i < user.data.relationships.practises.data.length; i++){
-        debugger;
         if (user.data.relationships.practises.data[i]["scale_id"] === scale.id){
-          $('.sb_content').text("Practised " + practised(user.data.relationships.practises.data[i]["scale_id"]));
+          $('.sb_content').text("Practised " + practised(user.data.relationships.practises.data[i]["experience"]));
           return true;
         } else {
           $('.sb_content').text("Never practised!");
         }
       }
+    }).done(function(user){
+      practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user["data"]})
+      // debugger;
+      $('.sb_content').append(practiseForm);
+      $('form#new_practise').on('submit', function(e){
+        e.preventDefault();
+        console.log("stop right here, my man!")
+        var $form = $(this)
+        var action = $form.attr("action")
+        var params = $form.serialize()
+        $.post(action + '.json', params).done(function(resp){
+          console.log("here's the response: " + resp )
+          loadPracticeRoom();
+        })
+      })
     })
   })
+}
+
+function createPractise(scale){
+  // debugger;
+  // MAKE POST PRACTISE CREATE REQUEST HERE
 }
 
 function practised(x){
