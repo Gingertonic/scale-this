@@ -259,6 +259,7 @@ function loadEditScaleForm(scale){
 
 // SHOW USER PROGRESS
 function loadProgress(scale, username){
+  // debugger;
   $('.sb_errors').removeClass('flash-error').text("");
   console.log("This is scale" + scale)
   console.log("current user is " + username)
@@ -283,7 +284,7 @@ function loadProgress(scale, username){
       for (var i = 0; i < user.data.relationships.practises.data.length; i++){
         if (user.data.relationships.practises.data[i]["scale_id"] === scale.id){
           $('.sb_content').text("Practised " + practised(user.data.relationships.practises.data[i]["experience"]));
-          // return true;
+          break;
         } else {
           $('.sb_content').text("Never practised!");
         }
@@ -340,5 +341,12 @@ $( document ).ready(function() {
   if (window.location.pathname === '/scales') {
     attachListeners();
     loadScalesLibrary();
+  } else {
+    $('.to_practice_room').on('click', function(e){
+      e.preventDefault();
+      window.location.assign("https://localhost:3000/scales").done(function(){
+        loadPracticeRoom();
+      })
+    })
   }
 });
