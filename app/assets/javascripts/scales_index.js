@@ -205,6 +205,11 @@ function loadProgress(scale){
           e.preventDefault();
           loadEditScaleForm(scale);
         })
+        $('.sb_nav').append('<button class="delete_scale sidebar_link"><a href="/scales/:id/destroy">Delete Scale</a></button>');
+        $('.delete_scale').on('click', function(e){
+          e.preventDefault();
+          deleteScale(scale);
+        })
       } else { $('.sb_nav').html("") }
       for (var i = 0; i < user.data.relationships.practises.data.length; i++){
         if (user.data.relationships.practises.data[i]["scale_id"] === scale.id){
@@ -230,6 +235,17 @@ function loadProgress(scale){
         })
       })
     })
+  })
+}
+
+function deleteScale(scale){
+  console.log(scale)
+  console.log(scale.id)
+  $.ajax({
+    url: '/scales/' + scale.id,
+    method: "delete"
+  }).done(function(resp){
+    loadScalesLibrary();
   })
 }
 

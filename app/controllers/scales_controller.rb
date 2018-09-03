@@ -80,11 +80,12 @@ class ScalesController < ApplicationController
   #   @most_popular_scale = "Ionian"
   # end
 
-  # def destroy
-  #   scale = Scale.find(params[:id]).destroy
-  #   editable_scale?(scale)
-  #   redirect_to scales_path
-  # end
+  def destroy
+    scale = Scale.find(params[:id]).destroy
+    # editable_scale?(scale)
+    # redirect_to scales_path
+    render json: {success: "yes"}
+  end
 
   private
   def scale_params
