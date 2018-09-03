@@ -79,9 +79,10 @@ function loadRankings(){
 function loadNewScaleForm(){
   $('.sb_errors').removeClass('flash-error').text("");
   $.get('/scales/new', function(resp){
+    scale = new Scale(resp);
     $.get('/current_username', function(username){
       $.get('/' + username + '.json', function(user){
-        scaleForm = HandlebarsTemplates['scale_form']({scale: resp, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
+        scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
         $('.sb_content').html(scaleForm)
         // debugger
         $('form#scale').on('submit', function(e){
