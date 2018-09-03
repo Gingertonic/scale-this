@@ -1,16 +1,19 @@
 function attachListeners(){
   $('.to_library').on('click', function(e){
-    $('.audio_trigger').attr('checked', false);
-    $('.audio_trigger').trigger("change");
     e.preventDefault();
+    stopAudio()
     loadScalesLibrary();
   })
   $('.to_practice_room').on('click', function(e){
-    $('.audio_trigger').attr('checked', false);
-    $('.audio_trigger').trigger("change");
     e.preventDefault();
+    stopAudio()
     loadPracticeRoom();
   })
+}
+
+function stopAudio(){
+  $('.audio_trigger').attr('checked', false);
+  $('.audio_trigger').trigger("change");
 }
 
 // SCALES INDEX VIEW
@@ -226,8 +229,7 @@ function loadScale(scaleName){
 }
 
 function changeRoot(scale, root){
-  $('.audio_trigger').attr('checked', false);
-  $('.audio_trigger').trigger("change");
+  stopAudio();
   var playback = HandlebarsTemplates['scale_show']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
   $('.primary_content').html(playback);
   var values = scale.patternFrom(root);
