@@ -176,6 +176,17 @@ Handlebars.registerHelper("selectedIf", function (root, value) {
     return (root === value) ? "selected" : "";
 });
 
+Handlebars.registerHelper("gColour", function (value, index) {
+    debugger
+    return (255 - (index*10) - value);
+});
+
+Handlebars.registerHelper("bColour", function (value, index) {
+    debugger
+    return (value + (index*10));
+});
+
+
 
 /////////////////////////
 
@@ -191,9 +202,10 @@ function loadScale(scaleName){
     $('.header').text(resp.name);
     var scale = new Scale(resp);
     console.log(scale);
-    var playback = HandlebarsTemplates['scale_playback']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
-    var values = scale.patternFrom(60);
+    var playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
     $('.primary_content').html(playback);
+    var values = scale.patternFrom(60);
+    loadPlayback(values)
     $.get('/current_username', function(user){
       if (!user) {
         $('.sb_nav').html('');
@@ -206,9 +218,10 @@ function loadScale(scaleName){
 }
 
 function changeRoot(scale, root){
-  var playback = HandlebarsTemplates['scale_playback']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
-  var values = scale.patternFrom(root);
+  var playback = HandlebarsTemplates['scale_show']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
   $('.primary_content').html(playback);
+  var values = scale.patternFrom(root);
+  loadPlayback(values)
   addRootListener(scale);
 }
 
@@ -337,16 +350,12 @@ function practised(x){
 ///////////
 
 
+////////
+
+
 $( document ).ready(function() {
   if (window.location.pathname === '/scales') {
     attachListeners();
     loadScalesLibrary();
-  } else {
-    $('.to_practice_room').on('click', function(e){
-      e.preventDefault();
-      window.location.assign("https://localhost:3000/scales").done(function(){
-        loadPracticeRoom();
-      })
-    })
   }
 });

@@ -1,12 +1,11 @@
-<!-- <script> var values = {{midi_notes}} </script> -->
+<!-- <script> var values = {{{midi_notes}}} </script> -->
 
-<!-- <h3><input type="checkbox" class="audio_trigger"> Listen to Scale</h3>
-(if scale does not play, try refreshing the page!) -->
+<h3><input type="checkbox" class="audio_trigger"> Listen to Scale</h3>
 
 <div class="sequencer">
   {{#each midi_notes}}
     <div class="div_for_sequencer">
-      <div class="pitch" id="pitch_{{@index}}", style="background-color: pink">
+      <div class="pitch" id="pitch_{{@index}}", style="background-color: rgb(255, {{gColour this @index}}, {{bColour this @index}}">
         {{this}}
       </div>
     </div>

@@ -1,20 +1,24 @@
-$( function() {
-
+function loadPlayback(notes) {
+  console.log("loading playback!")
+  debugger;
   // Set up our Audio Context
   var context = new AudioContext();
   window.context = context;
 
-  // grab the sliders from the DOM and bind a `change` event.
-  var $pitches = $('.div_for_sequencer');
+
+  var $seqDivs = $('.div_for_sequencer');
+
 
   // the checkbox will control the start & stop of the sequencer.
   $('.audio_trigger').on('change', function(e) {
     if( this.checked ) {
+      console.log("checked!")
       // start the sequencer
       nextNoteTime = context.currentTime;
       scheduleSequence();
       intervalId = setInterval(scheduleSequence, intervalTime);
     } else {
+      console.log("unchecked!")
       // stop the sequencer
       intervalId = clearInterval(intervalId);
     }
@@ -24,7 +28,7 @@ $( function() {
   // TIMING
   // ================================================================
 
-  var bpm          = 260;
+  var bpm          = 240;
   // an eighth note at the given bpm
   var noteLength   = bpm / 60 * (1/8);
   var attack       = 1/64;
@@ -43,11 +47,11 @@ $( function() {
   function scheduleSequence() {
     while(nextNoteTime < context.currentTime + lookahead) {
       // schedule the next note
-      scheduleNote( values[currentNote], nextNoteTime, currentNote );
+      scheduleNote( notes[currentNote], nextNoteTime, currentNote );
       // advance the time
       nextNoteTime += noteLength;
       // keep track of which note we're on
-      currentNote = ++currentNote % values.length;
+      currentNote = ++currentNote % notes.length;
     }
   }
 
@@ -87,16 +91,17 @@ $( function() {
   // The animation queue is an array with scheduled notes in it.
   // Within `requestFrameAnimation` we will check the next `time` in
   // the queue against `context.currentTime` to determine when we
-  // should highlight a pitch or not.
+  // should highlight a slider or not.
 
   var animationQueue = [];
 
   function highlightCurrentPitch() {
     while(animationQueue.length && context.currentTime > animationQueue[0].time) {
       // turn off all `highlight` classes
-      $pitches.toggleClass('highlight', false);
+      $seqDivs.toggleClass('highlight', false);
+      console.log('highlight change')
       // highlight the current slider
-      $pitches.eq(animationQueue[0].slider).addClass('highlight');
+      $seqDivs.eq(animationQueue[0].slider).addClass('highlight');
       // remove this item from the queue
       animationQueue.splice(0, 1);
     }
@@ -106,9 +111,11 @@ $( function() {
 
   highlightCurrentPitch();
 
-});
+};
 
 // mtof = Midi note to Frequency
+// input: 0 - 127 (although you could go higher if you wanted)
+// output: frequency in Hz from ~8Hz to ~12543Hz
 function mtof(note) {
   return ( Math.pow(2, ( note-69 ) / 12) ) * 440.0;
 }
