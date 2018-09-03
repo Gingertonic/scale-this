@@ -363,4 +363,8 @@ $( document ).ready(function() {
     attachListeners();
     loadScalesLibrary();
   }
+  if (window.location.hash === '#practise_room') {
+    attachListeners();
+    loadPracticeRoom();
+  }
 });
