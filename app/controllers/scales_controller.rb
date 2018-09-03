@@ -2,7 +2,11 @@ class ScalesController < ApplicationController
   # skip_before_action :check_session, only: [:index]
 
   def index
-    @scales = Scale.custom_index(current_user)
+    if current_user
+      @scales = Scale.custom_index(current_user)
+    else
+      @scales = Scale.standard_index
+    end
     # byebug
     @types = Scale.types
     respond_to do |f|

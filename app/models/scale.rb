@@ -20,6 +20,10 @@ class Scale < ApplicationRecord
     find{|s| s.slugify == slug}
   end
 
+  def self.standard_index
+    Scale.all.select{|s| s.private == false}.sort_by{|s| s.name}
+  end
+
   def self.custom_index(user)  #returns a list of scales visible to the user (based on permissions and private/public scale status)
     Scale.all.select{|s| s.private == false || s.created_by == user.id}.sort_by{|s| s.name}
   end
