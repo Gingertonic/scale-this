@@ -47,7 +47,14 @@ function addGoToScaleListener(link){
 //  GET RANKINGS
 function loadRankings(){
   $('.sb_errors').removeClass('flash-error').text("");
-  $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
+  $.get('/current_username', function(user){
+    // debugger;
+    if (!user) {
+      $('.sb_nav').html('');
+    } else {
+      $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
+    }
+  })
   $('.sb_header').html('<h1>Current Rankings!</h1>');
   $('.add_scale').on('click', function(e){
     e.preventDefault();
@@ -75,6 +82,7 @@ function loadNewScaleForm(){
         // debugger
         $('form#scale').on('submit', function(e){
           e.preventDefault();
+          $('.sb_errors').removeClass('flash-error').html("")
           console.log("stahhhp!")
           $form = $(this)
           console.log($form.serialize())
@@ -181,7 +189,11 @@ function loadScale(scaleName){
     var playback = HandlebarsTemplates['scale_playback']({scale: scale, midi_notes: scale.patternInC()});
     var values = scale.patternInC();
     $('.primary_content').html(playback);
-    loadProgress(scale);
+    if (!user) {
+      $('.sb_nav').html('');
+    } else {
+      loadProgress(scale);
+    }
   })
 }
 // EDIT SCALE FORM
@@ -198,6 +210,7 @@ function loadEditScaleForm(scale){
   })
   $('form#scale').on('submit', function(e){
     e.preventDefault();
+    $('.sb_errors').removeClass('flash-error').html("");
     $form = $(this);
     action = $form.attr("action");
     params = $form.serialize();

@@ -2,7 +2,10 @@ class Scale < ApplicationRecord
   validates :pattern, presence: {:message => "needs at least two notes!"}
   validates :pattern, uniqueness: {:message => "already belongs to another scale!"}
   validates :name, presence: true
+  validates_format_of :name, :with => /\A([\w\ |(|)|-|\d|\#])*\z/m, :message => "can only contain alphanumeric characters, spaces and the # sign!"
   validates :name, uniqueness: {:case_sensitive => false, :message => "is already is use for another scale!"}
+  validates :scale_type, presence: true
+  validates_format_of :scale_type, :with => /\A([\w\ |-|(|)\d|\#])*\z/, :message => "can only contain alphanumeric characters, spaces and the # sign!"
 
   has_many :practises
   has_many :musicians, through: :practises

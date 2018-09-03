@@ -3,8 +3,10 @@ class ApplicationController < ActionController::Base
   # before_action :check_session
 
   def current_username
-    @slug = current_user.slugify
-    render plain: @slug
+    if current_user
+      @slug = current_user.slugify
+      render plain: @slug
+    end
   end
 
   def current_user
