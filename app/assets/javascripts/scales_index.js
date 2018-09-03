@@ -1,9 +1,13 @@
 function attachListeners(){
   $('.to_library').on('click', function(e){
+    $('.audio_trigger').attr('checked', false);
+    $('.audio_trigger').trigger("change");
     e.preventDefault();
     loadScalesLibrary();
   })
   $('.to_practice_room').on('click', function(e){
+    $('.audio_trigger').attr('checked', false);
+    $('.audio_trigger').trigger("change");
     e.preventDefault();
     loadPracticeRoom();
   })
