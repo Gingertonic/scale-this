@@ -4,20 +4,25 @@
 (if scale does not play, try refreshing the page!) -->
 
 <div class="sequencer">
-  <div class="div_for_sequencer">
-    {{#each midi_notes}}
+  {{#each midi_notes}}
+    <div class="div_for_sequencer">
       <div class="pitch" id="pitch_{{@index}}", style="background-color: pink">
         {{this}}
       </div>
-    {{/each}}
-  </div>
+    </div>
+  {{/each}}
 </div>
 
-{{#with scale}}
-  <p>Melody Rules: {{melodyRules}}</p>
-  <p>Origin: {{origin}}</p>
-  <p>Type: {{scaleType}}</p>
-  {{#if aka}}
-    <p>Also known as: {{aka}}</p>
-  {{/if}}
-{{/with}}
+<br></br>
+
+<div class="scale_info">
+  {{#with scale}}
+    <p>Melody Rules: {{melodyRules}}</p><br>
+    <p>Origin: {{origin}}</p><br>
+    <p>Type: {{scaleType}}</p>
+    {{#if aka}}
+      <br>
+      <p>Also known as: {{aka}}</p>
+    {{/if}}
+  {{/with}}
+</div>

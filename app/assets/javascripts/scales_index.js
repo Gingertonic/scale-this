@@ -1,8 +1,4 @@
 function attachListeners(){
-  $('.add_scale').on('click', function(e){
-    e.preventDefault();
-    loadNewScaleForm();
-  })
   $('.to_library').on('click', function(e){
     e.preventDefault();
     loadScalesLibrary();
@@ -53,6 +49,10 @@ function loadRankings(){
       $('.sb_nav').html('');
     } else {
       $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
+      $('.add_scale').on('click', function(e){
+        e.preventDefault();
+        loadNewScaleForm();
+      })
     }
   })
   $('.sb_header').html('<h1>Current Rankings!</h1>');
@@ -189,11 +189,13 @@ function loadScale(scaleName){
     var playback = HandlebarsTemplates['scale_playback']({scale: scale, midi_notes: scale.patternInC()});
     var values = scale.patternInC();
     $('.primary_content').html(playback);
-    if (!user) {
-      $('.sb_nav').html('');
-    } else {
-      loadProgress(scale);
-    }
+    $.get('/current_username', function(user){
+      if (!user) {
+        $('.sb_nav').html('');
+      } else {
+        loadProgress(scale, user);
+      }
+    })
   })
 }
 // EDIT SCALE FORM
@@ -234,12 +236,13 @@ function loadEditScaleForm(scale){
 
 
 // SHOW USER PROGRESS
-function loadProgress(scale){
+function loadProgress(scale, username){
   $('.sb_errors').removeClass('flash-error').text("");
   console.log(scale)
   $('.sb_header').html('<h1>Practice Log</h1>');
-  $.get('/current_username', function(username){
+  // $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(user){
+      debugger;
       if (scale.createdBy === parseInt(user.data.id)){
         $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
         $('.edit_scale').on('click', function(e){
@@ -251,11 +254,13 @@ function loadProgress(scale){
           e.preventDefault();
           deleteScale(scale);
         })
-      } else { $('.sb_nav').html("") }
+      } else {
+        $('.sb_nav').html("")
+      }
       for (var i = 0; i < user.data.relationships.practises.data.length; i++){
         if (user.data.relationships.practises.data[i]["scale_id"] === scale.id){
           $('.sb_content').text("Practised " + practised(user.data.relationships.practises.data[i]["experience"]));
-          return true;
+          // return true;
         } else {
           $('.sb_content').text("Never practised!");
         }
@@ -276,7 +281,7 @@ function loadProgress(scale){
         })
       })
     })
-  })
+  // })
 }
 
 function deleteScale(scale){
@@ -309,6 +314,8 @@ function practised(x){
 
 
 $( document ).ready(function() {
-  attachListeners();
-  loadScalesLibrary();
+  if (window.location.pathname === '/scales') {
+    attachListeners();
+    loadScalesLibrary();
+  }
 });

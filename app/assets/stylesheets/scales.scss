@@ -1,9 +1,15 @@
 /* Inoro, root change and practised data */
 .scale_info {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 2%;
   margin-bottom: 3%;
+  width: 100%;
+}
+
+.scale_info p {
+  width: 30%;
+  padding: 1%;
 }
 
 .scale_info div:not(.form) {

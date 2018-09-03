@@ -3,20 +3,23 @@
 {
   display: flex;
   margin-top: 50px;
-  justify-content: space-around;
+  width: 100%;
+  // justify-content: space-around;
+  // align-content: space-around;
 }
 
 .div_for_sequencer
 {
   display: flex;
   justify-content: space-around;
-  align-content: space-around;
+  // align-content: space-around;
   flex-direction: column;
   background-color: #e5be60;
   // border: 2px solid grey;
   border-radius: 50%;
   height: 100px;
   width: 100px;
+  margin: 1%;
 }
 
 .pitch, .alt_pitch {
