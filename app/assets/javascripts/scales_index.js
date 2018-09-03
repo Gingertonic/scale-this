@@ -291,7 +291,7 @@ function loadProgress(scale, username){
   $('.sb_header').html('<h1>Practice Log</h1>');
   // $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(user){
-      debugger;
+      // debugger;
       if (scale.createdBy === parseInt(user.data.id)){
         $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
         $('.edit_scale').on('click', function(e){
@@ -315,27 +315,12 @@ function loadProgress(scale, username){
         }
       }
     }).done(function(user){
-      practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user["data"]})
-      // debugger;
-      $('.sb_content').append(practiseForm);
-      $('form#new_practise').on('submit', function(e){
-        e.preventDefault();
-        console.log("stop right here, my man!")
-        var $form = $(this)
-        var action = $form.attr("action")
-        var params = $form.serialize()
-        $.post(action + '.json', params).done(function(resp){
-          console.log("here's the response: " + resp )
-          loadPracticeRoom();
-        })
-      })
+      addPractiseForm(scale, user);
+      addPractiseListener();
     })
-  // })
 }
 
 function deleteScale(scale){
-  console.log(scale)
-  console.log(scale.id)
   $.ajax({
     url: '/scales/' + scale.id,
     method: "delete"
@@ -344,9 +329,12 @@ function deleteScale(scale){
   })
 }
 
-function createPractise(scale){
-  // debugger;
-  // MAKE POST PRACTISE CREATE REQUEST HERE
+function createPractise($form){
+  var action = $form.attr("action")
+  var params = $form.serialize()
+  $.post(action + '.json', params).done(function(resp){
+    loadPracticeRoom();
+  })
 }
 
 function practised(x){
@@ -362,8 +350,21 @@ function practised(x){
 ///////////
 
 
-////////
+////
 
+function addPractiseForm(scale, user){
+  debugger
+  practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user["data"]})
+  $('.sb_content').append(practiseForm);
+}
+
+function addPractiseListener(){
+  $('form#new_practise').on('submit', function(e){
+    e.preventDefault();
+    var $form = $(this)
+    createPractise($form)
+  })
+}
 
 $( document ).ready(function() {
   if (window.location.pathname === '/scales') {
