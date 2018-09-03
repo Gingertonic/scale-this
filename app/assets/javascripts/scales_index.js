@@ -284,40 +284,50 @@ function loadEditScaleForm(scale){
 
 // SHOW USER PROGRESS
 function loadProgress(scale, username){
-  // debugger;
   $('.sb_errors').removeClass('flash-error').text("");
-  console.log("This is scale" + scale)
-  console.log("current user is " + username)
   $('.sb_header').html('<h1>Practice Log</h1>');
-  // $.get('/current_username', function(username){
-    $.get('/' + username + '.json', function(user){
-      // debugger;
-      if (scale.createdBy === parseInt(user.data.id)){
-        $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
-        $('.edit_scale').on('click', function(e){
-          e.preventDefault();
-          loadEditScaleForm(scale);
-        })
-        $('.sb_nav').append('<button class="delete_scale sidebar_link"><a href="/scales/:id/destroy">Delete Scale</a></button>');
-        $('.delete_scale').on('click', function(e){
-          e.preventDefault();
-          deleteScale(scale);
-        })
-      } else {
-        $('.sb_nav').html("")
-      }
-      for (var i = 0; i < user.data.relationships.practises.data.length; i++){
-        if (user.data.relationships.practises.data[i]["scale_id"] === scale.id){
-          $('.sb_content').text("Practised " + practised(user.data.relationships.practises.data[i]["experience"]));
-          break;
-        } else {
-          $('.sb_content').text("Never practised!");
-        }
-      }
-    }).done(function(user){
+    $.get('/' + username + '.json', function(resp){
+    }).done(function(resp){
+      user = resp["data"]
+      loadScaleNavFor(scale, user);
+      loadExperience(scale, user)
       addPractiseForm(scale, user);
       addPractiseListener();
     })
+}
+
+function loadExperience(scale, user){
+  practises = user.relationships.practises.data;
+  for (var i = 0; i < practises.length; i++){
+    if (practises[i]["scale_id"] === scale.id){
+      $('.sb_content').text("Practised " + practised(practises[i]["experience"]));
+      break;
+    } else {
+      $('.sb_content').text("Never practised!");
+    }
+  }
+}
+
+function loadScaleNavFor(scale, user){
+  if (scale.createdBy === parseInt(user.id)){
+    linkWithId("edit_scale", "Edit Scale")
+    $('.sb_nav').html(linkWithId("edit_scale", "Edit Scale"));
+    $('#edit_scale').on('click', function(e){
+      e.preventDefault();
+      loadEditScaleForm(scale);
+    })
+    $('.sb_nav').append(linkWithId("delete_scale", "Delete Scale"));
+    $('#delete_scale').on('click', function(e){
+      e.preventDefault();
+      deleteScale(scale);
+    })
+  } else {
+    $('.sb_nav').html("")
+  }
+}
+
+function linkWithId(id, text){
+  return '<a id="' + id + '" href="#">' + text + '</a>'
 }
 
 function deleteScale(scale){
