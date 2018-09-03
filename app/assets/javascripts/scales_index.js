@@ -67,7 +67,7 @@ function loadNewScaleForm(){
   $.get('/scales/new', function(resp){
     $.get('/current_username', function(username){
       $.get('/' + username + '.json', function(user){
-        scaleForm = HandlebarsTemplates['scale_form']({scale: resp, action: "/scales", submitTag: "Add", musician_id: user.data.id})
+        scaleForm = HandlebarsTemplates['scale_form']({scale: resp, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
         $('.sb_content').html(scaleForm)
         // debugger
         $('form#scale').on('submit', function(e){
@@ -147,6 +147,10 @@ Handlebars.registerHelper("debug", function(what) {
   debugger;
 });
 
+Handlebars.registerHelper("checkedIf", function (pattern, note) {
+    return (pattern.includes(note)) ? "checked" : "";
+});
+
 /////////////////////////
 
 // SCALE SHOW VIEW
@@ -170,7 +174,8 @@ function loadScale(scaleName){
 function loadEditScaleForm(scale){
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
-  scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, submitTag: "Update"})
+  // debugger
+  scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternInC(), submitTag: "Update"})
   $('.sb_content').html(scaleForm)
   $('.see_progress').on('click', function(e){
     e.preventDefault();

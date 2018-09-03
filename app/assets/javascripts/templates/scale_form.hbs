@@ -1,48 +1,48 @@
   <form class="scale" id="scale" action="{{action}}">
-  {{#with scale}}
     <div class="upper_form">
       <div class="pattern_checkboxes">
         <input type="hidden" name="scale[pattern][]" value="">
-        <input type="checkbox" value="60" name="scale[pattern][]" id="scale_pattern_60">
+        <input type="checkbox" value="60" name="scale[pattern][]" id="scale_pattern_60" {{checkedIf midi_notes 60}}>
         <label for="scale_pattern_60">do</label>
-        <input type="checkbox" value="61" name="scale[pattern][]" id="scale_pattern_61">
+        <input type="checkbox" value="61" name="scale[pattern][]" id="scale_pattern_61" {{checkedIf midi_notes 61}}>
         <label for="scale_pattern_61">rah-di</label>
-        <input type="checkbox" value="62" name="scale[pattern][]" id="scale_pattern_62">
+        <input type="checkbox" value="62" name="scale[pattern][]" id="scale_pattern_62" {{checkedIf midi_notes 62}}>
         <label for="scale_pattern_62">re</label>
-        <input type="checkbox" value="63" name="scale[pattern][]" id="scale_pattern_63">
+        <input type="checkbox" value="63" name="scale[pattern][]" id="scale_pattern_63" {{checkedIf midi_notes 63}}>
         <label for="scale_pattern_63">me-ri</label>
-        <input type="checkbox" value="64" name="scale[pattern][]" id="scale_pattern_64">
+        <input type="checkbox" value="64" name="scale[pattern][]" id="scale_pattern_64" {{checkedIf midi_notes 64}}>
         <label for="scale_pattern_64">mi</label>
-        <input type="checkbox" value="65" name="scale[pattern][]" id="scale_pattern_65">
+        <input type="checkbox" value="65" name="scale[pattern][]" id="scale_pattern_65" {{checkedIf midi_notes 65}}>
         <label for="scale_pattern_65">fa</label>
-        <input type="checkbox" value="66" name="scale[pattern][]" id="scale_pattern_66">
+        <input type="checkbox" value="66" name="scale[pattern][]" id="scale_pattern_66" {{checkedIf midi_notes 66}}>
         <label for="scale_pattern_66">se-fi</label>
-        <input type="checkbox" value="67" name="scale[pattern][]" id="scale_pattern_67">
+        <input type="checkbox" value="67" name="scale[pattern][]" id="scale_pattern_67" {{checkedIf midi_notes 67}}>
         <label for="scale_pattern_67">so</label>
-        <input type="checkbox" value="68" name="scale[pattern][]" id="scale_pattern_68">
+        <input type="checkbox" value="68" name="scale[pattern][]" id="scale_pattern_68" {{checkedIf midi_notes 68}}>
         <label for="scale_pattern_68">le-si</label>
-        <input type="checkbox" value="69" name="scale[pattern][]" id="scale_pattern_69">
+        <input type="checkbox" value="69" name="scale[pattern][]" id="scale_pattern_69" {{checkedIf midi_notes 69}}>
         <label for="scale_pattern_69">la</label>
-        <input type="checkbox" value="70" name="scale[pattern][]" id="scale_pattern_70">
+        <input type="checkbox" value="70" name="scale[pattern][]" id="scale_pattern_70" {{checkedIf midi_notes 70}}>
         <label for="scale_pattern_70">te-li</label>
-        <input type="checkbox" value="71" name="scale[pattern][]" id="scale_pattern_71">
+        <input type="checkbox" value="71" name="scale[pattern][]" id="scale_pattern_71" {{checkedIf midi_notes 71}}>
         <label for="scale_pattern_71">ti</label>
       </div>
+    {{#with scale}}
       <div class="form_col_2">
         <label for="name">Name</label><br>
-        <input type="text" name="scale[name]" value={{name}}>
+        <input type="text" name="scale[name]" value="{{name}}">
         <br></br>
         <label for="scaleType">Type</label><br>
-        <input type="text" name="scale[scale_type]" value={{scaleType}}>
+        <input type="text" name="scale[scale_type]" value="{{scaleType}}">
         <br></br>
         <label for="origin">Origin</label><br>
-        <input type="text" name="scale[origin]" value={{origin}}>
+        <input type="text" name="scale[origin]" value="{{origin}}">
         <br></br>
         <label for="melodyRules">Melody Rules</label><br>
-        <input type="text" name="scale[melody_rules]" value={{{melodyRules}}}>
+        <input type="text" name="scale[melody_rules]" value="{{melodyRules}}">
         <br></br>
         <label for="aka">Also Known As</label><br>
-        <input type="text" name="scale[aka]" value={{aka}}>
+        <input type="text" name="scale[aka]" value="{{aka}}">
         <br></br>
         <label for="scale_private">Would you like to keep this scale private?</label> <br>
         <input name="scale[private]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="scale[private]" id="scale_private"> <br>
