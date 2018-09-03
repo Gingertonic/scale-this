@@ -51,12 +51,11 @@ function addGoToScaleListener(link){
 function loadRankings(){
   clearErrors();
   $.get('/current_username', function(user){
-    // debugger;
     if (!user) {
-      $('.sb_nav').html('');
+      sbNavStart("")
     } else {
-      $('.sb_nav').html('<button class="add_scale sidebar_link"><a href="/scales/new">Add a New Scale</a></button>');
-      $('.add_scale').on('click', function(e){
+      sbNavStart(linkWithId("add_scale", "Add a New Scale"))
+      $('#add_scale').on('click', function(e){
         e.preventDefault();
         loadNewScaleForm();
       })
@@ -115,9 +114,9 @@ function loadNewScaleForm(){
       })
     })
   })
-  $('.sb_nav').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button>');
+  sbNavStart(linkWithId("see_rankings", "See Rankings"))
   sbHeader("New Scale")
-  $('.see_rankings').on('click', function(e){
+  $('#see_rankings').on('click', function(e){
     e.preventDefault();
     loadRankings();
   })
@@ -155,8 +154,8 @@ function loadPracticeRoom(){
 
 function loadMusicianInfo(musician){
   clearErrors();
-  $('.sb_nav').html("");
-  $('.sb_header').text("");
+  sbNavStart("")
+  sbHeader("")
   var musicianInfo = HandlebarsTemplates['musician_info']({musician: musician});
   $('.sb_content').html(musicianInfo);
 }
@@ -216,7 +215,7 @@ function loadScale(scaleName){
     loadPlayback(values)
     $.get('/current_username', function(user){
       if (!user) {
-        $('.sb_nav').html('');
+        sbNavStart("")
       } else {
         loadProgress(scale, user);
       }
@@ -245,8 +244,7 @@ function addRootListener(scale){
 // EDIT SCALE FORM
 function loadEditScaleForm(scale){
   clearErrors();
-
-  $('.sb_nav').html(linkWithId("see_progress", "See Progress"))
+  sbNavStart(linkWithId("see_progress", "See Progress"))
   sbHeader("Edit Scale")
   debugger
   scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
@@ -274,6 +272,14 @@ function loadEditScaleForm(scale){
       }
     })
   })
+}
+
+function sbNavStart(content){
+  $('.sb_nav').html(content)
+}
+
+function sbNavAdd(content){
+  $('.sb_nav').append(content)
 }
 
 function sbHeader(headerText){
@@ -322,18 +328,18 @@ function loadExperience(scale, user){
 
 function loadScaleNavFor(scale, user){
   if (scale.createdBy === parseInt(user.id)){
-    $('.sb_nav').html(linkWithId("edit_scale", "Edit Scale"));
+    sbNavStart(linkWithId("edit_scale", "Edit Scale"))
     $('#edit_scale').on('click', function(e){
       e.preventDefault();
       loadEditScaleForm(scale);
     })
-    $('.sb_nav').append(linkWithId("delete_scale", "Delete Scale"));
+    sbNavAdd(linkWithId("delete_scale", "Delete Scale"))
     $('#delete_scale').on('click', function(e){
       e.preventDefault();
       deleteScale(scale);
     })
   } else {
-    $('.sb_nav').html("")
+    sbNavStart("")
   }
 }
 
