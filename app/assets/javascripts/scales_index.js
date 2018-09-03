@@ -172,6 +172,11 @@ Handlebars.registerHelper("checkedIf", function (pattern, note) {
     return (pattern.includes(note)) ? "checked" : "";
 });
 
+Handlebars.registerHelper("selectedIf", function (root, value) {
+    return (root === value) ? "selected" : "";
+});
+
+
 /////////////////////////
 
 // SCALE SHOW VIEW
@@ -186,8 +191,8 @@ function loadScale(scaleName){
     $('.header').text(resp.name);
     var scale = new Scale(resp);
     console.log(scale);
-    var playback = HandlebarsTemplates['scale_playback']({scale: scale, midi_notes: scale.patternInC()});
-    var values = scale.patternInC();
+    var playback = HandlebarsTemplates['scale_playback']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
+    var values = scale.patternFrom(60);
     $('.primary_content').html(playback);
     $.get('/current_username', function(user){
       if (!user) {
@@ -196,8 +201,25 @@ function loadScale(scaleName){
         loadProgress(scale, user);
       }
     })
+    addRootListener(scale);
   })
 }
+
+function changeRoot(scale, root){
+  var playback = HandlebarsTemplates['scale_playback']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
+  var values = scale.patternFrom(root);
+  $('.primary_content').html(playback);
+  addRootListener(scale);
+}
+
+function addRootListener(scale){
+  $('form#change_root').on('change', function(e){
+    e.preventDefault();
+    newRoot = parseInt($('select#root')[0].selectedOptions[0].value)
+    changeRoot(scale, newRoot);
+  })
+}
+
 // EDIT SCALE FORM
 function loadEditScaleForm(scale){
   $('.sb_errors').removeClass('flash-error').text("");
@@ -238,11 +260,12 @@ function loadEditScaleForm(scale){
 // SHOW USER PROGRESS
 function loadProgress(scale, username){
   $('.sb_errors').removeClass('flash-error').text("");
-  console.log(scale)
+  console.log("This is scale" + scale)
+  console.log("current user is " + username)
   $('.sb_header').html('<h1>Practice Log</h1>');
   // $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(user){
-      debugger;
+      // debugger;
       if (scale.createdBy === parseInt(user.data.id)){
         $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
         $('.edit_scale').on('click', function(e){

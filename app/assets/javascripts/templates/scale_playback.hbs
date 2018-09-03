@@ -26,3 +26,22 @@
     {{/if}}
   {{/with}}
 </div>
+
+<div class="root_change">
+  <form id="change_root" action="index.html" method="post">
+    <select name="root" id="root">
+    <option {{selectedIf root 60}} value="60">C</option>
+    <option {{selectedIf root 61}} value="61">C#/Db</option>
+    <option {{selectedIf root 62}} value="62">D</option>
+    <option {{selectedIf root 63}} value="63">D#/Eb</option>
+    <option {{selectedIf root 64}} value="64">E</option>
+    <option {{selectedIf root 65}} value="65">F</option>
+    <option {{selectedIf root 66}} value="66">F#/Gb</option>
+    <option {{selectedIf root 55}} value="55">G</option>
+    <option {{selectedIf root 56}} value="56">G#/Ab</option>
+    <option {{selectedIf root 57}} value="57">A</option>
+    <option {{selectedIf root 58}} value="58">A#/Bb</option>
+    <option {{selectedIf root 59}} value="59">B</option></select>
+    <!-- <input type="submit" id="change_root" name="commit" value="Change"> -->
+  </form>
+</div>

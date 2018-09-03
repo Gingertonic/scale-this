@@ -29,11 +29,11 @@ Scale.prototype.renderScaleTypeBlock = function(){
   </div>`
 }
 
-Scale.prototype.patternInC = function(){
-  patternC = [60];
+Scale.prototype.patternFrom = function(root){
+  patternFrom = [root];
   for (var i=0; i < this.pattern.length; i++) {
        diff = parseInt(this.pattern.charAt(i));
-       patternC.push(patternC[patternC.length - 1] + diff);
+       patternFrom.push(patternFrom[patternFrom.length - 1] + diff);
      }
-  return patternC;
+  return patternFrom;
 }
