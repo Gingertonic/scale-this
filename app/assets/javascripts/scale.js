@@ -20,7 +20,7 @@ Scale.prototype.renderLiLink = function(){
 }
 
 Scale.prototype.slugify = function(){
-  return this.name.replace(/\W/g, "-");
+  return this.name.replace(" ", "-").replace("#", "sharp");
 }
 
 Scale.prototype.renderScaleTypeBlock = function(){
