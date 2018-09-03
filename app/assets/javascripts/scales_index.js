@@ -247,8 +247,8 @@ function loadEditScaleForm(scale){
   $('.sb_errors').removeClass('flash-error').text("");
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
-  // debugger
-  scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternInC(), submitTag: "Update"})
+  debugger
+  scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
   $('.sb_content').html(scaleForm)
   $('.see_progress').on('click', function(e){
     e.preventDefault();
@@ -288,7 +288,7 @@ function loadProgress(scale, username){
   $('.sb_header').html('<h1>Practice Log</h1>');
   // $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(user){
-      // debugger;
+      debugger;
       if (scale.createdBy === parseInt(user.data.id)){
         $('.sb_nav').html('<button class="edit_scale sidebar_link"><a href="/scales/:id/edit">Edit Scale</a></button>');
         $('.edit_scale').on('click', function(e){
