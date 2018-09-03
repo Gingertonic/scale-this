@@ -62,7 +62,7 @@ function loadRankings(){
       })
     }
   })
-  $('.sb_header').html('<h1>Current Rankings!</h1>');
+  sbHeader("Current Rankings!")
   $('.add_scale').on('click', function(e){
     e.preventDefault();
     loadNewScaleForm();
@@ -99,10 +99,7 @@ function loadNewScaleForm(){
           $.post(action, params).done(function(resp){
             // debugger;
             if (resp["errors"]){
-              $('.sb_errors').addClass('flash-error')
-              resp["errors"].forEach(function(err){
-                $('.sb_errors').append('<p>' + err + '</p>')
-              })
+              renderErrors(resp)
             } else {
               new_scale = new Scale(resp)
               console.log(new_scale)
@@ -119,7 +116,7 @@ function loadNewScaleForm(){
     })
   })
   $('.sb_nav').html('<button class="see_rankings sidebar_link"><a href="/musicans/rankings">See rankings!</a></button>');
-  $('.sb_header').html('<h1>New Scale</h1>');
+  sbHeader("New Scale")
   $('.see_rankings').on('click', function(e){
     e.preventDefault();
     loadRankings();
@@ -248,12 +245,13 @@ function addRootListener(scale){
 // EDIT SCALE FORM
 function loadEditScaleForm(scale){
   clearErrors();
-  $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
-  $('.sb_header').html('<h1>Edit Scale</h1>');
+
+  $('.sb_nav').html(linkWithId("see_progress", "See Progress"))
+  sbHeader("Edit Scale")
   debugger
   scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
   $('.sb_content').html(scaleForm)
-  $('.see_progress').on('click', function(e){
+  $('#see_progress').on('click', function(e){
     e.preventDefault();
     loadProgress(scale);
   })
@@ -269,10 +267,7 @@ function loadEditScaleForm(scale){
       method: "patch"
     }).done(function(resp){
       if (resp["errors"]){
-        $('.sb_errors').addClass('flash-error')
-        resp["errors"].forEach(function(err){
-          $('.sb_errors').append('<p>' + err + '</p>')
-        })
+        renderErrors(resp)
       } else {
         thisScale = new Scale(resp)
         loadScaleShow(thisScale.slugify());
@@ -280,6 +275,19 @@ function loadEditScaleForm(scale){
     })
   })
 }
+
+function sbHeader(headerText){
+  $('.sb_header').html('<h1>' + headerText + '</h1>');
+}
+
+function renderErrors(resp){
+  $('.sb_errors').addClass('flash-error')
+  resp["errors"].forEach(function(err){
+    $('.sb_errors').append('<p>' + err + '</p>')
+  })
+}
+
+
 
 function clearErrors(){
   $('.sb_errors').removeClass('flash-error').html("");
@@ -289,7 +297,7 @@ function clearErrors(){
 // SHOW USER PROGRESS
 function loadProgress(scale, username){
   clearErrors();
-  $('.sb_header').html('<h1>Practice Log</h1>');
+  sbHeader("Practice Log")
     $.get('/' + username + '.json', function(resp){
     }).done(function(resp){
       user = resp["data"]
@@ -314,7 +322,6 @@ function loadExperience(scale, user){
 
 function loadScaleNavFor(scale, user){
   if (scale.createdBy === parseInt(user.id)){
-    linkWithId("edit_scale", "Edit Scale")
     $('.sb_nav').html(linkWithId("edit_scale", "Edit Scale"));
     $('#edit_scale').on('click', function(e){
       e.preventDefault();
