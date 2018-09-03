@@ -25,7 +25,7 @@ function loadScalesLibrary(){
 }
 // GET SCALES
 function loadScales(){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $('.primary_content').html("")
   $.get('/scales.json', function(resp){
     resp["data"].forEach(function(scale){
@@ -49,7 +49,7 @@ function addGoToScaleListener(link){
 
 //  GET RANKINGS
 function loadRankings(){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $.get('/current_username', function(user){
     // debugger;
     if (!user) {
@@ -80,7 +80,7 @@ function loadRankings(){
 }
 // NEW SCALE FORM
 function loadNewScaleForm(){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $.get('/scales/new', function(resp){
     scale = new Scale(resp);
     $.get('/current_username', function(username){
@@ -90,7 +90,7 @@ function loadNewScaleForm(){
         // debugger
         $('form#scale').on('submit', function(e){
           e.preventDefault();
-          $('.sb_errors').removeClass('flash-error').html("")
+          clearErrors();
           console.log("stahhhp!")
           $form = $(this)
           console.log($form.serialize())
@@ -131,7 +131,7 @@ function loadNewScaleForm(){
 
 // SHOW USER
 function loadPracticeRoom(){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(resp){
       musician = new Musician(resp["data"]);
@@ -157,7 +157,7 @@ function loadPracticeRoom(){
 }
 
 function loadMusicianInfo(musician){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $('.sb_nav').html("");
   $('.sb_header').text("");
   var musicianInfo = HandlebarsTemplates['musician_info']({musician: musician});
@@ -208,7 +208,7 @@ function loadScaleShow(scaleName){
 }
 // lOAD SCALE
 function loadScale(scaleName){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $.get('/scales/' + scaleName, function(resp){
     $('.header').text(resp.name);
     var scale = new Scale(resp);
@@ -247,7 +247,7 @@ function addRootListener(scale){
 
 // EDIT SCALE FORM
 function loadEditScaleForm(scale){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $('.sb_nav').html('<button class="see_progress sidebar_link"><a href="/musicans/progress">See Progress</a></button>');
   $('.sb_header').html('<h1>Edit Scale</h1>');
   debugger
@@ -259,7 +259,7 @@ function loadEditScaleForm(scale){
   })
   $('form#scale').on('submit', function(e){
     e.preventDefault();
-    $('.sb_errors').removeClass('flash-error').html("");
+    clearErrors()
     $form = $(this);
     action = $form.attr("action");
     params = $form.serialize();
@@ -281,10 +281,14 @@ function loadEditScaleForm(scale){
   })
 }
 
+function clearErrors(){
+  $('.sb_errors').removeClass('flash-error').html("");
+}
+
 
 // SHOW USER PROGRESS
 function loadProgress(scale, username){
-  $('.sb_errors').removeClass('flash-error').text("");
+  clearErrors();
   $('.sb_header').html('<h1>Practice Log</h1>');
     $.get('/' + username + '.json', function(resp){
     }).done(function(resp){
