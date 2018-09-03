@@ -4,10 +4,13 @@
   height: auto;
   width: 100%;
   text-align: center;
+  align-self: center;
   padding-top: 1.5%;
   padding-bottom: 1%;
   font-size: 1em;
   margin-bottom: 1%;
+  border-bottom-right-radius: 10%;
+  border-top-left-radius: 10%;
 }
 
 #error_explanation p {

@@ -14,7 +14,7 @@ class ScalesController < ApplicationController
   def show
     # root_note = Note.get_root(params)
     @scale = Scale.find_by_slug(params[:scale_slug]) || @scale = Scale.find(params[:scale_slug])
-    if valid_scale?(@scale)
+    # if valid_scale?(@scale)
       respond_to do |f|
         f.json { render json: @scale }
         # f.html { render 'index' }
@@ -25,7 +25,7 @@ class ScalesController < ApplicationController
       # @practise = Practise.new(scale: @scale)
       # @owner = Musician.find(@scale.created_by)
       # @your_practise = current_user.find_scale(@scale)
-    end
+    # end
   end
 
   # def change_root
@@ -51,6 +51,8 @@ class ScalesController < ApplicationController
     #   @note_selection = Note.references
     #   @pattern = @scale.midi_generator(60, 1)
     #   render :new
+    else
+      render json: {errors: @scale.errors.full_messages}
     end
   end
 
@@ -73,6 +75,8 @@ class ScalesController < ApplicationController
       # @note_selection = Note.references
       # @pattern = @scale.midi_generator(60, 1)
       # render :edit
+    else
+      render json: {errors: @scale.errors.full_messages}
     end
   end
   #

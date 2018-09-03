@@ -2,6 +2,7 @@
 
 <div class="container">
   <!-- <div class="primary_content"> -->
+  <!-- <div class="flash-error primary_error"></div> -->
     <%=content_tag :div, class: ["primary_content"] do%>
       <%@types.each do |type|%>
         <%=content_tag :div, class: ["scale_type"], id: ["#{type}"] do%>
@@ -24,5 +25,7 @@
     <div class="sb_content">
 
     </div>
+    <br></br>
+    <div class="sb_errors"></div>
   </div>
 </div> <!-- container -->

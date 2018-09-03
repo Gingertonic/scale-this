@@ -28,13 +28,7 @@
       <%end%>
     </div>
 
-    <%if !flash.empty?%>
-      <div class="flash-error">
-        <% flash.each do |key, value| %>
-          <%= content_tag :div, value, class: "flash #{key}" %>
-        <% end %>
-      </div>
-    <%end%>
+
     <br />
 
     <%= yield %>
