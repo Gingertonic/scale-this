@@ -6,7 +6,7 @@
   {{#each midi_notes}}
     <div class="div_for_sequencer">
       <div class="pitch" id="pitch_{{@index}}", style="background-color: rgb(255, {{gColour this @index}}, {{bColour this @index}}">
-        {{this}}
+        {{getNoteName this}}
       </div>
     </div>
   {{/each}}
