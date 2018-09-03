@@ -177,12 +177,10 @@ Handlebars.registerHelper("selectedIf", function (root, value) {
 });
 
 Handlebars.registerHelper("gColour", function (value, index) {
-    debugger
     return (255 - (index*10) - value);
 });
 
 Handlebars.registerHelper("bColour", function (value, index) {
-    debugger
     return (value + (index*10));
 });
 
@@ -223,6 +221,8 @@ function loadScale(scaleName){
 }
 
 function changeRoot(scale, root){
+  $('.audio_trigger').attr('checked', false);
+  $('.audio_trigger').trigger("change");
   var playback = HandlebarsTemplates['scale_show']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
   $('.primary_content').html(playback);
   var values = scale.patternFrom(root);

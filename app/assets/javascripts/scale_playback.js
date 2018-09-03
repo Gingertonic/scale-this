@@ -1,6 +1,5 @@
 function loadPlayback(notes) {
   console.log("loading playback!")
-  debugger;
   // Set up our Audio Context
   var context = new AudioContext();
   window.context = context;
@@ -20,9 +19,14 @@ function loadPlayback(notes) {
     } else {
       console.log("unchecked!")
       // stop the sequencer
-      intervalId = clearInterval(intervalId);
+      // intervalId = clearInterval(intervalId);
+      stopSeq()
     }
   });
+
+  function stopSeq(){
+    intervalId = clearInterval(intervalId);
+  }
 
   // ================================================================
   // TIMING
