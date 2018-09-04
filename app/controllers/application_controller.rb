@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  # before_action :check_session
 
   def current_username
     if current_user
