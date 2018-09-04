@@ -24,13 +24,19 @@
   background-color: pink;
 }
 
-/* Scales index */
-// .scales_menu {
-  // width: 60%;
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: space-around;
-// }
+.root_change {
+  width: 15%;
+  height: 10%;
+  justify-content: center;
+  align-content: center;
+  border: 2px dashed grey;
+  border-top-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  // font-size: 0.75em;
+  padding: 3%;
+  // padding-top: 3%;
+  // padding-bottom: 3%;
+}
 
 .sidebar {
   display: block;
