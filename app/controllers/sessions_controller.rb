@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  # skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [:new, :create]
   def new
     redirect_to root_path if logged_in?
   end
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
       redirect_to login_path, alert: "Oops, wrong password!"
     elsif user && user.authenticate(params[:password])
       login(user)
-      redirect_to scales_path
+      redirect_to practice_room_path(current_user.slugify)
     end
   end
 

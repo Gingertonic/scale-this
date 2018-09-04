@@ -8,7 +8,7 @@ $( function() {
   var $pitches = $('.div_for_sequencer');
 
   // the checkbox will control the start & stop of the sequencer.
-  $('.audio_trigger').on('change', function(e) {
+  $('.checkbox').on('change', function(e) {
     if( this.checked ) {
       // start the sequencer
       nextNoteTime = context.currentTime;
