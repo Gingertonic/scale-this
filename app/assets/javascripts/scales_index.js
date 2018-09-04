@@ -246,31 +246,48 @@ function loadEditScaleForm(scale){
   clearErrors();
   sbNavStart(linkWithId("see_progress", "See Progress"))
   sbHeader("Edit Scale")
-  debugger
+  // debugger
   scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
   $('.sb_content').html(scaleForm)
-  $('#see_progress').on('click', function(e){
-    e.preventDefault();
-    loadProgress(scale);
-  })
-  $('form#scale').on('submit', function(e){
+  addNavListener("see_progress", loadProgress, [scale])
+  // addFormSubmitListener(identifier, loadScaleShow, "patch")
+  addFormSubmitListener('form#scale', loadScaleShow, "patch")
+}
+
+
+function addFormSubmitListener(identifier, func, method){
+  $(identifier).on('submit', function(e){
     e.preventDefault();
     clearErrors()
     $form = $(this);
+    func($form)
     action = $form.attr("action");
     params = $form.serialize();
     $.ajax({
       url: action,
       data: params,
-      method: "patch"
+      method: method
     }).done(function(resp){
       if (resp["errors"]){
         renderErrors(resp)
       } else {
         thisScale = new Scale(resp)
-        loadScaleShow(thisScale.slugify());
+        // loadScaleShow(thisScale.slugify());
+        func.apply(this, [thisScale.slugify()])
       }
     })
+  })
+}
+
+function updateScale(){
+
+}
+
+function addNavListener(id, func, args){
+  debugger;
+  $('#' + id).on('click', function(e){
+    e.preventDefault();
+    func.apply(this, args)
   })
 }
 
@@ -304,13 +321,15 @@ function clearErrors(){
 function loadProgress(scale, username){
   clearErrors();
   sbHeader("Practice Log")
-    $.get('/' + username + '.json', function(resp){
-    }).done(function(resp){
-      user = resp["data"]
-      loadScaleNavFor(scale, user);
-      loadExperience(scale, user)
-      addPractiseForm(scale, user);
-      addPractiseListener();
+    $.get('/current_username', function(username){
+      $.get('/' + username + '.json', function(resp){
+      }).done(function(resp){
+        user = resp["data"]
+        loadScaleNavFor(scale, user);
+        loadExperience(scale, user)
+        addPractiseForm(scale, user);
+        addPractiseListener();
+      })
     })
 }
 
@@ -380,7 +399,6 @@ function practised(x){
 ////
 
 function addPractiseForm(scale, user){
-  debugger
   practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user["data"]})
   $('.sb_content').append(practiseForm);
 }
