@@ -12,5 +12,7 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require_tree .
+
+//= require handlebars
+//= require_tree
+//= require_tree ./templates

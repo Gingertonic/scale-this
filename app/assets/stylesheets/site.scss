@@ -11,8 +11,30 @@ body, html
   text-align: center;
 }
 
+.container {
+  display: flex;
+  margin: 2% 5% 1% 5%;
+}
+
 h1 {
   font-family: 'Megrim', cursive;
+}
+
+.primary_content {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.sidebar {
+  display: block;
+  width: 35%;
+  border: 2px dashed grey;
+  padding: 2%;
+  border-top-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  margin-left: 2%;
 }
 
 /* General links */
@@ -23,6 +45,14 @@ a:not(.nav-link) {
 
 a:not(.nav-link):hover {
   text-shadow: 1px 2px orange;
+}
+
+button {
+  width: 60%;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  font-family: 'Megrim', cursive;
+  border: none;
 }
 
 /* Outside logo */

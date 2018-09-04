@@ -1,5 +1,5 @@
 class MusiciansController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
+  # skip_before_action :require_login, only: [:new, :create]
 
   def new
     redirect_to root_path if logged_in?
@@ -15,12 +15,24 @@ class MusiciansController < ApplicationController
   def show
     @user = Musician.find_by_slug(params[:musician_slug])
     redirect_to login_path, alert: "That's not your practise room!" if not_your_room(@user)
-    @practise_log = @user.practise_log
+    respond_to do |f|
+      f.html { render 'show' }
+      f.json { render json: @user, serializer: MusicianPracticeDataSerializer }
+    end
+    # @practise_log = @user.practise_log
   end
 
   def rankings
-    redirect_to musician_rankings_path("name") unless valid_ranking?(params[:by])
+    # redirect_to musician_rankings_path("name") unless valid_ranking?(params[:by])
     @musicians = Musician.order_by(params[:by])
+    # @musicians = Musician.all
+    render json: @musicians, each_serializer: MusicianRankSerializer
+  end
+
+  def practise_log
+    musician = Musician.find(params[:id])
+    @practise_log = musician.practise_log
+    render json: @practise_log
   end
 
 

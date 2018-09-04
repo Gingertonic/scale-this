@@ -13,6 +13,9 @@ get '/scales/:scale_slug/:root_note', to: 'scales#show', as: 'show_scale'
 
 resources :practises, only: [:create]
 
+#helper routes
+get '/current_username', to: 'application#current_username'
+
 # Sessions routes
 get '/login', to: 'sessions#new', as: 'login'
 get '/auth/:provider/callback', to: 'sessions#create' # OAuth callback route
@@ -22,6 +25,7 @@ get '/logout', to: 'sessions#destroy'
 # Users (musicians) routes
 resources :musicians, only: [:new, :create]
 get '/musicians/rankings/:by', to: 'musicians#rankings', as: 'musician_rankings'
+get '/musicians/:id/practise_log', to: 'musicians#practise_log'
 get '/:musician_slug', to: 'musicians#show', as: 'practice_room'
 
 root 'welcome#welcome'

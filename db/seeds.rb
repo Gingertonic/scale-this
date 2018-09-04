@@ -43,7 +43,7 @@ Note.create(name: "G6", midi_value: 91, frequency: 1567.98, solfege: "so")
 
 
 admin = Musician.create(name: "Admin", email: "thegingertonicstudios@gmail.com", password: "administration", admin: true) #user 1
-aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password") #user 2
+aki = Musician.create(name: "Al Gakovic", email: "al@gak.com", password: "password", image_url: "http://www.angling-ireland.com/media/uploads/DACE(1).jpg") #user 2
 beti = Musician.create(name: "Gingertonic", email: "gingertonic@test.com", password: "password") #user 3
 
 Scale.create(name: "ionian", aka: "major", scale_type: "mode (major scale)", pattern: "221222", private: false, created_by: 1)
@@ -78,6 +78,7 @@ Scale.create(name: "melodic minor asc", aka: "jazz minor", scale_type: "essentia
 
 Scale.create(name: "oriental minor", aka: "Hungarian minor, Hungarian gypsy scale, Arabic minor", scale_type: "other", pattern: "213113", private: false, created_by: 1)
 
+Scale.create(name: "gakovian", scale_type: "custom", pattern: "2321", private: false, created_by: 2)
 
 
 Practise.create(musician_id: 2, scale_id: 1, experience: 3)
