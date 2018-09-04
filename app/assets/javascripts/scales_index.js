@@ -77,59 +77,44 @@ function loadRankings(){
     loadNewScaleForm();
   })
   $.get('/musicians/rankings/total-practises', function(resp){
-    console.log(resp);
-    $('.sb_content').text(resp["data"]);
     var musicians = []
     resp["data"].forEach(function(muso){
       musicians.push(new Musician(muso))
     })
     let rankingsTable = HandlebarsTemplates['musician_rankings']({musicians: musicians});
-    $('.sb_content').html(rankingsTable);
+    sbContent(rankingsTable);
   })
 }
 // NEW SCALE FORM
 function loadNewScaleForm(){
   clearErrors();
-  $.get('/scales/new', function(resp){
-    scale = new Scale(resp);
-    $.get('/current_username', function(username){
-      $.get('/' + username + '.json', function(user){
-        scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
-        $('.sb_content').html(scaleForm)
-        // debugger
-        $('form#scale').on('submit', function(e){
-          e.preventDefault();
-          clearErrors();
-          console.log("stahhhp!")
-          $form = $(this)
-          console.log($form.serialize())
-          action = $form.attr("action")
-          params = ($form.serialize())
-          $.post(action, params).done(function(resp){
-            // debugger;
-            if (resp["errors"]){
-              renderErrors(resp)
-            } else {
-              new_scale = new Scale(resp)
-              console.log(new_scale)
-              if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
-                $('.primary_content').append(new_scale.renderScaleTypeBlock());
-              }
-              $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
-              addGoToScaleListener($('#' + new_scale.slugify()));
-              loadNewScaleForm();
-            }
-          })
-        })
-      })
-    })
-  })
   sbNavStart(linkWithId("see_rankings", "See Rankings"))
   sbHeader("New Scale")
-  $('#see_rankings').on('click', function(e){
-    e.preventDefault();
-    loadRankings();
-  })
+  addNavListener("see_rankings", loadRankings)
+  $.get('/scales/new', function(resp){
+  }).done(function(resp){
+    scale = new Scale(resp);
+    $.get('/current_username', function(username){
+    }).done(function(username){
+      $.get('/' + username + '.json', function(user){
+        scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
+        sbContent(scaleForm)
+      }).done(function(){
+        addFormSubmitListener('form#scale', addScale, "post")
+      })
+    })
+  }) // get scales new done
+}
+
+function addScale(new_scale){
+  debugger;
+  if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
+    primaryContentAdd(new_scale.renderScaleTypeBlock())
+    // $('.primary_content').append(new_scale.renderScaleTypeBlock());
+  }
+  $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
+  addGoToScaleListener($('#' + new_scale.slugify()));
+  loadNewScaleForm();
 }
 
 
@@ -174,6 +159,10 @@ function sbContent(content){
   $('.sb_content').html(content);
 }
 
+function sbContentAdd(content){
+  $('.sb_content').append(content);
+}
+
 Handlebars.registerHelper("slugifyPeriod", function(period) {
     return period.replace(" ","_").replace('!','');
 });
@@ -214,6 +203,11 @@ Handlebars.registerHelper("getNoteName", function (midi) {
 // SCALE SHOW VIEW
 // LOAD SCALE PAGE
 function loadScaleShow(scaleName){
+  debugger;
+  if ((typeof scaleName) === "object"){
+    scale = scaleName.slugify()
+    loadScale(scale)
+  }
   loadScale(scaleName);
 }
 // lOAD SCALE
@@ -224,7 +218,6 @@ function loadScale(scaleName){
     var scale = new Scale(resp);
     var playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
     primaryContent(playback)
-    // $('.primary_content').html(playback);
     var values = scale.patternFrom(60);
     loadPlayback(values)
     $.get('/current_username', function(user){
@@ -249,7 +242,7 @@ function primaryHeader(headerText){
 function changeRoot(scale, root){
   stopAudio();
   var playback = HandlebarsTemplates['scale_show']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
-  $('.primary_content').html(playback);
+  primaryContent(playback)
   var values = scale.patternFrom(root);
   loadPlayback(values)
   addRootListener(scale);
@@ -268,21 +261,17 @@ function loadEditScaleForm(scale){
   clearErrors();
   sbNavStart(linkWithId("see_progress", "See Progress"))
   sbHeader("Edit Scale")
-  // debugger
   scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
-  $('.sb_content').html(scaleForm)
+  sbContent(scaleForm);
   addNavListener("see_progress", loadProgress, [scale])
-  // addFormSubmitListener(identifier, loadScaleShow, "patch")
   addFormSubmitListener('form#scale', loadScaleShow, "patch")
 }
-
 
 function addFormSubmitListener(identifier, func, method){
   $(identifier).on('submit', function(e){
     e.preventDefault();
     clearErrors()
     $form = $(this);
-    func($form)
     action = $form.attr("action");
     params = $form.serialize();
     $.ajax({
@@ -294,8 +283,7 @@ function addFormSubmitListener(identifier, func, method){
         renderErrors(resp)
       } else {
         thisScale = new Scale(resp)
-        // loadScaleShow(thisScale.slugify());
-        func.apply(this, [thisScale.slugify()])
+        func.call(this, thisScale)
       }
     })
   })
@@ -306,7 +294,7 @@ function updateScale(){
 }
 
 function addNavListener(id, func, args){
-  debugger;
+  // debugger;
   $('#' + id).on('click', function(e){
     e.preventDefault();
     func.apply(this, args)
@@ -359,10 +347,10 @@ function loadExperience(scale, user){
   practises = user.relationships.practises.data;
   for (var i = 0; i < practises.length; i++){
     if (practises[i]["scale_id"] === scale.id){
-      $('.sb_content').text("Practised " + practised(practises[i]["experience"]));
+      sbContent("Practised " + practised(practises[i]["experience"]))
       break;
     } else {
-      $('.sb_content').text("Never practised!");
+      sbContent("Never practised!");
     }
   }
 }
@@ -422,7 +410,7 @@ function practised(x){
 
 function addPractiseForm(scale, user){
   practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user["data"]})
-  $('.sb_content').append(practiseForm);
+  sbContentAdd(practiseForm);
 }
 
 function addPractiseListener(){
