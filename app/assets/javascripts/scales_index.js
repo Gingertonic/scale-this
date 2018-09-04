@@ -19,25 +19,33 @@ function stopAudio(){
 // SCALES INDEX VIEW
 //LOAD SCALES INDEX
 function loadScalesLibrary(){
-  $('.header').text("SCALES LIBRARY");
+  primaryHeader("SCALES LIBRARY");
   loadScales();
   loadRankings();
 }
 // GET SCALES
 function loadScales(){
   clearErrors();
-  $('.primary_content').html("")
+  primaryContent("")
   $.get('/scales.json', function(resp){
-    resp["data"].forEach(function(scale){
-      new_scale = new Scale(scale.attributes)
-      console.log(new_scale)
-      if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
-        $('.primary_content').append(new_scale.renderScaleTypeBlock());
-      }
-      $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
-      addGoToScaleListener($('#' + new_scale.slugify()));
-    })
+  }).done(function(resp){
+    sortScales(resp["data"])
   })
+}
+
+function sortScales(scales){
+  scales.forEach(function(scale){
+    new_scale = new Scale(scale.attributes)
+    if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
+      primaryContentAdd(new_scale.renderScaleTypeBlock())
+    }
+    $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
+    addGoToScaleListener($('#' + new_scale.slugify()));
+  })
+}
+
+function primaryContentAdd(content){
+ $('.primary_content').append(content)
 }
 // ADD LINKS
 function addGoToScaleListener(link){
@@ -122,8 +130,6 @@ function loadNewScaleForm(){
   })
 }
 
-// POST NEW SCALE FORM
-
 
 // SHOW USER
 function loadPracticeRoom(){
@@ -131,10 +137,11 @@ function loadPracticeRoom(){
   $.get('/current_username', function(username){
     $.get('/' + username + '.json', function(resp){
       musician = new Musician(resp["data"]);
-      $('.header').text(musician.name + "'s Practice Room");
+      primaryHeader(musician.name + "'s Practice Room")
       $.get('/musicians/' + musician.id + '/practise_log', function(resp){
         practiseLog = HandlebarsTemplates['practise_log']({log: resp})
-        $('.primary_content').html(practiseLog);
+        primaryContent(practiseLog)
+        loadPractiseLog()
         for (const period in resp){
           console.log(period.replace(" ","_").replace('!',''))
           for (var i = 0; i < resp[period].length; i++){
