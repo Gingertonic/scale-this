@@ -1,4 +1,4 @@
-// USER PROGRESS 
+// USER PROGRESS
 function loadProgress(scale, username){
   clearErrors();
   sbHeader("Practice Log")
@@ -27,7 +27,7 @@ function loadExperience(scale, user){
 }
 
 function addPractiseForm(scale, user){
-  practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user["data"]})
+  practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user})
   sbContentAdd(practiseForm);
 }
 
