@@ -23,6 +23,7 @@ function loadScalesLibrary(){
   loadScales();
   loadRankings();
 }
+
 // GET SCALES
 function loadScales(){
   clearErrors();
@@ -47,6 +48,7 @@ function sortScales(scales){
 function primaryContentAdd(content){
  $('.primary_content').append(content)
 }
+
 // ADD LINKS
 function addGoToScaleListener(link){
   link.on('click', function(e){
@@ -138,25 +140,26 @@ function loadPracticeRoom(){
     $.get('/' + username + '.json', function(resp){
       musician = new Musician(resp["data"]);
       primaryHeader(musician.name + "'s Practice Room")
-      $.get('/musicians/' + musician.id + '/practise_log', function(resp){
-        practiseLog = HandlebarsTemplates['practise_log']({log: resp})
+      $.get('/musicians/' + musician.id + '/practise_log', function(pLog){
+        practiseLog = HandlebarsTemplates['practise_log']({log: pLog})
         primaryContent(practiseLog)
-        loadPractiseLog()
-        for (const period in resp){
-          console.log(period.replace(" ","_").replace('!',''))
-          for (var i = 0; i < resp[period].length; i++){
-            console.log(resp[period][i]["scale_id"])
-            $.get('/scales/' + resp[period][i]["scale_id"], function(scale){
-              thisScale = new Scale(scale);
-              $('.' + period.replace(" ","_").replace('!','')).append(thisScale.renderLiLink());
-              addGoToScaleListener($('#' + thisScale.slugify()));
-            })
-          }
-        }
+        sortPractiseLog(pLog)
       });
       loadMusicianInfo(musician);
     })
   })
+}
+
+function sortPractiseLog(pLog){
+  for (const period in pLog){
+    for (var i = 0; i < pLog[period].length; i++){
+      $.get('/scales/' + pLog[period][i]["scale_id"], function(scale){
+        thisScale = new Scale(scale);
+        $('.' + period.replace(" ","_").replace('!','')).append(thisScale.renderLiLink());
+        addGoToScaleListener($('#' + thisScale.slugify()));
+      })
+    }
+  }
 }
 
 function loadMusicianInfo(musician){
