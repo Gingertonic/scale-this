@@ -25,4 +25,5 @@ class Note < ApplicationRecord
     root_note
   end
 
+
 end

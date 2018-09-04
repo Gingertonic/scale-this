@@ -1,3 +1,9 @@
+/// This code is lovingly adapted from an example by Kyle Stetz in their Web Audio Basics series https://github.com/kylestetz/Web-Audio-Basics
+function stopAudio(){
+  $('.audio_trigger').attr('checked', false);
+  $('.audio_trigger').trigger("change");
+}
+
 function loadPlayback(notes) {
   console.log("loading playback!")
   // Set up our Audio Context
