@@ -157,7 +157,11 @@ function loadMusicianInfo(musician){
   sbNavStart("")
   sbHeader("")
   var musicianInfo = HandlebarsTemplates['musician_info']({musician: musician});
-  $('.sb_content').html(musicianInfo);
+  sbContent(musicianInfo)
+}
+
+function sbContent(content){
+  $('.sb_content').html(content);
 }
 
 Handlebars.registerHelper("slugifyPeriod", function(period) {
@@ -206,11 +210,11 @@ function loadScaleShow(scaleName){
 function loadScale(scaleName){
   clearErrors();
   $.get('/scales/' + scaleName, function(resp){
-    $('.header').text(resp.name);
+    primaryHeader(resp.name)
     var scale = new Scale(resp);
-    console.log(scale);
     var playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
-    $('.primary_content').html(playback);
+    primaryContent(playback)
+    // $('.primary_content').html(playback);
     var values = scale.patternFrom(60);
     loadPlayback(values)
     $.get('/current_username', function(user){
@@ -222,6 +226,14 @@ function loadScale(scaleName){
     })
     addRootListener(scale);
   })
+}
+
+function primaryContent(content){
+  $('.primary_content').html(content);
+}
+
+function primaryHeader(headerText){
+  $('.header').text(headerText);
 }
 
 function changeRoot(scale, root){
