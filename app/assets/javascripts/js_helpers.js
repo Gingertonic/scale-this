@@ -40,7 +40,7 @@ function sbNavStart(content){
 }
 
 function sbNavAdd(content){
-  $('.sb_nav').append(content)
+  $('.sb_nav').append("   |   " + content)
 }
 
 function linkWithId(id, text){
