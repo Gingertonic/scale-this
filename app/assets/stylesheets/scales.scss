@@ -19,25 +19,15 @@
 }
 
 /* Scales index */
-// .scales_menu {
-  // width: 60%;
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: space-around;
-// }
-
-.sidebar {
-  display: block;
-  width: 35%;
-  border: 2px dashed grey;
-  padding: 2%;
-  border-top-left-radius: 10%;
-  border-bottom-right-radius: 10%;
-  margin-left: 2%;
+.scales_menu
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .scale_type {
-  width: 25%;
+  width: 20%;
   border: 2px dashed grey;
   padding: 1%;
   margin: 0.5%;

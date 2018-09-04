@@ -1,16 +1,11 @@
 class PractisesController < ApplicationController
   def create
-    @scale = Scale.find(practise_params[:scale_id])
-    @musician = Musician.find(practise_params[:musician_id])
-    # byebug
-    @musician.i_just_practised(@scale)
-    respond_to do |f|
-      f.json { render json: @musician }
-    end
+    current_user.i_just_practised(practise_params)
+    redirect_to practice_room_path(current_user.slugify)
   end
 
   private
   def practise_params
-    params.require(:practise).permit(:scale_id, :musician_id)
+    params.require(:practise).permit(:scale_id)
   end
 end

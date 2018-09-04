@@ -1,28 +1,14 @@
-<h1 class="header">SCALE LIBRARY</h1>
+<h1>SCALE LIBRARY</h1>
 
-<div class="container">
-  <!-- <div class="primary_content"> -->
-    <%=content_tag :div, class: ["primary_content"] do%>
-      <%@types.each do |type|%>
-        <%=content_tag :div, class: ["scale_type"], id: ["#{type}"] do%>
-          <h2><%=type%></h2>
-          <%of_type(@scales, type).each do |s|%>
-            <p><%=li_for_scale(s)%></p>
-          <%end%> <!-- of_type.each -->
-        <%end%> <!-- scale_type -->
-      <%end%> <!-- types.each -->
-    <%end%> <!-- scales_menu / primary content-->
-  <!-- </div> -->
+<%=content_tag :div, class: ["scales_menu"] do%>
+  <%@types.each do |type|%>
+    <%=content_tag :div, class: ["scale_type"], id: ["#{type}"] do%>
+      <h2><%=type%></h2>
+      <%of_type(@scales, type).each do |s|%>
+        <p><%=li_for_scale(s)%></p>
+      <%end%> <!-- of_type.each -->
+    <%end%> <!-- scale_type -->
+  <%end%> <!-- types.each -->
+<%end%> <!-- scales_menu -->
 
-  <div class="sidebar">
-    <div class="sb_nav">
-      <%=content_tag(:button, link_to("Add a new scale!", new_scale_path), class: ["add_scale"])%>
-    </div>
-    <div class="sb_header">
-
-    </div>
-    <div class="sb_content">
-
-    </div>
-  </div>
-</div> <!-- container -->
+<%=content_tag(:p, link_to("Add a new scale!", new_scale_path), class: ["add_scale"])%>

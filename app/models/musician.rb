@@ -62,8 +62,8 @@ class Musician < ApplicationRecord
     practise_log
   end
 
-  def i_just_practised(scale) # called when user practises a scale again, creates a new practise or increases experience of an existing practise.
-    new_practise = self.practises.find_or_create_by(scale_id: scale.id)
+  def i_just_practised(params) # called when user practises a scale again, creates a new practise or increases experience of an existing practise.
+    new_practise = self.practises.find_or_create_by(params)
     new_practise.increase_experience
     new_practise.save
   end
