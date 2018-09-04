@@ -1,7 +1,7 @@
 # Scale This
 
 ## Hello! Welcome to Scale This. This is a web application for discovering musical scales and tracking your progress.
-Visit the live site [here](https://scale-this.herokuapp.com)!
+Visit the live site [here](https://scale-this.herokuapp.com)! (currently on V1, not with JS & AJAX features)
 
 ![](http://forthebadge.com/images/badges/made-with-ruby.svg)
 ![](http://forthebadge.com/images/badges/made-with-javascript.svg)
@@ -49,6 +49,18 @@ To run this app on a local server:
 ## This is created for a Flatiron School Portfolio Project
 
 # Version 2: Rails with jQuery [CURRENT]
+
+Skills shown include:
+  + AJAX
+  + Javascript model prototypes
+  + Custom Rails API
+  + ActiveRecord and SQL
+  + Ruby on Rails framework
+  + OAuth authentication
+  + Handlebars
+  + HTML, ERB & CSS
+  + DRY principles
+
 Overview
 In this assessment your goal is to expand upon the rails assessment you did previously. The goal is to add dynamic features that are possible only through jQuery and a JSON API for your app. Do not use remote: true in this application.
 
