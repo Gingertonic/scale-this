@@ -1,3 +1,4 @@
+// USER PROGRESS 
 function loadProgress(scale, username){
   clearErrors();
   sbHeader("Practice Log")
