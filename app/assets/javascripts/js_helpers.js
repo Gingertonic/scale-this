@@ -24,7 +24,7 @@ function primaryContentAdd(content){
 }
 
 function sbHeader(headerText){
-  $('.sb_header').html('<h1>' + headerText + '</h1>');
+  $('.sb_header').html(`<h1>${headerText}</h1>`);
 }
 
 function sbContent(content){
@@ -40,15 +40,15 @@ function sbNavStart(content){
 }
 
 function sbNavAdd(content){
-  $('.sb_nav').append("   |   " + content)
+  $('.sb_nav').append(`   |   ${content}`)
 }
 
 function linkWithId(id, text){
-  return '<a id="' + id + '" href="#">' + text + '</a>'
+  return `<a id="${id}" href="#">${text}</a>`
 }
 
 function addNavListener(id, func, args){
-  $('#' + id).on('click', function(e){
+  $(`#${id}`).on('click', function(e){
     e.preventDefault();
     func.apply(this, args)
   })

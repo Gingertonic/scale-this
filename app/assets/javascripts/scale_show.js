@@ -10,7 +10,7 @@ function loadScaleShow(scaleName){
 // lOAD SCALE
 function loadScale(scaleName){
   clearErrors();
-  $.get('/scales/' + scaleName, function(resp){
+  $.get(`/scales/${scaleName}`, function(resp){
     primaryHeader(resp.name)
     var scale = new Scale(resp);
     var playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});

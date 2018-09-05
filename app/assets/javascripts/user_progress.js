@@ -3,7 +3,7 @@ function loadProgress(scale, username){
   clearErrors();
   sbHeader("Practice Log")
     $.get('/current_username', function(username){
-      $.get('/' + username + '.json', function(resp){
+      $.get(`/${username}`, function(resp){
       }).done(function(resp){
         user = resp["data"]
         loadScaleNavFor(scale, user);
@@ -18,7 +18,7 @@ function loadExperience(scale, user){
   practises = user.relationships.practises.data;
   for (var i = 0; i < practises.length; i++){
     if (practises[i]["scale_id"] === scale.id){
-      sbContent("Practised " + practised(practises[i]["experience"]))
+      sbContent(`Practised ${practised(practises[i]["experience"])}`)
       break;
     } else {
       sbContent("Never practised!");
@@ -42,7 +42,7 @@ function addPractiseListener(){
 function createPractise($form){
   var action = $form.attr("action")
   var params = $form.serialize()
-  $.post(action + '.json', params).done(function(resp){
+  $.post(action, params).done(function(resp){
     loadPracticeRoom();
   })
 }

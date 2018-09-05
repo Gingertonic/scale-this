@@ -15,8 +15,7 @@ Scale.prototype.scaleTypeSlug = function(){
 }
 
 Scale.prototype.renderLiLink = function(){
-  // return `<li><a class="scale_type" href="/scales/` + this.slugify() + `/do">` + this.name +`</a></li>`
-  return `<li><a class="scale_link" id="` + this.slugify() + `" href="#">` + this.name +`</a></li>`
+  return `<li><a class="scale_link" id="${this.slugify()}" href="#">${this.name}</a></li>`
 }
 
 Scale.prototype.slugify = function(){
@@ -24,8 +23,8 @@ Scale.prototype.slugify = function(){
 }
 
 Scale.prototype.renderScaleTypeBlock = function(){
-  return `<div class="scale_type" id="` + this.scaleTypeSlug() + `">
-    <h4> ${this.scaleType} </h4>
+  return `<div class="scale_type" id="${this.scaleTypeSlug()}">
+    <h4>${this.scaleType}</h4>
   </div>`
 }
 

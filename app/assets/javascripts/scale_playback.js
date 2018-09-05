@@ -5,7 +5,7 @@ function stopAudio(){
 }
 
 function loadPlayback(notes) {
-  console.log("loading playback!")
+  // console.log("loading playback!")
   // Set up our Audio Context
   var context = new AudioContext();
   window.context = context;
@@ -17,13 +17,13 @@ function loadPlayback(notes) {
   // the checkbox will control the start & stop of the sequencer.
   $('.audio_trigger').on('change', function(e) {
     if( this.checked ) {
-      console.log("checked!")
+      // console.log("checked!")
       // start the sequencer
       nextNoteTime = context.currentTime;
       scheduleSequence();
       intervalId = setInterval(scheduleSequence, intervalTime);
     } else {
-      console.log("unchecked!")
+      // console.log("unchecked!")
       // stop the sequencer
       // intervalId = clearInterval(intervalId);
       stopSeq()

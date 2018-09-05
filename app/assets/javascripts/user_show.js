@@ -2,10 +2,10 @@
 function loadPracticeRoom(){
   clearErrors();
   $.get('/current_username', function(username){
-    $.get('/' + username + '.json', function(resp){
+    $.get(`/${username}`, function(resp){
       musician = new Musician(resp["data"]);
-      primaryHeader(musician.name + "'s Practice Room")
-      $.get('/musicians/' + musician.id + '/practise_log', function(pLog){
+      primaryHeader(`${musician.name}'s Practice Room`)
+      $.get(`/musicians/${musician.id}/practise_log`, function(pLog){
         practiseLog = HandlebarsTemplates['practise_log']({log: pLog})
         primaryContent(practiseLog)
         sortPractiseLog(pLog)
@@ -18,10 +18,10 @@ function loadPracticeRoom(){
 function sortPractiseLog(pLog){
   for (const period in pLog){
     for (var i = 0; i < pLog[period].length; i++){
-      $.get('/scales/' + pLog[period][i]["scale_id"], function(scale){
+      $.get(`/scales/${pLog[period][i]["scale_id"]}`, function(scale){
         thisScale = new Scale(scale);
-        $('.' + period.replace(" ","_").replace('!','')).append(thisScale.renderLiLink());
-        addGoToScaleListener($('#' + thisScale.slugify()));
+        $(`.${period.replace(" ","_").replace("!","")}`).append(thisScale.renderLiLink());
+        addGoToScaleListener($(`#${thisScale.slugify()}`));
       })
     }
   }

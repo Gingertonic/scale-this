@@ -25,7 +25,7 @@ function addFormSubmitListener(identifier, func, method){
 function renderErrors(resp){
   $('.sb_errors').addClass('flash-error')
   resp["errors"].forEach(function(err){
-    $('.sb_errors').append('<p>' + err + '</p>')
+    $('.sb_errors').append(`<p>${err}</p>`)
   })
 }
 
@@ -36,7 +36,7 @@ function clearErrors(){
 // DELTE SCALE
 function deleteScale(scale){
   $.ajax({
-    url: '/scales/' + scale.id,
+    url: `/scales/${scale.id}`,
     method: "delete"
   }).done(function(resp){
     loadScalesLibrary();
@@ -55,7 +55,7 @@ function loadNewScaleForm(){
     scale = new Scale(resp);
     $.get('/current_username', function(username){
     }).done(function(username){
-      $.get('/' + username + '.json', function(user){
+      $.get(`/${username}.json`, function(user){
         scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
         sbContent(scaleForm)
       }).done(function(){
@@ -67,12 +67,12 @@ function loadNewScaleForm(){
 
 function addScale(new_scale){
   debugger;
-  if ($('#' + new_scale.scaleTypeSlug()).length === 0) {
+  if ($(`#${new_scale.scaleTypeSlug()}`).length === 0) {
     primaryContentAdd(new_scale.renderScaleTypeBlock())
     // $('.primary_content').append(new_scale.renderScaleTypeBlock());
   }
-  $('#' + new_scale.scaleTypeSlug()).append(new_scale.renderLiLink());
-  addGoToScaleListener($('#' + new_scale.slugify()));
+  $(`#${new_scale.scaleTypeSlug()}`).append(new_scale.renderLiLink());
+  addGoToScaleListener($(`#${new_scale.slugify()}`));
   loadNewScaleForm();
 }
 
