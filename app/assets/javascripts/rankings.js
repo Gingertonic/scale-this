@@ -19,7 +19,7 @@ function rankingNav(){
 
 function getRankingsData(){
   $.get('/musicians/rankings/total-practises', function(resp){
-    var musicians = []
+    let musicians = []
     resp["data"].forEach(function(muso){
       musicians.push(new Musician(muso))
     })

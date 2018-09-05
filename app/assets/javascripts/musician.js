@@ -7,7 +7,7 @@ function Musician(attr){
 }
 
 Musician.prototype.totalPractises = function(){
-  var totalExperience = 0
+  let totalExperience = 0
   this.practises.forEach(function(practise){
      totalExperience += practise.experience;
    })

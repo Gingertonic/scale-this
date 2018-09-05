@@ -17,7 +17,7 @@ function loadPracticeRoom(){
 
 function sortPractiseLog(pLog){
   for (const period in pLog){
-    for (var i = 0; i < pLog[period].length; i++){
+    for (let i = 0; i < pLog[period].length; i++){
       $.get(`/scales/${pLog[period][i]["scale_id"]}`, function(scale){
         thisScale = new Scale(scale);
         $(`.${period.replace(" ","_").replace("!","")}`).append(thisScale.renderLiLink());
@@ -31,6 +31,6 @@ function loadMusicianInfo(musician){
   clearErrors();
   sbNavStart("")
   sbHeader("")
-  var musicianInfo = HandlebarsTemplates['musician_info']({musician: musician});
+  const musicianInfo = HandlebarsTemplates['musician_info']({musician: musician});
   sbContent(musicianInfo)
 }

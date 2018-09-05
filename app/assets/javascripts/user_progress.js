@@ -16,7 +16,7 @@ function loadProgress(scale, username){
 
 function loadExperience(scale, user){
   practises = user.relationships.practises.data;
-  for (var i = 0; i < practises.length; i++){
+  for (let i = 0; i < practises.length; i++){
     if (practises[i]["scale_id"] === scale.id){
       sbContent(`Practised ${practised(practises[i]["experience"])}`)
       break;
@@ -34,14 +34,14 @@ function addPractiseForm(scale, user){
 function addPractiseListener(){
   $('form#new_practise').on('submit', function(e){
     e.preventDefault();
-    var $form = $(this)
+    let $form = $(this)
     createPractise($form)
   })
 }
 
 function createPractise($form){
-  var action = $form.attr("action")
-  var params = $form.serialize()
+  let action = $form.attr("action")
+  let params = $form.serialize()
   $.post(action, params).done(function(resp){
     loadPracticeRoom();
   })

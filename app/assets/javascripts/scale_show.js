@@ -12,10 +12,10 @@ function loadScale(scaleName){
   clearErrors();
   $.get(`/scales/${scaleName}`, function(resp){
     primaryHeader(resp.name)
-    var scale = new Scale(resp);
-    var playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
+    let scale = new Scale(resp);
+    const playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
     primaryContent(playback)
-    var values = scale.patternFrom(60);
+    let values = scale.patternFrom(60);
     loadPlayback(values)
     $.get('/current_username', function(user){
       if (!user) {
@@ -30,9 +30,9 @@ function loadScale(scaleName){
 
 function changeRoot(scale, root){
   stopAudio();
-  var playback = HandlebarsTemplates['scale_show']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
+  const playback = HandlebarsTemplates['scale_show']({scale: scale, root: root, midi_notes: scale.patternFrom(root)});
   primaryContent(playback)
-  var values = scale.patternFrom(root);
+  let values = scale.patternFrom(root);
   loadPlayback(values)
   addRootListener(scale);
 }
