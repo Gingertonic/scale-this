@@ -8,8 +8,6 @@ function Musician(attr){
 
 Musician.prototype.totalPractises = function(){
   let totalExperience = 0
-  this.practises.forEach(function(practise){
-     totalExperience += practise.experience;
-   })
-   return totalExperience
+  this.practises.forEach(practise => totalExperience += practise.experience)
+  return totalExperience
 }

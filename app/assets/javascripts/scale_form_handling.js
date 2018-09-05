@@ -24,9 +24,7 @@ function addFormSubmitListener(identifier, func, method){
 // ERROR HANDLING
 function renderErrors(resp){
   $('.sb_errors').addClass('flash-error')
-  resp["errors"].forEach(function(err){
-    $('.sb_errors').append(`<p>${err}</p>`)
-  })
+  resp["errors"].forEach(err => $('.sb_errors').append(`<p>${err}</p>`))
 }
 
 function clearErrors(){
@@ -66,10 +64,8 @@ function loadNewScaleForm(){
 }
 
 function addScale(new_scale){
-  debugger;
   if ($(`#${new_scale.scaleTypeSlug()}`).length === 0) {
     primaryContentAdd(new_scale.renderScaleTypeBlock())
-    // $('.primary_content').append(new_scale.renderScaleTypeBlock());
   }
   $(`#${new_scale.scaleTypeSlug()}`).append(new_scale.renderLiLink());
   addGoToScaleListener($(`#${new_scale.slugify()}`));

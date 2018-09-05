@@ -19,10 +19,8 @@ function rankingNav(){
 
 function getRankingsData(){
   $.get('/musicians/rankings/total-practises', function(resp){
-    let musicians = []
-    resp["data"].forEach(function(muso){
-      musicians.push(new Musician(muso))
-    })
+    let musicians = [];
+    resp["data"].forEach(muso => musicians.push(new Musician(muso)));
     let rankingsTable = HandlebarsTemplates['musician_rankings']({musicians: musicians});
     sbContent(rankingsTable);
   })
