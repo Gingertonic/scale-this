@@ -19,12 +19,17 @@ function loadScales(){
 function sortScales(scales){
   scales.forEach(function(scale){
     new_scale = new Scale(scale.attributes)
-    if ($(`#${new_scale.scaleTypeSlug()}`).length === 0) {
-      primaryContentAdd(new_scale.renderScaleTypeBlock())
-    }
-    $(`#${new_scale.scaleTypeSlug()}`).append(new_scale.renderLiLink());
-    addGoToScaleListener($(`#${new_scale.slugify()}`));
+    addToIndex(new_scale)
   })
+}
+
+
+function addToIndex(new_scale){
+  if ($(`#${new_scale.scaleTypeSlug()}`).length === 0) {
+    primaryContentAdd(new_scale.renderScaleTypeBlock())
+  }
+  $(`#${new_scale.scaleTypeSlug()}`).append(new_scale.renderLiLink());
+  addGoToScaleListener($(`#${new_scale.slugify()}`));
 }
 
 // ADD LINKS
