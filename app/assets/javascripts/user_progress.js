@@ -16,14 +16,12 @@ function loadProgress(scale, username){
 
 function loadExperience(scale, user){
   practises = user.relationships.practises.data;
-  for (let i = 0; i < practises.length; i++){
-    if (practises[i]["scale_id"] === scale.id){
-      sbContent(`Practised ${practised(practises[i]["experience"])}`)
-      break;
-    } else {
-      sbContent("Never practised!");
+  sbContent("Never practised!")
+  practises.some(function(practise){
+    if (practise["scale_id"] === scale.id){
+      sbContent(`Practised ${practised(practise["experience"])}`)
     }
-  }
+  });
 }
 
 function addPractiseForm(scale, user){

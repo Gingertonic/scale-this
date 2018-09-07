@@ -27,6 +27,7 @@ function sortPractiseLog(pLog){
   }
 }
 
+
 function loadMusicianInfo(musician){
   clearErrors();
   sbNavStart("")

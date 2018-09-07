@@ -30,9 +30,8 @@ Scale.prototype.renderScaleTypeBlock = function(){
 
 Scale.prototype.patternFrom = function(root){
   patternFrom = [root];
-  for (let i=0; i < this.pattern.length; i++) {
-       diff = parseInt(this.pattern.charAt(i));
-       patternFrom.push(patternFrom[patternFrom.length - 1] + diff);
-     }
+  [...this.pattern].forEach(function(diff){
+    patternFrom.push(patternFrom[patternFrom.length - 1] + parseInt(diff))
+  });
   return patternFrom;
 }
