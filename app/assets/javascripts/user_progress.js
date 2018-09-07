@@ -43,6 +43,7 @@ function createPractise($form){
   let action = $form.attr("action")
   let params = $form.serialize()
   $.post(action, params).done(function(resp){
+    stopAudio();
     loadPracticeRoom();
   })
 }
