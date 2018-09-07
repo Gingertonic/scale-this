@@ -1,5 +1,5 @@
 function Scale(attr){
-  this.id = attr.id
+  this.id = attr.id;
   this.name = attr.name;
   this.scaleType = attr.scale_type;
   this.origin = attr.origin;

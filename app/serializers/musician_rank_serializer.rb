@@ -1,4 +1,4 @@
 class MusicianRankSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image_url
+  attributes :id, :name
   has_many :practises
 end

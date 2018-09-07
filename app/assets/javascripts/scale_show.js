@@ -11,8 +11,8 @@ function loadScaleShow(scaleName){
 function loadScale(scaleName){
   clearErrors();
   $.get(`/scales/${scaleName}`, function(resp){
-    primaryHeader(resp.name)
     let scale = new Scale(resp);
+    primaryHeader(scale.name)
     const playback = HandlebarsTemplates['scale_show']({scale: scale, root: 60, midi_notes: scale.patternFrom(60)});
     primaryContent(playback)
     let values = scale.patternFrom(60);

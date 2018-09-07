@@ -14,6 +14,7 @@ function addFormSubmitListener(identifier, func, method){
       if (resp["errors"]){
         renderErrors(resp)
       } else {
+        debugger;
         thisScale = new Scale(resp)
         func.call(this, thisScale)
       }
