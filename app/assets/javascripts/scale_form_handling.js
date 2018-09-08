@@ -2,7 +2,7 @@
 function addFormSubmitListener(identifier, func, method){
   $(identifier).on('submit', function(e){
     e.preventDefault();
-    clearErrors()
+    clearErrors();
     let $form = $(this);
     let action = $form.attr("action");
     let params = $form.serialize();
@@ -12,25 +12,24 @@ function addFormSubmitListener(identifier, func, method){
       method: method
     }).done(function(resp){
       if (resp["errors"]){
-        renderErrors(resp)
+        renderErrors(resp);
       } else {
-        debugger;
-        let thisScale = new Scale(resp)
-        func.call(this, thisScale)
-      }
-    })
-  })
-}
+        let thisScale = new Scale(resp);
+        func.call(this, thisScale);
+      };
+    });
+  });
+};
 
 // ERROR HANDLING
 function renderErrors(resp){
-  $('.sb_errors').addClass('flash-error')
-  resp["errors"].forEach(err => $('.sb_errors').append(`<p>${err}</p>`))
-}
+  $('.sb_errors').addClass('flash-error');
+  resp["errors"].forEach(err => $('.sb_errors').append(`<p>${err}</p>`));
+};
 
 function clearErrors(){
   $('.sb_errors').removeClass('flash-error').html("");
-}
+};
 
 // DELTE SCALE
 function deleteScale(scale){
@@ -39,43 +38,43 @@ function deleteScale(scale){
     method: "delete"
   }).done(function(resp){
     loadScalesLibrary();
-  })
-}
+  });
+};
 
 
 // NEW SCALE FORM
 function loadNewScaleForm(){
   clearErrors();
-  sbNavStart(linkWithId("see_rankings", "See Rankings"))
-  sbHeader("New Scale")
-  addNavListener("see_rankings", loadRankings)
+  sbNavStart(linkWithId("see_rankings", "See Rankings"));
+  sbHeader("New Scale");
+  addNavListener("see_rankings", loadRankings);
   $.get('/scales/new', function(resp){
   }).done(function(resp){
     let scale = new Scale(resp);
     $.get('/current_username', function(username){
     }).done(function(username){
       $.get(`/${username}.json`, function(user){
-        const scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
-        sbContent(scaleForm)
+        const scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id});
+        sbContent(scaleForm);
       }).done(function(){
-        addFormSubmitListener('form#scale', addScale, "post")
-      })
-    })
-  })
-}
+        addFormSubmitListener('form#scale', addScale, "post");
+      });
+    });
+  });
+};
 
 function addScale(new_scale){
   addToIndex(new_scale);
   loadNewScaleForm();
-}
+};
 
 // EDIT SCALE FORM
 function loadEditScaleForm(scale){
   clearErrors();
-  sbNavStart(linkWithId("see_progress", "See Progress"))
-  sbHeader("Edit Scale")
-  const scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
+  sbNavStart(linkWithId("see_progress", "See Progress"));
+  sbHeader("Edit Scale");
+  const scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"});
   sbContent(scaleForm);
-  addNavListener("see_progress", loadProgress, [scale])
-  addFormSubmitListener('form#scale', loadScaleShow, "patch")
-}
+  addNavListener("see_progress", loadProgress, [scale]);
+  addFormSubmitListener('form#scale', loadScaleShow, "patch");
+};

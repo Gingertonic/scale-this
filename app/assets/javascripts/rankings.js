@@ -2,20 +2,20 @@
 function loadRankings(){
   clearErrors();
   rankingNav();
-  sbHeader("Current Rankings!")
+  sbHeader("Current Rankings!");
   getRankingsData();
 }
 
 function rankingNav(){
   $.get('/current_username', function(user){
     if (!user) {
-      sbNavStart("")
+      sbNavStart("");
     } else {
-      sbNavStart(linkWithId("add_scale", "Add a New Scale"))
-      addNavListener("add_scale", loadNewScaleForm)
-    }
-  })
-}
+      sbNavStart(linkWithId("add_scale", "Add a New Scale"));
+      addNavListener("add_scale", loadNewScaleForm);
+    };
+  });
+};
 
 function getRankingsData(){
   $.get('/musicians/rankings/total-practises', function(resp){
@@ -23,5 +23,5 @@ function getRankingsData(){
     resp["data"].forEach(muso => musicians.push(new Musician(muso)));
     let rankingsTable = HandlebarsTemplates['musician_rankings']({musicians: musicians});
     sbContent(rankingsTable);
-  })
-}
+  });
+};

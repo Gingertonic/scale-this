@@ -27,6 +27,6 @@ Handlebars.registerHelper("bColour", function (value, index) {
 });
 
 Handlebars.registerHelper("getNoteName", function (midi) {
-    notes = {55: "G", 56: "G#/Ab", 57: "A", 58: "A#/Bb", 59: "B", 60: "C", 61: "C#/Db", 62: "D", 63: "D#/Eb", 64: "E", 65: "F", 66: "F#/Gb", 67: "G", 68: "G#/Ab", 69: "A", 70: "A#/Bb", 71: "B", 72: "C", 73: "C#/Db", 74: "D", 75: "D#/Eb", 76: "E", 77: "F", 78: "F#/Gb"}
-    return notes[midi]
+    notes = {55: "G", 56: "G#/Ab", 57: "A", 58: "A#/Bb", 59: "B", 60: "C", 61: "C#/Db", 62: "D", 63: "D#/Eb", 64: "E", 65: "F", 66: "F#/Gb", 67: "G", 68: "G#/Ab", 69: "A", 70: "A#/Bb", 71: "B", 72: "C", 73: "C#/Db", 74: "D", 75: "D#/Eb", 76: "E", 77: "F", 78: "F#/Gb"};
+    return notes[midi];
 });

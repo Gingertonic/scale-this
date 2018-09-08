@@ -4,29 +4,29 @@ function loadScalesLibrary(){
   primaryHeader("SCALES LIBRARY");
   loadScales();
   loadRankings();
-}
+};
 
 // GET SCALES
 
 function clearPrimaryContent(){
   clearErrors();
-  primaryContent("")
-}
+  primaryContent("");
+};
 
 function loadScales(){
   clearPrimaryContent();
   $.get('/scales', function(resp){
   }, 'json').done(function(resp){
-    sortScales(resp["data"])
-  })
-}
+    sortScales(resp["data"]);
+  });
+};
 
 function sortScales(scales){
   scales.forEach(function(scale){
-    let new_scale = new Scale(scale.attributes)
-    addToIndex(new_scale)
-  })
-}
+    let new_scale = new Scale(scale.attributes);
+    addToIndex(new_scale);
+  });
+};
 
 function searchScales(){
   let searchTerm = $('input#search').val();
@@ -36,13 +36,13 @@ function searchScales(){
     let scales = resp["data"];
     let matches = scales.filter(function(scale){
       return (scale.attributes.name).includes(searchTerm);
-    })
+    });
     matches.forEach(function(scale){
       let new_scale = new Scale(scale.attributes);
       addToIndex(new_scale);
-    })
-  })
-}
+    });
+  });
+};
 
 
 
