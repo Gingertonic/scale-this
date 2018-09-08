@@ -28,20 +28,21 @@ function sortScales(scales){
   })
 }
 
-// function sortByDim(){
-//   clearPrimaryContent();
-//   $.get('/scales', function(resp){
-//   }, 'json').done(function(resp){
-//     let scales = resp["data"];
-//     let dims = scales.filter(function(scale){
-//       return (scale.attributes.name).includes("dim")
-//     })
-//     dims.forEach(function(scale){
-//       let new_scale = new Scale(scale.attributes);
-//       addToIndex(new_scale);
-//     })
-//   })
-// }
+function searchScales(){
+  let searchTerm = $('input#search').val();
+  clearPrimaryContent();
+  $.get('/scales', function(resp){
+  }, 'json').done(function(resp){
+    let scales = resp["data"];
+    let matches = scales.filter(function(scale){
+      return (scale.attributes.name).includes(searchTerm);
+    })
+    matches.forEach(function(scale){
+      let new_scale = new Scale(scale.attributes);
+      addToIndex(new_scale);
+    })
+  })
+}
 
 
 

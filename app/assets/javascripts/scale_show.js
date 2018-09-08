@@ -10,6 +10,7 @@ function loadScaleShow(scaleName){
 // lOAD SCALE
 function loadScale(scaleName){
   clearErrors();
+  hideSearchBar();
   $.get(`/scales/${scaleName}`, function(resp){
     let scale = new Scale(resp);
     primaryHeader(scale.name)

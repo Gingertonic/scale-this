@@ -1,8 +1,13 @@
 <h1 class="header">SCALE LIBRARY</h1>
 
-<div class="container">
+<div class="search_bar">
+  <form id="search">
+    <input type="text" id="search" name="search" placeholder="Find a scale">
+    <input type="submit" value="Find!">
+  </form>
+</div>
 
-  <!-- <button type="button" id="dim" name="button">Diminish!</button> -->
+<div class="container">
   <!-- <div class="primary_content"> -->
   <!-- <div class="flash-error primary_error"></div> -->
     <%=content_tag :div, class: ["primary_content"] do%>

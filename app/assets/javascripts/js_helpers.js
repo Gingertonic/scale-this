@@ -3,14 +3,17 @@ function attachListeners(){
     e.preventDefault();
     stopAudio();
     loadScalesLibrary();
+    showSearchBar();
   })
   $('.to_practice_room').on('click', function(e){
     e.preventDefault();
+    hideSearchBar();
     stopAudio()
     loadPracticeRoom();
   })
-  $('#dim').on('click', function(){
-    sortByDim();
+  $('form#search').on('submit', function(e){
+    e.preventDefault();
+    searchScales();
   })
 }
 
@@ -31,6 +34,13 @@ const sbNavStart = content => $('.sb_nav').html(content)
 const sbNavAdd = content => $('.sb_nav').append(`   |   ${content}`)
 
 const linkWithId = (id, text) => `<a id="${id}" href="#">${text}</a>`
+
+const showSearchBar = () => $('form#search').show()
+
+function hideSearchBar(){
+  $('input#search').val("")
+  $('form#search').hide()
+}
 
 function addNavListener(id, func, args){
   $(`#${id}`).on('click', function(e){
