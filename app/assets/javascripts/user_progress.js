@@ -5,7 +5,7 @@ function loadProgress(scale, username){
     $.get('/current_username', function(username){
       $.get(`/${username}`, function(resp){
       }).done(function(resp){
-        user = resp["data"]
+        let user = resp["data"]
         loadScaleNavFor(scale, user);
         loadExperience(scale, user)
         addPractiseForm(scale, user);
@@ -15,7 +15,7 @@ function loadProgress(scale, username){
 }
 
 function loadExperience(scale, user){
-  practises = user.relationships.practises.data;
+  let practises = user.relationships.practises.data;
   sbContent("Never practised!")
   practises.some(function(practise){
     if (practise["scale_id"] === scale.id){
@@ -25,7 +25,7 @@ function loadExperience(scale, user){
 }
 
 function addPractiseForm(scale, user){
-  practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user})
+  const practiseForm = HandlebarsTemplates['new_practise']({scale: scale, musician: user})
   sbContentAdd(practiseForm);
 }
 

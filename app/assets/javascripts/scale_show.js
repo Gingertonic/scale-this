@@ -2,7 +2,7 @@
 // LOAD SCALE PAGE
 function loadScaleShow(scaleName){
   if ((typeof scaleName) === "object"){
-    scale = scaleName.slugify()
+    let scale = scaleName.slugify()
     loadScale(scale)
   }
   loadScale(scaleName);
@@ -41,7 +41,7 @@ function changeRoot(scale, root){
 function addRootListener(scale){
   $('form#change_root').on('change', function(e){
     e.preventDefault();
-    newRoot = parseInt($('select#root')[0].selectedOptions[0].value)
+    let newRoot = parseInt($('select#root')[0].selectedOptions[0].value)
     changeRoot(scale, newRoot);
   })
 }

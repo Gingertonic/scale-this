@@ -3,9 +3,9 @@ function addFormSubmitListener(identifier, func, method){
   $(identifier).on('submit', function(e){
     e.preventDefault();
     clearErrors()
-    $form = $(this);
-    action = $form.attr("action");
-    params = $form.serialize();
+    let $form = $(this);
+    let action = $form.attr("action");
+    let params = $form.serialize();
     $.ajax({
       url: action,
       data: params,
@@ -15,7 +15,7 @@ function addFormSubmitListener(identifier, func, method){
         renderErrors(resp)
       } else {
         debugger;
-        thisScale = new Scale(resp)
+        let thisScale = new Scale(resp)
         func.call(this, thisScale)
       }
     })
@@ -51,11 +51,11 @@ function loadNewScaleForm(){
   addNavListener("see_rankings", loadRankings)
   $.get('/scales/new', function(resp){
   }).done(function(resp){
-    scale = new Scale(resp);
+    let scale = new Scale(resp);
     $.get('/current_username', function(username){
     }).done(function(username){
       $.get(`/${username}.json`, function(user){
-        scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
+        const scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: "/scales", midi_notes: [], submitTag: "Add", musician_id: user.data.id})
         sbContent(scaleForm)
       }).done(function(){
         addFormSubmitListener('form#scale', addScale, "post")
@@ -74,7 +74,7 @@ function loadEditScaleForm(scale){
   clearErrors();
   sbNavStart(linkWithId("see_progress", "See Progress"))
   sbHeader("Edit Scale")
-  scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
+  const scaleForm = HandlebarsTemplates['scale_form']({scale: scale, action: `/scales/${scale.id}`, midi_notes: scale.patternFrom(60), submitTag: "Update"})
   sbContent(scaleForm);
   addNavListener("see_progress", loadProgress, [scale])
   addFormSubmitListener('form#scale', loadScaleShow, "patch")
