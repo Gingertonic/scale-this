@@ -7,22 +7,45 @@ function loadScalesLibrary(){
 }
 
 // GET SCALES
-function loadScales(){
+
+function clearPrimaryContent(){
   clearErrors();
   primaryContent("")
-  $.get('/scales.json', function(resp){
-  }).done(function(resp){
+}
+
+function loadScales(){
+  clearPrimaryContent();
+  $.get('/scales', function(resp){
+  }, 'json').done(function(resp){
     sortScales(resp["data"])
   })
 }
 
 function sortScales(scales){
   scales.forEach(function(scale){
-    new_scale = new Scale(scale.attributes)
+    let new_scale = new Scale(scale.attributes)
     addToIndex(new_scale)
   })
 }
 
+// function sortByDim(){
+//   clearPrimaryContent();
+//   $.get('/scales', function(resp){
+//   }, 'json').done(function(resp){
+//     let scales = resp["data"];
+//     let dims = scales.filter(function(scale){
+//       return (scale.attributes.name).includes("dim")
+//     })
+//     dims.forEach(function(scale){
+//       let new_scale = new Scale(scale.attributes);
+//       addToIndex(new_scale);
+//     })
+//   })
+// }
+
+
+
+// Return scales with 'dim' in
 
 function addToIndex(new_scale){
   if ($(`#${new_scale.scaleTypeSlug()}`).length === 0) {

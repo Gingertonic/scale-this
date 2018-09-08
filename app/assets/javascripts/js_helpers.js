@@ -1,13 +1,16 @@
 function attachListeners(){
   $('.to_library').on('click', function(e){
     e.preventDefault();
-    stopAudio()
+    stopAudio();
     loadScalesLibrary();
   })
   $('.to_practice_room').on('click', function(e){
     e.preventDefault();
     stopAudio()
     loadPracticeRoom();
+  })
+  $('#dim').on('click', function(){
+    sortByDim();
   })
 }
 
