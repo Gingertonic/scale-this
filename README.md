@@ -1,7 +1,7 @@
 # Scale This
 
 ## Hello! Welcome to Scale This. This is a web application for discovering musical scales and tracking your progress.
-Visit the live site [here](https://scale-this.herokuapp.com)! (currently on V1, not with JS & AJAX features)
+Visit the live site [here](https://scale-this.herokuapp.com)!
 
 ![](http://forthebadge.com/images/badges/made-with-ruby.svg)
 ![](http://forthebadge.com/images/badges/made-with-javascript.svg)
