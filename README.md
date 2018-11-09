@@ -3,6 +3,8 @@
 ## Hello! Welcome to Scale This. This is a web application for discovering musical scales and tracking your progress.
 Visit the live site [here](https://scale-this.herokuapp.com)!
 
+Read my blog posts about [V2 here](https://medium.com/@bethmschofield/any-jqueries-on-how-to-scale-this-so-far-a6e6e0e47068) and [V1 here](https://medium.com/@bethmschofield/scaling-rails-cb26cdda7039)!
+
 ![](http://forthebadge.com/images/badges/made-with-ruby.svg)
 ![](http://forthebadge.com/images/badges/made-with-javascript.svg)
 ![](https://forthebadge.com/images/badges/built-with-love.svg)
